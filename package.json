@@ -9,7 +9,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -30,5 +30,8 @@
   "homepage": "https://github.com/toshirot/w2w#readme",
   "dependencies": {
     "ws": "^8.8.1"
+  },
+  "devDependencies": {
+    "mocha": "^10.0.0"
   }
 }
