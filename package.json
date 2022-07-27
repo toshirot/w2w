@@ -1,0 +1,34 @@
+{
+  "name": "w2w",
+  "version": "1.0.0",
+  "description": "Tool for connecting WebSocket Networks",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc",
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toshirot/w2w.git"
+  },
+  "keywords": [
+    "websocket",
+    "connect",
+    "wss2wss",
+    "ws2ws",
+    "w2w"
+  ],
+  "author": "toshirot <tato@reien.top> (https://github.com/toshirot/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/toshirot/w2w/issues"
+  },
+  "homepage": "https://github.com/toshirot/w2w#readme",
+  "dependencies": {
+    "ws": "^8.8.1"
+  }
+}
