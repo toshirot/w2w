@@ -1,5 +1,5 @@
 # w2w
-Tool for connecting WebSocket Networks
+Tool for WebSocket to WebSocket
 
 
 https://w2w.info/
