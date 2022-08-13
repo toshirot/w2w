@@ -16,11 +16,12 @@ w2w.info\html>npm run test
 
 
   WebSocketサーバーからの受信
-    ✔ wss://reien.top:3333 から"Response from 3333"を受信できた (369ms)
-    ✔ wss://reien.top:3334 から"Response from 3334"を受信できた (471ms)
+    ✔ ALICE: wss://reien.top:3333 から"Response from 3333"を受信できた (157ms)
+    ✔ BOB: wss://reien.top:3334 から"Response from 3334"を受信できた (118ms)
+    ✔ ALICE: wss://reien.top:3333 へsendして結果を受け取った。"A to 3333 to A"を受信できた
 
 
-  2 passing (848ms)
+  3 passing (285ms)
 ```
 
 
