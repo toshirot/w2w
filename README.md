@@ -25,8 +25,9 @@ w2w.info\html>npm run test
 
 
   WebSocketサーバーからの受信
-    ✔ wss://reien.top:3333から受信できた (1404ms)
+    ✔ wss://reien.top:3333から受信できた (840ms)
+    ✔ wss://reien.top:3334から受信できた (421ms)
 
 
-  1 passing (1s)
+  2 passing (1s)
 ```
