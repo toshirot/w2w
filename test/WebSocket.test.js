@@ -3,7 +3,7 @@ const assert = require("assert");
 const WebSocket=require('../index.js').WebSocket
 
 describe('WebSocketサーバーからの受信', function () {
-    it('ALICE: wss://reien.top:3333 から"Response from 3333"を受信できた', (done) => {
+    it('sa->ca: wss://reien.top:3333 から"Response from 3333"を受信できた', (done) => {
 
         //接続先
         const PORT=3333
@@ -22,7 +22,7 @@ describe('WebSocketサーバーからの受信', function () {
         });
 
     });
-    it('BOB: wss://reien.top:3334 から"Response from 3334"を受信できた', (done) => {
+    it('ca->sa: wss://reien.top:3334 から"Response from 3334"を受信できた', (done) => {
 
         //接続先
         const PORT=3334
@@ -42,7 +42,7 @@ describe('WebSocketサーバーからの受信', function () {
 
     });
 
-    it('ALICE: wss://reien.top:3333 へsendして結果を受け取った。"A to 3333 to A"を受信できた', (done) => {
+    it('ca->sa->ca: wss://reien.top:3333 へsendして結果を受け取った。"A to 3333 to A"を受信できた', (done) => {
 
         //接続先
         const PORT=3333
