@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/toshirot/w2w#readme",
   "dependencies": {
+    "elliptic": "^6.5.4",
     "ws": "^8.8.1"
   },
   "devDependencies": {
