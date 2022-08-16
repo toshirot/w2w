@@ -9,9 +9,11 @@ https://w2w.info/
 ```
 凡例 通信方向
 sa->ca サーバーaからクライアントaへ送信する
+sb->cb サーバーbからクライアントbへ送信する
 ca->sa  クライアントaからサーバーaへ送信する
 ca->sa->ca  クライアントaからサーバーaへ送信し、サーバーaからクライアントaへ返信する
 ca->sa->cb  クライアントaからサーバーaへ送信し、サーバーaからクライアントbへ送信する
+
 ```
 
 ```
@@ -22,8 +24,8 @@ w2w.info\html>npm run test
 
 
   WebSocketサーバーからの受信
-    ✔ sa->ca: wss://reien.top:3333 から"Response from 3333"を受信できた (433ms)
-    ✔ ca->sa: wss://reien.top:3334 から"Response from 3334"を受信できた (318ms)
+    ✔ sa->ca: wss://reien.top:3333 から"Response from 3333"を受信できた (181ms)
+    ✔ sb->cb: wss://reien.top:3334 から"Response from 3334"を受信できた (102ms)
     ✔ ca->sa->ca: wss://reien.top:3333 へsendして結果を受け取った。"A to 3333 to A"を受信できた
 
 

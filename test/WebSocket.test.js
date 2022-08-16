@@ -1,6 +1,49 @@
+/*
+凡例 通信方向
+sa->ca サーバーaからクライアントaへ送信する
+sb->cb サーバーbからクライアントbへ送信する
+ca->sa  クライアントaからサーバーaへ送信する
+ca->sa->ca  クライアントaからサーバーaへ送信し、サーバーaからクライアントaへ返信する
+ca->sa->cb  クライアントaからサーバーaへ送信し、サーバーaからクライアントbへ送信する
+
+*/
+
+
+
 
 const assert = require("assert");
 const WebSocket=require('../index.js').WebSocket
+
+
+//-----------------------------------------------------------------------------
+// send to server
+// @wss {object} websocket
+// @type {string} data type
+// @msg {string} send message
+function sendMsg(wss, type, msg){
+    let send_msg=JSON.stringify({
+        type: type
+        ,msg: msg
+    });
+    // 送信する
+    wss.send(send_msg)
+}
+
+//-----------------------------------------------------------------------------
+// receive from server
+// @receivedData {string} received data
+// @return data {object}
+function receiveFromServer(receivedData){
+    let data
+    try {
+        data = JSON.parse(receivedData);
+    } catch (e) {
+        console.log('JSONparse err:', data);
+        return;
+    }
+    return data
+}
+
 
 describe.only('WebSocketサーバーからの受信', function () {
     it('sa->ca: wss://reien.top:3333 から"Response from 3333"を受信できた', (done) => {
@@ -23,7 +66,7 @@ describe.only('WebSocketサーバーからの受信', function () {
         });
 
     });
-    it('ca->sa: wss://reien.top:3334 から"Response from 3334"を受信できた', (done) => {
+    it('sb->cb: wss://reien.top:3334 から"Response from 3334"を受信できた', (done) => {
 
         //接続先
         const PORT=3334
@@ -81,31 +124,3 @@ describe.only('WebSocketサーバーからの受信', function () {
     });
 });
 
-//-----------------------------------------------------------------------------
-// send to server
-// @wss {object} websocket
-// @type {string} data type
-// @msg {string} send message
-function sendMsg(wss, type, msg){
-    let send_msg=JSON.stringify({
-        type: type
-        ,msg: msg
-    });
-    // 送信する
-    wss.send(send_msg)
-}
-
-//-----------------------------------------------------------------------------
-// receive from server
-// @receivedData {string} received data
-// @return data {object}
-function receiveFromServer(receivedData){
-    let data
-    try {
-        data = JSON.parse(receivedData);
-    } catch (e) {
-        console.log('JSONparse err:', data);
-        return;
-    }
-    return data
-}
