@@ -2,7 +2,7 @@
 const assert = require("assert");
 const WebSocket=require('../index.js').WebSocket
 
-describe('WebSocketサーバーからの受信', function () {
+describe.only('WebSocketサーバーからの受信', function () {
     it('sa->ca: wss://reien.top:3333 から"Response from 3333"を受信できた', (done) => {
 
         //接続先
@@ -14,7 +14,8 @@ describe('WebSocketサーバーからの受信', function () {
         const ws = new WebSocket(URL)
          
         ws.on('message', function message(data) {
-            let actual_str=JSON.parse(data)
+            // receive from 3333
+            const actual_str=receiveFromServer(data)
 
             assert.equal(expected_str, actual_str)
             done();
@@ -27,13 +28,15 @@ describe('WebSocketサーバーからの受信', function () {
         //接続先
         const PORT=3334
         const URL='wss://reien.top:'+PORT
+
         // 期待した値
         expected_str='Response from ' + PORT;
 
         const ws = new WebSocket(URL)
          
         ws.on('message', function message(data) {
-            let actual_str=JSON.parse(data)
+            // receive from 3333
+            const actual_str=receiveFromServer(data)
 
             assert.equal(expected_str, actual_str)
             done();
@@ -48,37 +51,27 @@ describe('WebSocketサーバーからの受信', function () {
         const PORT=3333
         const URL='wss://reien.top:'+PORT
 
+        // 送信するデータ
+        const type='msg_from_ALICE'
+        const msg='A'
+
         // 期待した値
         expected_str='A to '+ PORT+' to A'
 
         const ws = new WebSocket(URL)
         ws.on('message', function message(data) {
 
-            //-----------------------------------------------------------------------------
             // send to 3333
-            //
-            let send_msg=JSON.stringify({
-                type: 'msg_from_ALICE'
-                ,msg: 'A'
-            });
-            // 送信する
-            ws.send(send_msg)
+            sendMsg(ws, type, msg)
 
-            //-----------------------------------------------------------------------------
             // receive from 3333
-            //
-            try {
-                data = JSON.parse(data);
-            } catch (e) {
-                console.log('JSONparse err:', data);
-                return;
-            }
+            const receivedData=receiveFromServer(data)
 
-            if(data.type==='msg_from_3333'){
-                let actual_str=data.msg
-                console.log('data.msg', data.msg)
+            // assert
+            if(receivedData.type==='msg_from_3333'){
+                const actual_str=receivedData.msg
+                //console.log('data.msg', receivedData.msg)
                 assert.equal(expected_str, actual_str)
-
             }
             
             ws.close()
@@ -87,3 +80,32 @@ describe('WebSocketサーバーからの受信', function () {
         done()
     });
 });
+
+//-----------------------------------------------------------------------------
+// send to server
+// @wss {object} websocket
+// @type {string} data type
+// @msg {string} send message
+function sendMsg(wss, type, msg){
+    let send_msg=JSON.stringify({
+        type: type
+        ,msg: msg
+    });
+    // 送信する
+    wss.send(send_msg)
+}
+
+//-----------------------------------------------------------------------------
+// receive from server
+// @receivedData {string} received data
+// @return data {object}
+function receiveFromServer(receivedData){
+    let data
+    try {
+        data = JSON.parse(receivedData);
+    } catch (e) {
+        console.log('JSONparse err:', data);
+        return;
+    }
+    return data
+}
