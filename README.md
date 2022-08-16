@@ -35,6 +35,7 @@ w2w.info\html>npm run test
 
 # ca->sa->cb 違うクライアントへ送る場合
 
+<ol>
 <li>clientへの配信方法
 <ol>
     <li>wss Serverでブロードキャストする方法
@@ -59,6 +60,7 @@ w2w.info\html>npm run test
 <ol>
     <li>uuidv4
     <li>sha3やeddsaとか楕円曲
+</ol>
 </ol>
 
 # memo:
