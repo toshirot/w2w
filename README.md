@@ -11,40 +11,41 @@ https://w2w.info/
 flowchart LR
 
 
-    text1(単一ネットワーク) 
+text1(単一ネットワーク):::class_text
 
     %%type1
         type1c(ws client a) 
-        type1s(ws server a)
+        type1s(ws server a):::class_server
             type1c --> type1s
     %%type2
         type2c(ws client a) 
-        type2s(ws server a) 
-            type2c --> type2s  --> type2c
+        type2s(ws server a):::class_server
+           type2s --> type2c 
     %%type3
-        type3c1(ws client a) 
-        type3s1(ws server a) 
-        type3c2(ws client b) 
-            type3c1 --> type3s1  --> type3c2
-            
-       
+        type3c(ws client a) 
+        type3s(ws server a):::class_server
+            type3c --> type3s  --> type3c
     %%type4
         type4c1(ws client a) 
-        type4s1(ws server a) 
+        type4s1(ws server a):::class_server 
         type4c2(ws client b) 
-        type4c3(ws client c) 
-        type4c4(ws client d) 
             type4c1 --> type4s1  --> type4c2
-                        type4s1  --> type4c3
-                        type4s1  --> type4c4
+            
+       
+    %%type5
+        type5c1(ws client a) 
+        type5s1(ws server a):::class_server 
+        type5c2(ws client b) 
+        type5c3(ws client c) 
+        type5c4(ws client d) 
+            type5c1 --> type5s1  --> type5c2
+                        type5s1  --> type5c3
+                        type5s1  --> type5c4
 
  
+classDef class_server fill:#ccc,color:#000,stroke:#333
+classDef class_text fill:#fff,color:#000,stroke:#fff
 
- style text1 fill:#fff,color:#000,stroke:#fff
- %%  style text2 fill:#ccc,color:#000,stroke:#333
- %%   style db1 fill:#8080ff,color:#fff,stroke:#333
- %%   style db2 fill:#ff6fff,color:#fff,stroke:#333
- %%  style sendSMS fill:#fdbde2,color:#000,stroke:#333
 ```
 
 
