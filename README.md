@@ -43,7 +43,7 @@ text1(単一ネットワーク):::class_text
                         type5s1  --> type5c4
 
  
-classDef class_server fill:#ccc,color:#000,stroke:#333
+classDef class_server fill:#eee,color:#000,stroke:#333
 classDef class_text fill:#fff,color:#000,stroke:#fff
 
 ```
