@@ -194,4 +194,11 @@ https://twitter.com/toshirot/status/1552300957433995265
 https://www.npmjs.com/
 
 .gitignore　を作っておいた
+```
 
+### 参考
+
+<li>WebSocket Server https://github.com/websockets/ws
+<li>WebSockets - Web 関連仕様 日本語訳 https://triple-underscore.github.io/WebSocket-ja.html
+<li>RFC6455 The WebSocket Protocol 日本語訳 https://triple-underscore.github.io/RFC6455-ja.html
+<li>RFC6455 The WebSocket Protocol https://www.rfc-editor.org/rfc/rfc6455

@@ -51,12 +51,15 @@ describe.only('WebSocketサーバーからの受信', function () {
         //接続先
         const PORT=3333
         const URL='wss://reien.top:'+PORT
+        const wss_protocol=encodeURIComponent(JSON.stringify({name:'w2w'}))
+          
         // 期待した値
         expected_str='Response from ' + PORT;
 
-        const ws = new WebSocket(URL)
+        const ws = new WebSocket(URL, wss_protocol)
          
         ws.on('message', function message(data) {
+            // on connection で発信されたレスポンス
             // receive from 3333
             const actual_str=receiveFromServer(data)
 
@@ -71,13 +74,15 @@ describe.only('WebSocketサーバーからの受信', function () {
         //接続先
         const PORT=3334
         const URL='wss://reien.top:'+PORT
+        const wss_protocol=encodeURIComponent(JSON.stringify({name:'w2w'}))
 
         // 期待した値
         expected_str='Response from ' + PORT;
 
-        const ws = new WebSocket(URL)
+        const ws = new WebSocket(URL, wss_protocol)
          
         ws.on('message', function message(data) {
+            // on connection で発信されたレスポンス
             // receive from 3333
             const actual_str=receiveFromServer(data)
 
@@ -88,20 +93,21 @@ describe.only('WebSocketサーバーからの受信', function () {
 
     });
 
-    it('ca->sa->ca: wss://reien.top:3333 へsendして結果を受け取った。"A to 3333 to A"を受信できた', (done) => {
+    it('ca->sa->ca: wss://reien.top:3333 へsendして結果を受け取った。"ca to 3333 to ca"を受信できた', (done) => {
 
         //接続先
         const PORT=3333
         const URL='wss://reien.top:'+PORT
+        const wss_protocol=encodeURIComponent(JSON.stringify({name:'w2w'}))
 
         // 送信するデータ
         const type='msg_from_ALICE'
-        const msg='A'
+        const msg='ca'
 
         // 期待した値
-        expected_str='A to '+ PORT+' to A'
+        expected_str=msg+' to '+ PORT+' to '+msg
 
-        const ws = new WebSocket(URL)
+        const ws = new WebSocket(URL, wss_protocol)
         ws.on('message', function message(data) {
 
             // send to 3333
@@ -111,9 +117,9 @@ describe.only('WebSocketサーバーからの受信', function () {
             const receivedData=receiveFromServer(data)
 
             // assert
-            if(receivedData.type==='msg_from_3333'){
+            if(receivedData.type==='msg_from_'+PORT){
                 const actual_str=receivedData.msg
-                //console.log('data.msg', receivedData.msg)
+                console.log('data.msg', receivedData.msg)
                 assert.equal(expected_str, actual_str)
             }
             
@@ -122,6 +128,42 @@ describe.only('WebSocketサーバーからの受信', function () {
 
         done()
     });
+    it('ca->sa->cb: wss://reien.top:3333 へsendして結果を受け取った。"ca to 3333 to cb"を受信できた', (done) => {
+
+        //接続先
+        const PORT=3333
+        const URL='wss://reien.top:'+PORT
+        const wss_protocol=encodeURIComponent(JSON.stringify({name:'w2w'}))
+
+        // 送信するデータ
+        const type='msg_from_ALICE'
+        const msg='ca'
+
+        // 期待した値
+        expected_str=msg+' to '+ PORT+' to '+msg
+
+        const ws = new WebSocket(URL, wss_protocol)
+        ws.on('message', function message(data) {
+
+            // send to 3333
+            sendMsg(ws, type, msg)
+
+            // receive from 3333
+            const receivedData=receiveFromServer(data)
+
+            // assert
+            if(receivedData.type==='msg_from_'+PORT){
+                const actual_str=receivedData.msg
+                console.log('data.msg', receivedData.msg)
+                assert.equal(expected_str, actual_str)
+            }
+            
+            ws.close()
+        });
+
+        done()
+    });
+
 /*
     it('ca->sa->cb: wss://reien.top:3333 へsendしてcbが結果を受け取った。"A to 3333 to B" を受信できた', (done) => {
 
