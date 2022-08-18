@@ -180,9 +180,10 @@ w2w.info\html>npm run test
 
 
   WebSocketサーバーからの受信
-    ✔ sa->ca: wss://reien.top:3333 から"Response from 3333"を受信できた (181ms)
-    ✔ sb->cb: wss://reien.top:3334 から"Response from 3334"を受信できた (102ms)
-    ✔ ca->sa->ca: wss://reien.top:3333 へsendして結果を受け取った。"A to 3333 to A"を受信できた
+    ✔ sa->ca: wss://reien.top:3333 から"Response from 3333"を受信できた (1075ms)
+    ✔ sb->cb: wss://reien.top:3334 から"Response from 3334"を受信できた (267ms)
+    ✔ ca->sa->ca: wss://reien.top:3333 へsendして結果を受け取った。"ca to 3333 to ca"を受信できた
+    ✔ ca->sa->cb: wss://reien.top:3333 へsendして結果を受け取った。"ca to 3333 to cb"を受信できた
 
 
   3 passing (285ms)
@@ -260,3 +261,4 @@ https://www.npmjs.com/
 <li>memo Set Phasers to STUN/TURN: Getting Started with WebRTC using Node.js, Socket.io and Twilio’s NAT Traversal Service https://www.twilio.com/blog/2014/12/set-phasers-to-stunturn-getting-started-with-webrtc-using-node-js-socket-io-and-twilios-nat-traversal-service.html @twilioより 
 
 <li>mermaid https://mermaid-js.github.io/mermaid/#/
+<li>暗号検証 https://emn178.github.io/online-tools/
