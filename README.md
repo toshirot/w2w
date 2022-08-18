@@ -126,6 +126,9 @@ classDef class_text fill:#fff,color:#000,stroke:#fff
 <li>データの暗号化、改竄防止機能
 <li>データの公開機能
 <li>NAT越え機能
+<ul>
+    <li>リバースプロキシで443ではだめなの？
+</ul>
 <li>データのリモート削除機能 (Autonomous なら無しか代替機能)
 
 ### 宛先IDアドレスの作り方(ブロードキャストでは使わない)
