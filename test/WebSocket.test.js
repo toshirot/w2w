@@ -53,8 +53,8 @@ describe.only('WebSocketサーバーからの受信', function () {
         //接続先
         const PORT=3333
         const URL='wss://reien.top:'+PORT
-        const id=CryptoJS.SHA224(uuidv4).toString()
-
+       // const id=CryptoJS.SHA224(uuidv4).toString()
+        const id="1111"
         //console.log(id)
       
         const wss_protocol=encodeURIComponent(JSON.stringify({name:'w2w', id:id}))
@@ -71,7 +71,7 @@ describe.only('WebSocketサーバーからの受信', function () {
 
             assert.equal(expected_str, actual_str)
             done();
-            ws.close()
+            //ws.close()
         });
 
     });
@@ -81,8 +81,8 @@ describe.only('WebSocketサーバーからの受信', function () {
         //接続先
         const PORT=3334
         const URL='wss://reien.top:'+PORT
-        const id=CryptoJS.SHA224(uuidv4).toString()
-
+       // const id=CryptoJS.SHA224(uuidv4).toString()
+        const id="2222"
         //console.log(id)
       
         const wss_protocol=encodeURIComponent(JSON.stringify({name:'w2w', id:id}))
@@ -99,7 +99,7 @@ describe.only('WebSocketサーバーからの受信', function () {
 
             assert.equal(expected_str, actual_str)
             done();
-            ws.close()
+            //ws.close()
         });
 
     });
@@ -109,7 +109,8 @@ describe.only('WebSocketサーバーからの受信', function () {
         //接続先
         const PORT=3333
         const URL='wss://reien.top:'+PORT
-        const id=CryptoJS.SHA224(uuidv4).toString()
+       // const id=CryptoJS.SHA224(uuidv4).toString()
+        const id="12345"
 
         //console.log(id)
       
@@ -138,12 +139,12 @@ describe.only('WebSocketサーバーからの受信', function () {
                 assert.equal(expected_str, actual_str)
             }
             
-            ws.close()
+            //ws.close()
         });
 
         done()
     });
-    it('ca->sa->cb: wss://reien.top:3333 へsendして結果を受け取った。"ca to 3333 to cb"を受信できた', (done) => {
+    it('ca->sa->cb: ca から wss://reien.top:3333 へsendして cb が結果を受け取った。"ca to 3333 to cb"を受信できた', (done) => {
 
         //接続先
         const PORT=3333
@@ -199,7 +200,7 @@ function mkClient(URL, PORT, type, msg, protocol, to){
             }
         }
         
-        ws.close()
+       // ws.close()
     });
 
     return ws
