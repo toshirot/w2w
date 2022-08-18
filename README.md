@@ -136,10 +136,11 @@ classDef class_text fill:#fff,color:#000,stroke:#fff
 <li>wssサーバーへ送信する
 <li>サーバー側では onconnect時にsubprotocolの基礎要件を判定して
 <li>falseなら接続終了
-<li>trueなら更にIDの存在を確認し
-<li>falseなら内部メモリかDBへ登録する
+<li>trueなら更にIDの存在を（とりまメモリかDBで）確認し
+<li>falseならメモリかDBへ登録する
 <li>trueなら何もしない
 <li>送信時に宛先を判定し
+<li>(要：知ってるリストの問い合わせ方法)
 <li>知ってるリストがあればそこへ送信する
 <li>知ってるリストが無ければどうするのが良いか
 </ol>
