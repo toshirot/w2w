@@ -128,6 +128,34 @@ classDef class_text fill:#fff,color:#000,stroke:#fff
 <li>NAT越え機能
 <li>データのリモート削除機能 (Autonomous なら無しか代替機能)
 
+### IDの作り方
+
+プランA
+
+<li>IDはclientのWebSocket生成時にsubprotocolとしてハッシュ(SHA3など)を作り
+<li>wssサーバーへ送信する
+<li>サーバー側では onconnect時にsubprotocolを判定して
+<li>内部メモリはDBへ登録する
+<li>送信時に宛先を判定し
+<li>知ってるリストがあればそこへ送信する
+<li>知ってるリストが無ければどうするのが良いか
+
+
+```mermaid
+flowchart LR
+
+
+    %%mk_id_1
+        single_type2c(mk subprotocol=SHA3) 
+     
+        single_type2s(save to memory or storage):::class_server
+            single_type2c --> single_type2s
+            single_type2s --> A{"send時に送信先を判定"}:::class_server
+
+classDef class_server fill:#eee,color:#000,stroke:#333
+classDef class_text fill:#fff,color:#000,stroke:#fff
+```
+
 ### test
 
 ```
@@ -186,34 +214,6 @@ w2w.info\html>npm run test
     <li>sha3やeddsaとか楕円曲
 </ol>
 </ol>
-
-### IDの作り方
-
-プランA
-
-<li>IDはclientのWebSocket生成時にsubprotocolとしてハッシュ(SHA3など)を作り
-<li>wssサーバーへ送信する
-<li>サーバー側では onconnect時にsubprotocolを判定して
-<li>内部メモリはDBへ登録する
-<li>送信時に宛先を判定し
-<li>知ってるリストがあればそこへ送信する
-<li>知ってるリストが無ければどうするのが良いか
-
-
-```mermaid
-flowchart LR
-
-
-    %%mk_id_1
-        single_type2c(mk subprotocol=SHA3) 
-     
-        single_type2s(save to memory or storage):::class_server
-            single_type2c --> single_type2s
-            single_type2s --> A{"send時に送信先を判定"}:::class_server
-
-classDef class_server fill:#eee,color:#000,stroke:#333
-classDef class_text fill:#fff,color:#000,stroke:#fff
-```
 
 ### memo:
 
