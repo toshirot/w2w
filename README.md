@@ -134,9 +134,11 @@ classDef class_text fill:#fff,color:#000,stroke:#fff
 <ol>
 <li>IDはclientのWebSocket生成時にsubprotocolとしてハッシュ(sha3やeddsaなど)を作り
 <li>wssサーバーへ送信する
-<li>サーバー側では onconnect時にsubprotocolを判定して
+<li>サーバー側では onconnect時にsubprotocolの基礎要件を判定して
 <li>falseなら接続終了
-<li>trueなら内部メモリかDBへ登録する
+<li>trueなら更にIDの存在を確認し
+<li>falseなら内部メモリかDBへ登録する
+<li>trueなら何もしない
 <li>送信時に宛先を判定し
 <li>知ってるリストがあればそこへ送信する
 <li>知ってるリストが無ければどうするのが良いか
