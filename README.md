@@ -130,16 +130,17 @@ classDef class_text fill:#fff,color:#000,stroke:#fff
 
 ### IDの作り方
 
-プランA
-
+プランA アルゴリズム
+<ol>
 <li>IDはclientのWebSocket生成時にsubprotocolとしてハッシュ(SHA3など)を作り
 <li>wssサーバーへ送信する
 <li>サーバー側では onconnect時にsubprotocolを判定して
-<li>内部メモリはDBへ登録する
+<li>falseなら接続終了
+<li>trueなら内部メモリかDBへ登録する
 <li>送信時に宛先を判定し
 <li>知ってるリストがあればそこへ送信する
 <li>知ってるリストが無ければどうするのが良いか
-
+</ol>
 
 ```mermaid
 flowchart LR
