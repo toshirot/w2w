@@ -121,7 +121,16 @@ classDef class_text fill:#fff,color:#000,stroke:#fff
 
 ```
 
+### 機能要件
 
+#### 参加処理 ID登録 
+#### 脱退処理
+#### 冗長化
+#### データの取得と提供（転送）
+#### データの暗号化、改竄防止機能
+#### データの公開機能
+#### NAT越え機能
+#### データのリモート削除機能 (Autonomous なら無しか代替機能)
 
 ### test
 
@@ -224,3 +233,10 @@ https://www.npmjs.com/
     >Pure P2P型: 言ゲームの要領で、ネットワーク中のPeerを芋づる式に検索する
 ```
 <li>wiki P2P https://ja.wikipedia.org/wiki/Peer_to_Peer
+
+<li>先人達 2011.11.20 [P2P]Websocketでブラウザ間P2P通信は実現できるか？(その2) http://toremoro.tea-nifty.com/tomos_hotline/2011/11/p2pwebsocketp2p.html
+<li>先人達 2011-11-05 WebSocketを使ってWebブラウザ間P2P通信をしてみた https://yogit.hatenadiary.org/entry/20111105/1320492134
+
+<li> P2P通信でNatを越える https://qiita.com/nekobato/items/86e83d40b9d1a4d9b446 #Qiita 
+
+<li>memo Set Phasers to STUN/TURN: Getting Started with WebRTC using Node.js, Socket.io and Twilio’s NAT Traversal Service https://www.twilio.com/blog/2014/12/set-phasers-to-stunturn-getting-started-with-webrtc-using-node-js-socket-io-and-twilios-nat-traversal-service.html @twilioより 
