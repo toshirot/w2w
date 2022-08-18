@@ -1,6 +1,5 @@
 # w2w
-Tool for WebSocket to WebSocket
-
+Tool for WebSocket to WebSocket. Realizing W2W (WebSocket-to-WebSocket)
 
 ### サイト準備
 https://w2w.info/
