@@ -5,7 +5,11 @@ Tool for WebSocket to WebSocket. Realizing W2W (WebSocket-to-WebSocket) like P2P
 https://w2w.info/
 
 ### 構築後のフロー
-
+<style>
+.mermaid>svg {
+    margin: 0;
+}
+</style>
 ```mermaid
 flowchart LR
 
