@@ -6,6 +6,11 @@ https://w2w.info/
 
 ### 構築後のフロー
 
+<style>
+.mermaid>svg {
+    margin: 0;
+}
+</style>
 ```mermaid
 flowchart LR
 
@@ -44,7 +49,7 @@ text1(単一ネットワーク single network):::class_text
                         single_type5s1 --> single_type5c4
 
 classDef class_server fill:#eee,color:#000,stroke:#333
-classDef class_text fill:#fff,color:#000,stroke:#fff
+classDef class_text fill:#fff,color:#000,stroke:#fff,margin:0
 ```
 ```mermaid
 flowchart LR
@@ -176,6 +181,16 @@ w2w.info\html>npm run test
     <li>sha3やeddsaとか楕円曲
 </ol>
 </ol>
+
+### IDの作り方
+
+
+```
+プランA
+
+ALICE 
+
+```
 
 ### memo:
 
