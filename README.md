@@ -153,7 +153,7 @@ flowchart LR
 
 
     %%mk_id_1
-        single_type2c(mk subprotocol=SHA3) 
+        single_type2c(mk subprotocol=SHA or etc..) 
      
         single_type2s(save to memory or storage):::class_server
             single_type2c --> single_type2s
