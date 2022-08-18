@@ -14,31 +14,31 @@ flowchart LR
 text1(単一ネットワーク single network):::class_text
 
     %%single_type1
-        single_type1c(ws client a) 
-        single_type1s(ws server a):::class_server
+        single_type1c(ws client ca) 
+        single_type1s(ws server sa):::class_server
            single_type1s --> single_type1c 
 
     %%single_type2
-        single_type2c(ws client a) 
-        single_type2s(ws server a):::class_server
+        single_type2c(ws client ca) 
+        single_type2s(ws server sa):::class_server
             single_type2c --> single_type2s
 
     %%single_type3
-        single_type3c(ws client a) 
-        single_type3s(ws server a):::class_server
+        single_type3c(ws client ca) 
+        single_type3s(ws server sa):::class_server
             single_type3c --> single_type3s --> single_type3c
 
     %%single_type4
-        single_type4c1(ws client a) 
-        single_type4s1(ws server a):::class_server 
-        single_type4c2(ws client b) 
+        single_type4c1(ws client ca) 
+        single_type4s1(ws server sa):::class_server 
+        single_type4c2(ws client cb) 
             single_type4c1 --> single_type4s1 --> single_type4c2
 
     %%single_type6
-        single_type5c1(ws client a) 
-        single_type5s1(ws server a):::class_server 
-        single_type5c2(ws client b) 
-        single_type5c3(ws client c) 
+        single_type5c1(ws client ca) 
+        single_type5s1(ws server sa):::class_server 
+        single_type5c2(ws client cb) 
+        single_type5c3(ws client cc) 
         single_type5c4(ws client ..n) 
             single_type5c1 --> single_type5s1 --> single_type5c2
                         single_type5s1 --> single_type5c3
@@ -53,55 +53,55 @@ flowchart LR
 text2(複数ネットワーク multiple networks):::class_text
 
     %%multi_type1
-        multi_type1s1(ws server a):::class_server
-        multi_type1s2(ws server b):::class_server
+        multi_type1s1(ws server sa):::class_server
+        multi_type1s2(ws server sb):::class_server
             multi_type1s1 --> multi_type1s2
 
     %%multi_type2
-        multi_type2s1(ws server a):::class_server
-        multi_type2s2(ws server b):::class_server
+        multi_type2s1(ws server sa):::class_server
+        multi_type2s2(ws server sb):::class_server
         multi_type2c(ws client ..n) 
             multi_type2s1 --> multi_type2s2 --> multi_type2c
 
     %%multi_type3
-        multi_type3c(ws client a) 
-        multi_type3s1(ws server a):::class_server
-        multi_type3s2(ws server b):::class_server
+        multi_type3c(ws client ca) 
+        multi_type3s1(ws server sa):::class_server
+        multi_type3s2(ws server sb):::class_server
             multi_type3c --> multi_type3s1 --> multi_type3s2
 
     %%single_type4
-        multi_type4c1(ws client a) 
-        multi_type4s1(ws server a):::class_server 
-        multi_type4s2(ws server b):::class_server
+        multi_type4c1(ws client ca) 
+        multi_type4s1(ws server sa):::class_server 
+        multi_type4s2(ws server sb):::class_server
 　
             multi_type4c1 --> multi_type4s1 --> multi_type4s2 --> multi_type4s1--> multi_type4c1
  
      %%multi_type5
-        multi_type5c1(ws client a) 
-        multi_type5s1(ws server a):::class_server
-        multi_type5s2(ws server a):::class_server 
-        multi_type5c2(ws client b) 
-        multi_type5c3(ws client c) 
+        multi_type5c1(ws client ca) 
+        multi_type5s1(ws server sa):::class_server
+        multi_type5s2(ws server sa):::class_server 
+        multi_type5c2(ws client cb) 
+        multi_type5c3(ws client cc) 
             multi_type5c1 --> multi_type5s1 --> multi_type5c2
                         multi_type5s1 --> multi_type5s2
                         multi_type5s2 --> multi_type5c3
 
      %%multi_type6
-        multi_type6c1(ws client a) 
-        multi_type6s1(ws server a):::class_server
-        multi_type6s2(ws server a):::class_server 
-        multi_type6c2(ws client b) 
+        multi_type6c1(ws client ca) 
+        multi_type6s1(ws server sa):::class_server
+        multi_type6s2(ws server sa):::class_server 
+        multi_type6c2(ws client cb) 
         multi_type6c3(ws client ..n) 
             multi_type6c1 --> multi_type6s1 --> multi_type6c2
                         multi_type6s1 --> multi_type6c3
                         multi_type6s1 --> multi_type6s2
 
      %%multi_type7
-        multi_type7c1(ws client a) 
-        multi_type7s1(ws server a):::class_server
-        multi_type7s2(ws server a):::class_server 
+        multi_type7c1(ws client ca) 
+        multi_type7s1(ws server sa):::class_server
+        multi_type7s2(ws server sa):::class_server 
 
-        multi_type7c2(ws client b) 
+        multi_type7c2(ws client cb) 
         multi_type7c3(ws client ..n) 
 
         multi_type7c5(ws client ..n) 
