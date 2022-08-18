@@ -6,11 +6,7 @@ https://w2w.info/
 
 ### 構築後のフロー
 
-<style>
-.mermaid>svg {
-    margin: 0;
-}
-</style>
+
 ```mermaid
 flowchart LR
 
@@ -193,12 +189,20 @@ w2w.info\html>npm run test
 
 ### IDの作り方
 
-
-```
 プランA
+```mermaid
+flowchart LR
 
-ALICE 
 
+    %%mk_id_1
+        single_type2c(mk subprotocol=SHA3) 
+     
+        single_type2s(save to memory or storage):::class_server
+            single_type2c --> single_type2s
+            single_type2s --> A{"send時に送信先を判定"}:::class_server
+
+classDef class_server fill:#eee,color:#000,stroke:#333
+classDef class_text fill:#fff,color:#000,stroke:#fff
 ```
 
 ### memo:
@@ -240,3 +244,5 @@ https://www.npmjs.com/
 <li> P2P通信でNatを越える https://qiita.com/nekobato/items/86e83d40b9d1a4d9b446 #Qiita 
 
 <li>memo Set Phasers to STUN/TURN: Getting Started with WebRTC using Node.js, Socket.io and Twilio’s NAT Traversal Service https://www.twilio.com/blog/2014/12/set-phasers-to-stunturn-getting-started-with-webrtc-using-node-js-socket-io-and-twilios-nat-traversal-service.html @twilioより 
+
+<li>mermaid https://mermaid-js.github.io/mermaid/#/
