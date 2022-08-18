@@ -128,7 +128,7 @@ classDef class_text fill:#fff,color:#000,stroke:#fff
 <li>NAT越え機能
 <li>データのリモート削除機能 (Autonomous なら無しか代替機能)
 
-### IDの作り方
+### 宛先IDの作り方(ブロードキャストでは使わない)
 
 プランA アルゴリズム
 <ol>
