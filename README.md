@@ -208,3 +208,4 @@ https://www.npmjs.com/
     >Hybrid P2P型:誰がどんな情報を持っているかを把握したサーバーがあり、最初はそこに接続しに行って、Peerを発見する
     >Pure P2P型: 言ゲームの要領で、ネットワーク中のPeerを芋づる式に検索する
 ```
+<li>wiki P2P https://ja.wikipedia.org/wiki/Peer_to_Peer
