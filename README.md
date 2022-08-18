@@ -202,3 +202,9 @@ https://www.npmjs.com/
 <li>WebSockets - Web 関連仕様 日本語訳 https://triple-underscore.github.io/WebSocket-ja.html
 <li>RFC6455 The WebSocket Protocol 日本語訳 https://triple-underscore.github.io/RFC6455-ja.html
 <li>RFC6455 The WebSocket Protocol https://www.rfc-editor.org/rfc/rfc6455
+    
+<li>Hybrid P2P型とPure P2P型 https://internet.watch.impress.co.jp/www/column/wp2p/wp2p01.htm
+```
+    >Hybrid P2P型:誰がどんな情報を持っているかを把握したサーバーがあり、最初はそこに接続しに行って、Peerを発見する
+    >Pure P2P型: 言ゲームの要領で、ネットワーク中のPeerを芋づる式に検索する
+```
