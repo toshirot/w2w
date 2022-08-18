@@ -128,11 +128,11 @@ classDef class_text fill:#fff,color:#000,stroke:#fff
 <li>NAT越え機能
 <li>データのリモート削除機能 (Autonomous なら無しか代替機能)
 
-### 宛先IDの作り方(ブロードキャストでは使わない)
+### 宛先IDアドレスの作り方(ブロードキャストでは使わない)
 
 プランA アルゴリズム
 <ol>
-<li>IDはclientのWebSocket生成時にsubprotocolとしてハッシュ(SHA3など)を作り
+<li>IDはclientのWebSocket生成時にsubprotocolとしてハッシュ(sha3やeddsaなど)を作り
 <li>wssサーバーへ送信する
 <li>サーバー側では onconnect時にsubprotocolを判定して
 <li>falseなら接続終了
