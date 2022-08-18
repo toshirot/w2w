@@ -201,7 +201,7 @@ https://www.npmjs.com/
 <li>WebSockets - Web 関連仕様 日本語訳 https://triple-underscore.github.io/WebSocket-ja.html
 <li>RFC6455 The WebSocket Protocol 日本語訳 https://triple-underscore.github.io/RFC6455-ja.html
 <li>RFC6455 The WebSocket Protocol https://www.rfc-editor.org/rfc/rfc6455
-    
+<li>WebSocket のセキュリティ 日本語 — Switch to English https://devcenter.heroku.com/ja/articles/websocket-security
 <li>Hybrid P2P型とPure P2P型 https://internet.watch.impress.co.jp/www/column/wp2p/wp2p01.htm
     
 ```
