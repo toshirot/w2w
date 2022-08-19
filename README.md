@@ -12,6 +12,8 @@ https://w2w.info/
 <li>a2n (sent to all/broadcast)
 <li>s2s (server to server)
 
+( x2s terminate on last server. )
+
 ### 構築後のフロー
 
 
