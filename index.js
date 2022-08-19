@@ -1,10 +1,15 @@
 'use strict';
 
 const websocket = require('ws');
-websocket.w2w = require('./lib/w2w');
+const w2w = require('./lib/w2w');
+const sendFromClient = require('./lib/sendFromClient');
+const receiveFromServer = require('./lib/receiveFromServer');
 
 module.exports= new function() {
-    this.w2w=websocket.w2w
+    this.receiveFromServer=receiveFromServer
+    this.sendFromClient=sendFromClient
+    this.w2w=w2w
+
     this.createWebSocketStream=websocket.createWebSocketStream;
     this.Server=websocket.Server;
     this.Receiver=websocket.Receiver;

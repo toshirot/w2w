@@ -7,46 +7,13 @@ ca->sa->ca  クライアントaからサーバーaへ送信し、サーバーa�
 ca->sa->cb  クライアントaからサーバーaへ送信し、サーバーaからクライアントbへ送信する
 
 */
-
-
-
-
 const assert = require("assert");
 const WebSocket=require('../index.js').WebSocket
+const sendFromClient=require('../index.js').sendFromClient
+const receiveFromServer=require('../index.js').receiveFromServer
 const CryptoJS =require('crypto-js')
 
-//-----------------------------------------------------------------------------
-// send to server
-// @wss {object} websocket
-// @type {string} data type
-// @msg {string} send message
-function sendMsg(wss, type, msg, to){
-    let oj={
-        type: type
-        ,msg: msg
-    }
-    if(to){
-        oj.to=to
-    }
-    let send_msg=JSON.stringify(oj);
-    // 送信する
-    wss.send(send_msg)
-}
 
-//-----------------------------------------------------------------------------
-// receive from server
-// @receivedData {string} received data
-// @return data {object}
-function receiveFromServer(receivedData){
-    let data
-    try {
-        data = JSON.parse(receivedData);
-    } catch (e) {
-        console.log('JSONparse err:', data);
-        return;
-    }
-    return data
-}
 
 
 describe.only('WebSocketサーバーからの受信', function () {
@@ -130,7 +97,7 @@ describe.only('WebSocketサーバーからの受信', function () {
         ws.on('message', function message(data) {
 
             // send to 3333
-            sendMsg(ws, type, msg)
+            sendFromClient(ws, type, msg)
 
             // receive from 3333
             const receivedData=receiveFromServer(data)
@@ -173,7 +140,7 @@ describe.only('WebSocketサーバーからの受信', function () {
 
         ws_a.on('open', function open() {
             // send to 3333
-            sendMsg(ws_a, 'a2b', 'cb', id_b)
+            sendFromClient(ws_a, 'a2b', 'cb', id_b)
         })
 
         ws_b.on('message', function message(data) {
@@ -244,7 +211,7 @@ function uuidv4() {
     // Thanx for
     // https://gist.github.com/jcxplorer/823878
     // https://web.archive.org/web/20150201084235/http://blog.snowfinch.net/post/3254029029/uuid-v4-js
-  
+
     let uuid = '';
     let random;
     for (let i = 0; i < 32; i++) {
@@ -258,7 +225,7 @@ function uuidv4() {
         uuid=random=null;
     }, 1000);
     return uuid;
-  }
+}
 /*
     it('ca->sa->cb: wss://reien.top:3333 へsendしてcbが結果を受け取った。"A to 3333 to B" を受信できた', (done) => {
 
@@ -277,7 +244,7 @@ function uuidv4() {
         ws.on('message', function message(data) {
 
             // send to 3333
-            sendMsg(ws, type, msg)
+            sendFromClient(ws, type, msg)
 
             // receive from 3333
             const receivedData=receiveFromServer(data)
