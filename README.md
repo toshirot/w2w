@@ -139,7 +139,8 @@ classDef class_text_min fill:#fff,color:#000,stroke:#fff,margin:0
 
 ### 機能要件
 
-<li>参加処理 ID登録 
+<li>参加処理 ID登録
+
 ```mermaid
 sequenceDiagram
   autonumber
@@ -152,6 +153,7 @@ sequenceDiagram
         Note right of Server:  Verify by Client's Public Key<br/>and "sigB"<br/>if true then OK<br/>save to DB<br/>and publish to public
  
 ```
+
 <li>脱退処理
 <li>冗長化
 <li>データの取得と提供（転送）
