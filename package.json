@@ -1,7 +1,7 @@
 {
   "name": "w2w",
   "version": "1.0.0",
-  "description": "Tool for connecting WebSocket Networks",
+  "description": "Tool for WebSocket to WebSocket. Realizing W2W (WebSocket-to-WebSocket) like P2P",
   "main": "index.js",
   "directories": {
     "doc": "doc",
