@@ -140,6 +140,18 @@ classDef class_text_min fill:#fff,color:#000,stroke:#fff,margin:0
 ### 機能要件
 
 <li>参加処理 ID登録 
+```mermaid
+sequenceDiagram
+  autonumber
+        Note left of Client:  Client make the "sigA" <br/>by Client's Private Key<br/>And send "sigA" to Server
+    Client->>+Server: send Client's PubKey and sigA
+        Note right of Server: Server make the "sigB" <br/>by Server's Private Key and "sigA"<br/>And send "sigB" to Client
+    Server->>+Client:send Server's PubKey and send sigB
+        Note left of Client: Verify by Server's Public Key <br/>and "sigA"<br/>if true then Make the "sigC" <br/>by the Alice's Private Key <br/>and the "sigB".
+    Client->>+Server: send sigC
+        Note right of Server:  Verify by Client's Public Key<br/>and "sigB"<br/>if true then OK<br/>save to DB<br/>and publish to public
+ 
+```
 <li>脱退処理
 <li>冗長化
 <li>データの取得と提供（転送）
