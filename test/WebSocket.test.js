@@ -21,11 +21,14 @@ const CryptoJS =require('crypto-js')
 // @type {string} data type
 // @msg {string} send message
 function sendMsg(wss, type, msg, to){
-    let send_msg=JSON.stringify({
-        to: to
-        ,type: type
+    let oj={
+        type: type
         ,msg: msg
-    });
+    }
+    if(to){
+        oj.to=to
+    }
+    let send_msg=JSON.stringify(oj);
     // 送信する
     wss.send(send_msg)
 }
@@ -161,47 +164,76 @@ describe.only('WebSocketサーバーからの受信', function () {
         const wss_protocol_b=encodeURIComponent(JSON.stringify({name:'w2w', id:id_b}))
 
         //let ws1=mkClient(URL, PORT, type1, msg1)
-        let ws1=mkClient(URL, PORT, 'a2a', 'ca', wss_protocol_a)
-        let ws2=mkClient(URL, PORT, 'a2b', 'cb', wss_protocol_b, id_b)
+        let ws_a=mkClient(URL, PORT, wss_protocol_a)
+        let ws_b=mkClient(URL, PORT, wss_protocol_b)
+
+
+        // 期待した値
+        expected_str='a2b'+' to '+ PORT+' to '+'cb'
+
+        ws_a.on('open', function open() {
+            // send to 3333
+            sendMsg(ws_a, 'a2b', 'cb', id_b)
+        })
+
+        ws_b.on('message', function message(data) {
+
+            // receive from 3333
+            const receivedData=receiveFromServer(data)
+            console.log('data.msg', receivedData)
+            // assert
+            if(receivedData.type==='msg_from_'+PORT){
+                if(receivedData.msg==='msg_from_'+PORT){
+                    const actual_str=receivedData.msg
+                    console.log('data.msg', receivedData.msg)
+                    assert.equal(expected_str, actual_str)
+                }
+            }
+            
+        // ws.close()
+        });
+
 
         done()
     });
+    /*
+    it('ca2n: ca から wss://reien.top:3333 へsendして all が結果を受け取った。"ca to 3333 to all"を受信できた', (done) => {
 
-function mkClient(URL, PORT, type, msg, protocol, to){
+        //接続先
+        const PORT=3333
+        const URL='wss://reien.top'
+        //const wss_protocol=encodeURIComponent(JSON.stringify({name:'w2w', id:SHA256( uuidv4())}))
+
+
+        // const uuidv4Str=uuidv4()
+        // const id=CryptoJS.SHA224(uuidv4Str).toString()
+        const id_a="123"
+        const id_b="456"
+        const id_c="789"
+        const id_d="101"
+
+        const wss_protocol_a=encodeURIComponent(JSON.stringify({name:'w2w', id:id_a}))
+        const wss_protocol_b=encodeURIComponent(JSON.stringify({name:'w2w', id:id_b}))
+        const wss_protocol_c=encodeURIComponent(JSON.stringify({name:'w2w', id:id_c}))
+        const wss_protocol_d=encodeURIComponent(JSON.stringify({name:'w2w', id:id_d}))
+
+        //let ws1=mkClient(URL, PORT, type1, msg1)
+        let ws_a=mkClient(URL, PORT, 'a2a', 'ca', wss_protocol_a)
+        let ws_b=mkClient(URL, PORT, 'a2b', 'cb', wss_protocol_b)
+        let ws_c=mkClient(URL, PORT, 'a2b', 'cb', wss_protocol_c)
+        let ws_d=mkClient(URL, PORT, 'a2b', 'cb', wss_protocol_d)
+
+        done()
+    });
+    */
+
+// -----------------------------------------------------------------------------
+// mkClient
+//
+function mkClient(URL, PORT, protocol){
     //接続情報
     const url=URL+':'+PORT
-
-
-    // 送信するデータ
-    //const type=type//'msg_from_ALICE'
-   // const msg=msg//'ca'
-
-    // 期待した値
-    expected_str=msg+' to '+ PORT+' to '+msg
-
     const ws = new WebSocket(url, protocol)
-
-    ws.on('open', function open() {
-        // send to 3333
-        sendMsg(ws, type, msg, to)
-    })
-
-    ws.on('message', function message(data) {
-
-        // receive from 3333
-        const receivedData=receiveFromServer(data)
-
-        // assert
-        if(receivedData.type==='msg_from_'+PORT){
-            if(receivedData.msg==='msg_from_'+PORT){
-                const actual_str=receivedData.msg
-                console.log('data.msg', receivedData.msg)
-                assert.equal(expected_str, actual_str)
-            }
-        }
-        
-       // ws.close()
-    });
 
     return ws
 }
