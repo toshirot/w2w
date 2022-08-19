@@ -4,6 +4,14 @@ Tool for WebSocket to WebSocket. Realizing W2W (WebSocket-to-WebSocket) like P2P
 ### サイト準備
 https://w2w.info/
 
+### 経路type
+<li>s2c (sent to client from server)
+<li>c2s (sent to server from client)
+<li>a2a (reply to myself)
+<li>a2b (sent to an other)
+<li>a2n (sent to all/broadcast)
+<li>s2s (server to server)
+
 ### 構築後のフロー
 
 
@@ -14,38 +22,49 @@ flowchart LR
 text1(単一ネットワーク single network):::class_text
 
     %%single_type1
+        text_s2c(s2c/sent to client from server):::class_text_min
         single_type1c(ws client ca) 
         single_type1s(ws server sa):::class_server
-           single_type1s --> single_type1c 
+            text_s2c -.- single_type1s
+            single_type1s --> single_type1c 
 
     %%single_type2
+        text_c2s(c2s/sent to server from client):::class_text_min
         single_type2c(ws client ca) 
         single_type2s(ws server sa):::class_server
+            text_c2s -.- single_type2c
             single_type2c --> single_type2s
 
     %%single_type3
+        text_a2a(a2a):::class_text_min
         single_type3c(ws client ca) 
         single_type3s(ws server sa):::class_server
+            text_a2a -.- single_type3c
             single_type3c --> single_type3s --> single_type3c
 
     %%single_type4
+        text_a2b(a2b):::class_text_min
         single_type4c1(ws client ca) 
         single_type4s1(ws server sa):::class_server 
-        single_type4c2(ws client cb) 
+        single_type4c2(ws client cb)
+            text_a2b -.- single_type4c1
             single_type4c1 --> single_type4s1 --> single_type4c2
 
     %%single_type6
+        text_a2n(a2n):::class_text_min
         single_type5c1(ws client ca) 
         single_type5s1(ws server sa):::class_server 
         single_type5c2(ws client cb) 
         single_type5c3(ws client cc) 
         single_type5c4(ws client ..n) 
+            text_a2n -.- single_type5c1
             single_type5c1 --> single_type5s1 --> single_type5c2
                         single_type5s1 --> single_type5c3
                         single_type5s1 --> single_type5c4
 
 classDef class_server fill:#eee,color:#000,stroke:#333
 classDef class_text fill:#fff,color:#000,stroke:#fff,margin:0
+classDef class_text_min fill:#fff,color:#000,stroke:#fff,margin:0
 ```
 ```mermaid
 flowchart LR
@@ -53,67 +72,66 @@ flowchart LR
 text2(複数ネットワーク multiple networks):::class_text
 
     %%multi_type1
+        text_s2s(s2s):::class_text_min
         multi_type1s1(ws server sa):::class_server
         multi_type1s2(ws server sb):::class_server
-            multi_type1s1 --> multi_type1s2
+            text_s2s -.- multi_type1s1
+            multi_type1s1 --> |..n server| multi_type1s2
 
     %%multi_type2
+        text_s2c(s2c):::class_text_min
         multi_type2s1(ws server sa):::class_server
         multi_type2s2(ws server sb):::class_server
         multi_type2c(ws client ..n) 
-            multi_type2s1 --> multi_type2s2 --> multi_type2c
+            text_s2c -.- multi_type2s1
+            multi_type2s1 -->  |..n server| multi_type2s2 --> multi_type2c
 
     %%multi_type3
+        text_c2s(c2s):::class_text_min
         multi_type3c(ws client ca) 
         multi_type3s1(ws server sa):::class_server
         multi_type3s2(ws server sb):::class_server
-            multi_type3c --> multi_type3s1 --> multi_type3s2
+            text_c2s -.- multi_type3c
+            multi_type3c --> multi_type3s1 -->  |..n server| multi_type3s2
 
     %%single_type4
+        text_a2a(a2a):::class_text_min
         multi_type4c1(ws client ca) 
         multi_type4s1(ws server sa):::class_server 
         multi_type4s2(ws server sb):::class_server
-　
-            multi_type4c1 --> multi_type4s1 --> multi_type4s2 --> multi_type4s1--> multi_type4c1
+            text_a2a -.- multi_type4c1
+            multi_type4c1 --> multi_type4s1 --> |..n server| multi_type4s2 -->  |..n server| multi_type4s1--> multi_type4c1
  
      %%multi_type5
+        text_a2b(a2b):::class_text_min
         multi_type5c1(ws client ca) 
         multi_type5s1(ws server sa):::class_server
         multi_type5s2(ws server sa):::class_server 
-        multi_type5c2(ws client cb) 
         multi_type5c3(ws client cc) 
-            multi_type5c1 --> multi_type5s1 --> multi_type5c2
-                        multi_type5s1 --> multi_type5s2
+            text_a2b -.- multi_type5c1
+            multi_type5c1 --> multi_type5s1
+                        multi_type5s1 -->  |..n server| multi_type5s2
                         multi_type5s2 --> multi_type5c3
 
+
      %%multi_type6
+        text_a2n(a2n):::class_text_min
         multi_type6c1(ws client ca) 
         multi_type6s1(ws server sa):::class_server
         multi_type6s2(ws server sa):::class_server 
-        multi_type6c2(ws client cb) 
-        multi_type6c3(ws client ..n) 
+
+        multi_type6c2(ws client ..n) 
+
+        multi_type6c5(ws client ..n) 
+            text_a2n-.- multi_type6c1
             multi_type6c1 --> multi_type6s1 --> multi_type6c2
-                        multi_type6s1 --> multi_type6c3
-                        multi_type6s1 --> multi_type6s2
-
-     %%multi_type7
-        multi_type7c1(ws client ca) 
-        multi_type7s1(ws server sa):::class_server
-        multi_type7s2(ws server sa):::class_server 
-
-        multi_type7c2(ws client cb) 
-        multi_type7c3(ws client ..n) 
-
-        multi_type7c5(ws client ..n) 
-
-            multi_type7c1 --> multi_type7s1 --> multi_type7c2
-                        multi_type7s1 --> multi_type7c3
-                        multi_type7s1 --> multi_type7s2
-                        multi_type7s2 --> multi_type7c5
+                        multi_type6s1 -->  |..n server| multi_type6s2
+                        multi_type6s2 --> multi_type6c5
                      
 
 classDef class_server fill:#eee,color:#000,stroke:#333
 classDef class_text fill:#fff,color:#000,stroke:#fff
+classDef class_text_min fill:#fff,color:#000,stroke:#fff,margin:0
 
 ```
 
@@ -195,30 +213,35 @@ w2w.info\html>npm run test
 ### ca->sa->cb 違うクライアントへ送る場合
 実現するいくつかの方法がある。
 オプションで選択で聞くようにするか？どういうオプションが使いやすいか？
+
+<br> ✔は2022-08-18 テスト実装
+<br>
 <ol>
 <li>clientへの配信方法
 <ol>
     <li>wss Serverでブロードキャストする方法
-    <li>cbを特定して送る方法。
+    <li>cbを特定して送る方法。 ✔
 </ol>
 <li>clientを特定する仕組み
 <ol>
     <li>ipを記憶
-    <li>idを作る
+    <li>idを作る ✔
 </ol>
 <li>idを作るタイミング1
 <ol>
-    <li>クライアント側　
+    <li>クライアント側　 ✔
     <li>サーバー側
 </ol>
 <li>idを作るタイミング2
 <ol>
-    <li>サブプロトコル
+    <li>サブプロトコル ✔
     <li>サーバー側 onmessage
 </ol>
 <li>idを作る方法
 <ol>
+    <li>暫定text ✔
     <li>uuidv4
+    <li>uuidv4+SHA224
     <li>sha3やeddsaとか楕円曲
 </ol>
 </ol>
@@ -258,9 +281,9 @@ https://www.npmjs.com/
 
 <li>先人達 2011.11.20 [P2P]Websocketでブラウザ間P2P通信は実現できるか？(その2) http://toremoro.tea-nifty.com/tomos_hotline/2011/11/p2pwebsocketp2p.html
 <li>先人達 2011-11-05 WebSocketを使ってWebブラウザ間P2P通信をしてみた https://yogit.hatenadiary.org/entry/20111105/1320492134
-
+<li>SSDP (Simple Service Discovery Protocol) https://datatracker.ietf.org/doc/html/draft-cai-ssdp-v1-03
 <li> P2P通信でNatを越える https://qiita.com/nekobato/items/86e83d40b9d1a4d9b446 #Qiita 
-
+<li> node-ssdp https://www.npmjs.com/package/node-ssdp
 <li>memo Set Phasers to STUN/TURN: Getting Started with WebRTC using Node.js, Socket.io and Twilio’s NAT Traversal Service https://www.twilio.com/blog/2014/12/set-phasers-to-stunturn-getting-started-with-webrtc-using-node-js-socket-io-and-twilios-nat-traversal-service.html @twilioより 
 
 <li>mermaid https://mermaid-js.github.io/mermaid/#/
