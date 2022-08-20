@@ -17,19 +17,20 @@
   },
   "keywords": [
     "websocket",
-    "connect",
-    "wss2wss",
-    "ws2ws",
-    "w2w"
+    "w2w",
+    "p2p",
+    "websocket to websocket"
   ],
-  "author": "toshirot <tato@reien.top> (https://github.com/toshirot/)",
+  "author": "toshirot (https://github.com/toshirot/)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/toshirot/w2w/issues"
   },
   "homepage": "https://github.com/toshirot/w2w#readme",
   "dependencies": {
+    "crypto": "^1.0.1",
     "crypto-js": "^4.1.1",
+    "eccrypto": "^1.1.6",
     "elliptic": "^6.5.4",
     "ws": "^8.8.1"
   },

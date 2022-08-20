@@ -390,3 +390,50 @@ https://www.npmjs.com/
 
 <li>mermaid https://mermaid-js.github.io/mermaid/#/
 <li>暗号検証 https://emn178.github.io/online-tools/
+<li>暗号スイートの暗号強度と、公開鍵のビット数の設定 https://http2.try-and-test.net/ecdhe.html
+<li>サーバ負荷をRSAとECDSAで比較 https://http2.try-and-test.net/ecdsa.html
+
+```
+2022-08-2011
+
+{
+  "name": "w2w",
+  "version": "1.0.0",
+  "description": "Tool for WebSocket to WebSocket. Realizing W2W (WebSocket-to-WebSocket) like P2P",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc",
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toshirot/w2w.git"
+  },
+  "keywords": [
+    "websocket",
+    "w2w",
+    "p2p",
+    "websocket to websocket"
+  ],
+  "author": "toshirot <tato@reien.top> (https://github.com/toshirot/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/toshirot/w2w/issues"
+  },
+  "homepage": "https://github.com/toshirot/w2w#readme",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "crypto-js": "^4.1.1",
+    "eccrypto": "^1.1.6",
+    "elliptic": "^6.5.4",
+    "ws": "^8.8.1"
+  },
+  "devDependencies": {
+    "mocha": "^10.0.0"
+  }
+}
+```
