@@ -150,6 +150,7 @@ classDef class_text_min fill:#fff,color:#000,stroke:#fff,margin:0
 <p><small>動作イメージ： 例えば Client を立ち上げると、「参加処理 ID登録」で自動サインインし、wss Server の Node List にアカウントが登録される。
 その後は、「データの取得と提供」により、アカウント指定して Node Client と接続し、1on1 or 1onN でデータを送受信できる。
 「データの暗号化、改竄防止機能」は以下のイメージ。「データの取得と提供」接続時に使った"sigC"をencryptに利用する。
+あるいは、a2g,a2nでの放送も可能。
 </small></p>
 <br/>
 
@@ -213,6 +214,10 @@ sequenceDiagram
     
 ```
 <li>データの公開機能
+<ol>
+    <li>単純なアドレスリストはNode Clientが持つ。
+    <li>「私はこういうデータを持っています」という宣言はフォーマットを決めて考慮
+</ol>
 <li>NAT越え機能
 <ul>
     <li>リバースプロクシで443ではだめなの？
