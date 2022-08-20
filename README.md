@@ -203,6 +203,7 @@ sequenceDiagram
 ```
 <li>データの暗号化、改竄防止機能
 <p><small>Node Clientは、Clientへデータ送信前に "sigC"をsoltとした暗号化を施して送り、Clientは "sigC"で解凍する。</small><p>
+<p><small>改竄防止はハッシュで実装できるけど今はいらないかな？</small><p>
 
 ```mermaid
 sequenceDiagram
