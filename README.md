@@ -162,7 +162,7 @@ sequenceDiagram
 </ol>
 <li>冗長化
 <li>データの取得と提供（転送）
-<p><small>Clientはwss Serverから欲しいデータを持っているNode Clientリストを受け取る。Node Clientへデータを要求し、相互のPubkey/署名を交換して、OKならNode ClientはClientへデータを送る。</small></p>
+<p><small>Clientはwss Serverから欲しいデータを持っているNode Clientリストを受け取る。Node Clientへデータを要求し、相互のPubkey/署名を交換して、認証OKならNode ClientはClientへデータを送る。</small></p>
 
 ```mermaid
 sequenceDiagram
@@ -176,7 +176,8 @@ sequenceDiagram
         Note left of Client: Verify by Node Client's Public Key <br/>and "sigA"<br/>if true then Make the "sigC" <br/>by the Client's Private Key <br/>and the "sigB"<br/>if false then end
     Client->>+Node Client: send sigC to Node Client
         Note right of Node Client:  Verify by Client's Public Key<br/>and "sigB"<br/>if true then OK<br/>sent   data to Client
-    Node Client->>+Client:send Data to Client
+    Node Client->>+Client:send Data/Msg
+    Client->>+Node Client:send Data/Msg
 ```
 <li>データの暗号化、改竄防止機能
 <p><small>Node Clientは、Clientへデータ送信前に "sigC"をsoltとした暗号化を施して送り、Clientは "sigC"で解凍する。</small><p>
@@ -187,8 +188,15 @@ sequenceDiagram
     Client->>+Node Client: request to  Node Client with  Client's Private and sig
         Note right of Node Client:  get data from Client<br/> --omission-- <br/>Verify by Client's Public Key<br/>and "sigC"<br/>if true then OK
         Note right of Node Client:  Make encrypt data<br/>by sigC solt<br/>and sent data to Client
-    Node Client->>+Client:send Data to Client
+    Node Client->>+Client:send encrypt Data/Msg
         Note left of Client:  Client decrypt by sigC
+        Note left of Client:  and make  encrypt by sigC
+    Client->>+Node Client:send encrypt Data/Msg
+        Note right of Node Client:  Node Client decrypt by sigC
+        Note right of Node Client:  and make  encrypt by sigC
+    Node Client->>+Client:send encrypt Data/Msg
+        Note left of Client:  Client decrypt by sigC
+    
 ```
 <li>データの公開機能
 <li>NAT越え機能
@@ -298,6 +306,10 @@ w2w.info\html>npm run test
 
 
 ```
+2022-07-20
+仮にAES使うならこんな感じ
+CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(msgs), sigC).toString()
+CryptoJS.AES.decrypt(msgs, sigC).toString(CryptoJS.enc.Utf8);
 
 2022-08-18
 無限ループの止め方
