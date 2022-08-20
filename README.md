@@ -145,12 +145,12 @@ classDef class_text_min fill:#fff,color:#000,stroke:#fff,margin:0
 sequenceDiagram
   autonumber
         Note left of Client:  Client make the "sigA" <br/>by Client's Private Key<br/>And send "sigA" to Server
-    Client->>+Server: send Client's PubKey and sigA
-        Note right of Server: Server make the "sigB" <br/>by Server's Private Key and "sigA"<br/>And send "sigB" to Client
-    Server->>+Client:send Server's PubKey and send sigB
-        Note left of Client: Verify by Server's Public Key <br/>and "sigA"<br/>if true then Make the "sigC" <br/>by the Alice's Private Key <br/>and the "sigB"<br/>if false then end
-    Client->>+Server: send sigC
-        Note right of Server:  Verify by Client's Public Key<br/>and "sigB"<br/>if true then OK<br/>save to DB<br/>and publish to public<br/>if false then end
+    Client->>+Wss Server: send Client's PubKey and sigA
+        Note right of Wss Server: Server make the "sigB" <br/>by Server's Private Key and "sigA"<br/>And send "sigB" to Client
+    Wss Server->>+Client:send Server's PubKey and send sigB
+        Note left of Client: Verify by Server's Public Key <br/>and "sigA"<br/>if true then Make the "sigC" <br/>by the Client's Private Key <br/>and the "sigB"<br/>if false then end
+    Client->>+Wss Server: send sigC
+        Note right of Wss Server:  Verify by Client's Public Key<br/>and "sigC"<br/>if true then OK<br/>save to DB<br/>and publish to public<br/>if false then end
  
 ```
 
@@ -161,7 +161,30 @@ sequenceDiagram
 </ol>
 <li>冗長化
 <li>データの取得と提供（転送）
+```mermaid
+sequenceDiagram
+  autonumber
+    Client->>+Wss Server: get list from Wss Server
+        Note left of Client:  Client make the "sigA" <br/>by Client's Private Key<br/>And send "sigA" to Node Client
+    Wss Server->>+Client: send list from Wss Server
+    Client->>+Node Client: send Client's PubKey and sigA
+        Note right of Node Client: Node Client make the "sigB" <br/>by Node Client's Private Key and "sigA"<br/>And send "sigB" to Client
+    Node Client->>+Client:send Node Client's PubKey and send sigB
+        Note left of Client: Verify by Node Client's Public Key <br/>and "sigA"<br/>if true then Make the "sigC" <br/>by the Client's Private Key <br/>and the "sigB"<br/>if false then end
+    Client->>+Node Client: send sigC to Node Client
+        Note right of Node Client:  Verify by Client's Public Key<br/>and "sigB"<br/>if true then OK<br/>sent   data to Client
+    Node Client->>+Client:send Data to Client
+```
 <li>データの暗号化、改竄防止機能
+```mermaid
+sequenceDiagram
+  autonumber
+    Client->>+Node Client: request to  Node Client with  Client's Private and sig
+        Note right of Node Client:  get data from Client<br/> --omission-- <br/>Verify by Client's Public Key<br/>and "sigC"<br/>if true then OK
+        Note right of Node Client:  Make encrypt data<br/>by sigC solt<br/>and sent data to Client
+    Node Client->>+Client:send Data to Client
+        Note left of Client:  Client decrypt by sigC
+```
 <li>データの公開機能
 <li>NAT越え機能
 <ul>
