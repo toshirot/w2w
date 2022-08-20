@@ -26,7 +26,6 @@ https://w2w.info/
 
 ### 構築後のフロー
 
-メモ：1onN でアカウントを指定したグループ a2g が網羅されていないのであとで追加する
 ```mermaid
 flowchart LR
 
@@ -62,7 +61,7 @@ text1(単一ネットワーク single network):::class_text
             text_a2b -.- single_type4c1
             single_type4c1 --> single_type4s1 --> single_type4c2
 
-    %%single_type6
+    %%single_type5
         text_a2n(a2n):::class_text_min
         single_type5c1(ws client ca) 
         single_type5s1(ws server sa):::class_server 
@@ -73,6 +72,19 @@ text1(単一ネットワーク single network):::class_text
             single_type5c1 --> single_type5s1 --> single_type5c2
                         single_type5s1 --> single_type5c3
                         single_type5s1 --> single_type5c4
+
+
+    %%single_type6
+        text_a2g(a2g):::class_text_min
+        single_type6c1(ws client ca) 
+        single_type6s1(ws server sa):::class_server 
+        single_type6c2(ws client cb) 
+        single_type6c3(ws client cc) 
+        single_type6c4(ws client cd) 
+            text_a2g -.- single_type6c1
+            single_type6c1 --> single_type6s1 --> single_type6c2
+                        single_type6s1 --> single_type6c3
+                        single_type6s1 --> single_type6c4
 
 classDef class_server fill:#eee,color:#000,stroke:#333
 classDef class_text fill:#fff,color:#000,stroke:#fff,margin:0
@@ -125,21 +137,21 @@ text2(複数ネットワーク multiple networks):::class_text
                         multi_type5s1 -->  |..n server| multi_type5s2
                         multi_type5s2 --> multi_type5c3
 
-
-     %%multi_type6
-        text_a2n(a2n):::class_text_min
+    %%single_type6
+        text_a2g(a2g):::class_text_min
         multi_type6c1(ws client ca) 
-        multi_type6s1(ws server sa):::class_server
+        multi_type6s1(ws server sa):::class_server 
         multi_type6s2(ws server sa):::class_server 
+        multi_type6c2(ws client cb) 
+        multi_type6c3(ws client cc) 
+        multi_type6c4(ws client cd) 
+            text_a2g -.- multi_type6s1
+            multi_type6s1 --> multi_type6s2
+                multi_type6s2 --> multi_type6c1
+            multi_type6s2 --> multi_type6c2
+                        multi_type6s1 --> multi_type6c3
+                        multi_type6s1 --> multi_type6c4
 
-        multi_type6c2(ws client ..n) 
-
-        multi_type6c5(ws client ..n) 
-            text_a2n-.- multi_type6c1
-            multi_type6c1 --> multi_type6s1 --> multi_type6c2
-                        multi_type6s1 -->  |..n server| multi_type6s2
-                        multi_type6s2 --> multi_type6c5
-                     
 
 classDef class_server fill:#eee,color:#000,stroke:#333
 classDef class_text fill:#fff,color:#000,stroke:#fff
