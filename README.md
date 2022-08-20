@@ -138,6 +138,9 @@ classDef class_text_min fill:#fff,color:#000,stroke:#fff,margin:0
 ```
 
 ### 機能要件
+<p><small>前提：各通信全てがwssで暗号化されている</small></p>
+<br/>
+
 
 <li>参加処理 ID登録
 <p><small>Clientは自分の所属しているネットワークの wss Serverと相互のPubkey/署名を交換し、OKなら wss Server はDBへ登録・公開する。</small></p>
