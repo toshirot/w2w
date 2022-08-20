@@ -1,5 +1,5 @@
 # w2w
-Tool for WebSocket to WebSocket. Realizing W2W (WebSocket-to-WebSocket) like P2P
+Tool for WebSocket to WebSocket. Realizing W2W (WebSocket-to-WebSocket) like P2P. But is not P2P.
 
 ### サイト準備
 https://w2w.info/
