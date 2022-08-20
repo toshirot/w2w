@@ -10,6 +10,9 @@ https://w2w.info/
 
 したがって、ここでやろうとしてるのはほんの少しP2Pに似てるかもしれないけど、P2Pではないです。WebSocket 2 WebSocke の W2W です。
 
+勇気付けてくれる人がいるだけで、人は立ち上がれる。
+自分も人に力を渡せる人になりたい。
+
 ### 経路type
 <li>s2c (sent to client from server)
 <li>c2s (sent to server from client)
