@@ -148,13 +148,17 @@ sequenceDiagram
     Client->>+Server: send Client's PubKey and sigA
         Note right of Server: Server make the "sigB" <br/>by Server's Private Key and "sigA"<br/>And send "sigB" to Client
     Server->>+Client:send Server's PubKey and send sigB
-        Note left of Client: Verify by Server's Public Key <br/>and "sigA"<br/>if true then Make the "sigC" <br/>by the Alice's Private Key <br/>and the "sigB".
+        Note left of Client: Verify by Server's Public Key <br/>and "sigA"<br/>if true then Make the "sigC" <br/>by the Alice's Private Key <br/>and the "sigB"<br/>if false then end
     Client->>+Server: send sigC
-        Note right of Server:  Verify by Client's Public Key<br/>and "sigB"<br/>if true then OK<br/>save to DB<br/>and publish to public
+        Note right of Server:  Verify by Client's Public Key<br/>and "sigB"<br/>if true then OK<br/>save to DB<br/>and publish to public<br/>if false then end
  
 ```
 
 <li>脱退処理
+<ol>
+    <li>サーバーサイドでのPing/Pongの監視
+    <li>Clientからの明確なclose送信
+</ol>
 <li>冗長化
 <li>データの取得と提供（転送）
 <li>データの暗号化、改竄防止機能
