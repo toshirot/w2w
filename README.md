@@ -9,6 +9,7 @@ https://w2w.info/
 <li>c2s (sent to server from client)
 <li>a2a (reply to myself)
 <li>a2b (sent to an other)
+<li>a2g (sent to gloup)
 <li>a2n (sent to all/broadcast)
 <li>s2s (server to server)
 
@@ -16,7 +17,7 @@ https://w2w.info/
 
 ### 構築後のフロー
 
-メモ：1onN が網羅されていない
+メモ：1onN でアカウントを指定したグループ a2g が網羅されていないのであとで追加する
 ```mermaid
 flowchart LR
 
