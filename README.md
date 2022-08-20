@@ -161,6 +161,7 @@ sequenceDiagram
 </ol>
 <li>冗長化
 <li>データの取得と提供（転送）
+
 ```mermaid
 sequenceDiagram
   autonumber
