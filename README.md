@@ -139,9 +139,9 @@ classDef class_text_min fill:#fff,color:#000,stroke:#fff,margin:0
 ```
 
 ### 機能要件
-<p><small>前提：各通信全てがwssで暗号化されている</small></p>
-
-<p><small>例えば Client を立ち上げると、「参加処理 ID登録」で自動サインインし、wss Server の Node List にアカウントが登録される。
+<p><small>前提： 各通信全てがwssで暗号化されている</small></p>
+<br/>
+<p><small>動作イメージ： 例えば Client を立ち上げると、「参加処理 ID登録」で自動サインインし、wss Server の Node List にアカウントが登録される。
 その後は、「データの取得と提供」により、アカウント指定して Node Client と接続し、1on1 or 1onN でデータを送受信できる。
 「データの暗号化、改竄防止機能」は以下のイメージ。「データの取得と提供」接続時に使った"sigC"をencryptに利用する。
 </small></p>
