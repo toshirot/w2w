@@ -148,6 +148,7 @@ classDef class_text_min fill:#fff,color:#000,stroke:#fff,margin:0
 <li>Client: wssネットワーク上のclient
 <li>wss Server: WebSocketネットワークServer。以下の Node Client を兼ねる。
 <li>Node Client: 参加しているNode List を持つClient。Clientに教える。
+<li>ID: Node Client の Node List で公開されている各ClientのアカウントIDで公開鍵。
 
 
 ### 機能要件
@@ -161,7 +162,7 @@ classDef class_text_min fill:#fff,color:#000,stroke:#fff,margin:0
 <br/>
 
 <li>参加処理 ID登録
-<p><small>Clientは自分の所属しているネットワークの wss Serverと相互のPubkey/署名を交換し、OKなら wss Server はDBへ登録・公開する。</small></p>
+<p><small>Clientは自分の所属しているネットワークの wss Serverと相互のPubkey/署名を交換し、OKなら wss Server はDBへ登録・公開する。公開されるアカウントIDは各Clientの公開鍵です。</small></p>
 
 ```mermaid
 sequenceDiagram
