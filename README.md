@@ -140,17 +140,18 @@ classDef class_text_min fill:#fff,color:#000,stroke:#fff,margin:0
 ### 機能要件
 
 <li>参加処理 ID登録
+<p><small>Clientは自分の所属しているネットワークの wss Serverと相互のPubkey/署名を交換し、OKなら wss Server はDBへ登録・公開する。</small></p>
 
 ```mermaid
 sequenceDiagram
   autonumber
         Note left of Client:  Client make the "sigA" <br/>by Client's Private Key<br/>And send "sigA" to Server
-    Client->>+Wss Server: send Client's PubKey and sigA
-        Note right of Wss Server: Server make the "sigB" <br/>by Server's Private Key and "sigA"<br/>And send "sigB" to Client
-    Wss Server->>+Client:send Server's PubKey and send sigB
+    Client->>+wss Server: send Client's PubKey and sigA
+        Note right of wss Server: Server make the "sigB" <br/>by Server's Private Key and "sigA"<br/>And send "sigB" to Client
+    wss Server->>+Client:send Server's PubKey and send sigB
         Note left of Client: Verify by Server's Public Key <br/>and "sigA"<br/>if true then Make the "sigC" <br/>by the Client's Private Key <br/>and the "sigB"<br/>if false then end
-    Client->>+Wss Server: send sigC
-        Note right of Wss Server:  Verify by Client's Public Key<br/>and "sigC"<br/>if true then OK<br/>save to DB<br/>and publish to public<br/>if false then end
+    Client->>+wss Server: send sigC
+        Note right of wss Server:  Verify by Client's Public Key<br/>and "sigC"<br/>if true then OK<br/>save to DB<br/>and publish to public<br/>if false then end
  
 ```
 
@@ -161,13 +162,14 @@ sequenceDiagram
 </ol>
 <li>冗長化
 <li>データの取得と提供（転送）
+<p><small>Clientはwss Serverから欲しいデータを持っているNode Clientリストを受け取る。Node Clientへデータを要求し、相互のPubkey/署名を交換して、OKならNode ClientはClientへデータを送る。</small></p>
 
 ```mermaid
 sequenceDiagram
   autonumber
-    Client->>+Wss Server: get list from Wss Server
+    Client->>+wss Server: get list from wss Server
         Note left of Client:  Client make the "sigA" <br/>by Client's Private Key<br/>And send "sigA" to Node Client
-    Wss Server->>+Client: send list from Wss Server
+    wss Server->>+Client: send list from wss Server
     Client->>+Node Client: send Client's PubKey and sigA
         Note right of Node Client: Node Client make the "sigB" <br/>by Node Client's Private Key and "sigA"<br/>And send "sigB" to Client
     Node Client->>+Client:send Node Client's PubKey and send sigB
@@ -177,6 +179,7 @@ sequenceDiagram
     Node Client->>+Client:send Data to Client
 ```
 <li>データの暗号化、改竄防止機能
+<p><small>Node Clientは、Clientへデータ送信前に "sigC"をsoltとした暗号化を施して送り、Clientは "sigC"で解凍する。</small><p>
 
 ```mermaid
 sequenceDiagram
