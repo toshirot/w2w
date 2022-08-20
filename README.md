@@ -4,6 +4,12 @@ Tool for WebSocket to WebSocket. Realizing W2W (WebSocket-to-WebSocket) like P2P
 ### サイト準備
 https://w2w.info/
 
+### 動機
+
+WebSocketのネットワークを繋いでいったら面白いのじゃないかと10年以上前に思って話したら、何故かいきなり「そんなのP2Pじゃないっ」と言われて凹んで、2022年となり、年取ったしまぁ人はどうでもいいから自分が面白そうと思うなら、自分のできる範囲でやってみようと思った。勇気づけてくれる方もいたので、感謝しつつ。
+
+だからここでやろうとしてるのはP2Pではないです。WebSocket 2 WebSockeのW2W。
+
 ### 経路type
 <li>s2c (sent to client from server)
 <li>c2s (sent to server from client)
