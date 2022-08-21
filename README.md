@@ -396,6 +396,7 @@ https://www.npmjs.com/
 <li>暗号検証 https://emn178.github.io/online-tools/
 <li>暗号スイートの暗号強度と、公開鍵のビット数の設定 https://http2.try-and-test.net/ecdhe.html
 <li>サーバ負荷をRSAとECDSAで比較 https://http2.try-and-test.net/ecdsa.html
+<li>Node Doc https://nodejs.org/dist/latest-v16.x/docs/api/
 
 ```
 2022-08-2011
