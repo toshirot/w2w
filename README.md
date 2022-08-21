@@ -403,7 +403,7 @@ https://www.npmjs.com/
 <li>Node Doc https://nodejs.org/dist/latest-v16.x/docs/api/
 
 ```
-2022-08-2011
+2022-08-21
 
 {
   "name": "w2w",
@@ -428,7 +428,7 @@ https://www.npmjs.com/
     "p2p",
     "websocket to websocket"
   ],
-  "author": "toshirot <tato@reien.top> (https://github.com/toshirot/)",
+  "author": "toshirot (https://github.com/toshirot/)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/toshirot/w2w/issues"
@@ -437,12 +437,11 @@ https://www.npmjs.com/
   "dependencies": {
     "crypto": "^1.0.1",
     "crypto-js": "^4.1.1",
-    "eccrypto": "^1.1.6",
-    "elliptic": "^6.5.4",
     "ws": "^8.8.1"
   },
   "devDependencies": {
     "mocha": "^10.0.0"
   }
 }
+
 ```
