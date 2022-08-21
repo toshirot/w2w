@@ -251,8 +251,9 @@ sequenceDiagram
 
 プランA アルゴリズム
 <ol>
-<li>IDはclientのWebSocket生成時にsubprotocolとしてハッシュ(sha3やeddsaなど)を作り
-<li>wssサーバーへ送信する
+<li>IDはclientのWebSocket生成時にsubprotocol用にkeypairを作り
+<li>keypairはCONF_PATHへ保存する
+<li>公開鍵をwssサーバーへ送信する
 <li>サーバー側では onconnect時にsubprotocolの基礎要件を判定して
 <li>falseなら接続終了
 <li>trueなら更にIDの存在を（とりまメモリかDBで）確認し
