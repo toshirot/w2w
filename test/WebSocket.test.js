@@ -30,16 +30,16 @@ describe.only('WebSocketサーバーからの受信', function () {
         const wss_protocol=encodeURIComponent(JSON.stringify({name:'w2w', id:id}))
           
         // 期待した値
-        expected_str='Response from ' + PORT;
+        expected='Response from ' + PORT;
 
         const ws = new WebSocket(URL, wss_protocol)
          
         ws.on('message', function message(data) {
             // on connection で発信されたレスポンス
             // receive from 3333
-            const actual_str=receiveFromServer(data)
+            const actual=receiveFromServer(data)
 
-            assert.equal(expected_str, actual_str)
+            assert.equal(actual, expected)
             done();
             //ws.close()
         });
@@ -58,16 +58,16 @@ describe.only('WebSocketサーバーからの受信', function () {
         const wss_protocol=encodeURIComponent(JSON.stringify({name:'w2w', id:id}))
 
         // 期待した値
-        expected_str='Response from ' + PORT;
+        expected='Response from ' + PORT;
 
         const ws = new WebSocket(URL, wss_protocol)
          
         ws.on('message', function message(data) {
             // on connection で発信されたレスポンス
             // receive from 3333
-            const actual_str=receiveFromServer(data)
+            const actual=receiveFromServer(data)
 
-            assert.equal(expected_str, actual_str)
+            assert.equal(actual, expected)
             done();
             //ws.close()
         });
@@ -91,7 +91,7 @@ describe.only('WebSocketサーバーからの受信', function () {
         const msg='ca'
 
         // 期待した値
-        expected_str=msg+' to '+ PORT+' to '+msg
+        expected=msg+' to '+ PORT+' to '+msg
 
         const ws = new WebSocket(URL, wss_protocol)
         ws.on('message', function message(data) {
@@ -104,9 +104,9 @@ describe.only('WebSocketサーバーからの受信', function () {
 
             // assert
             if(receivedData.type==='msg_from_'+PORT){
-                const actual_str=receivedData.msg
+                const actual=receivedData.msg
                 console.log('data.msg', receivedData.msg)
-                assert.equal(expected_str, actual_str)
+                assert.equal(actual, expected)
             }
             
             //ws.close()
@@ -136,7 +136,7 @@ describe.only('WebSocketサーバーからの受信', function () {
 
 
         // 期待した値
-        expected_str='a2b'+' to '+ PORT+' to '+'cb'
+        expected='a2b'+' to '+ PORT+' to '+'cb'
 
         ws_a.on('open', function open() {
             // send to 3333
@@ -151,9 +151,9 @@ describe.only('WebSocketサーバーからの受信', function () {
             // assert
             if(receivedData.type==='msg_from_'+PORT){
                 if(receivedData.msg==='msg_from_'+PORT){
-                    const actual_str=receivedData.msg
+                    const actual=receivedData.msg
                     console.log('data.msg', receivedData.msg)
-                    assert.equal(expected_str, actual_str)
+                    assert.equal(actual, expected)
                 }
             }
             
@@ -238,7 +238,7 @@ function uuidv4() {
         const msg='to B'
 
         // 期待した値
-        expected_str='A to '+ PORT+' to B'
+        expected='A to '+ PORT+' to B'
 
         const ws = new WebSocket(URL)
         ws.on('message', function message(data) {
@@ -251,9 +251,9 @@ function uuidv4() {
 
             // assert
             if(receivedData.type==='msg_from_3333'){
-                const actual_str=receivedData.msg
+                const actual=receivedData.msg
                 //console.log('data.msg', receivedData.msg)
-                assert.equal(expected_str, actual_str)
+                assert.equal(actual, expected)
             }
             
             ws.close()

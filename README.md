@@ -298,9 +298,13 @@ w2w.info\html>npm run test
 > mocha
 
 
+  新しいAccountの作成
+    ✔ 一旦古いアカウントを削除した
+    ✔ 新しいアカウントを作製した
+
   WebSocketサーバーからの受信
-    ✔ sa->ca: wss://reien.top:3333 から"Response from 3333"を受信できた (333ms)
-    ✔ sb->cb: wss://reien.top:3334 から"Response from 3334"を受信できた (289ms)
+    ✔ sa->ca: wss://reien.top:3333 から"Response from 3333"を受信できた (397ms)
+    ✔ sb->cb: wss://reien.top:3334 から"Response from 3334"を受信できた (655ms)
     ✔ ca->sa->ca: wss://reien.top:3333 へsendして結果を受け取った。"ca to 3333 to ca"を受信できた
     ✔ ca->sa->cb: ca から wss://reien.top:3333 へsendして cb が結果を受け取った。"ca to 3333 to cb"を受信できた
 
