@@ -16,7 +16,7 @@ const CryptoJS =require('crypto-js')
 
 
 
-describe.only('WebSocketサーバーからの受信', function () {
+describe.only('WebSocketサーバーとの送受信', function () {
 
     it('sa->ca: wss://reien.top:3333 から"Response from 3333"を受信できた', (done) => {
 

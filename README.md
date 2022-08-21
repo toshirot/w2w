@@ -303,7 +303,7 @@ w2w.info\html>npm run test
     ✔ 一旦古いアカウントを削除した
     ✔ 新しいアカウントを作製した
 
-  WebSocketサーバーからの受信
+  WebSocketサーバーとの送受信
     ✔ sa->ca: wss://reien.top:3333 から"Response from 3333"を受信できた (397ms)
     ✔ sb->cb: wss://reien.top:3334 から"Response from 3334"を受信できた (655ms)
     ✔ ca->sa->ca: wss://reien.top:3333 へsendして結果を受け取った。"ca to 3333 to ca"を受信できた
@@ -353,7 +353,9 @@ w2w.info\html>npm run test
 
 
 ```
-2022-07-20
+2022-08-21
+暫定send フォーマット {to,from,type,msg}
+2022-08-20
 仮にAES使うならこんな感じ
 CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(msgs), sigC).toString()
 CryptoJS.AES.decrypt(msgs, sigC).toString(CryptoJS.enc.Utf8);
