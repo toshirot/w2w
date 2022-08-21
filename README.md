@@ -342,10 +342,11 @@ w2w.info\html>npm run test
 </ol>
 <li>idを作る方法
 <ol>
-    <li>暫定text ✔
+    <li>暫定text 
     <li>uuidv4
     <li>uuidv4+SHA224
-    <li>sha3やeddsaとか楕円曲
+    <li>sha3とか
+    <li>Ed25519 楕円曲線 ✔
 </ol>
 </ol>
 
