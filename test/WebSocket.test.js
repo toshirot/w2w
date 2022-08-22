@@ -247,36 +247,8 @@ describe.only('WebSocketサーバーとの送受信', function () {
 
         done()
     });
-    /*
-    it('ca2n: ca から wss://reien.top:3333 へsendして all が結果を受け取った。"ca to 3333 to all"を受信できた', (done) => {
 
-        //接続先
-        const PORT=3333
-        const URL='wss://reien.top'
-        //const wss_protocol=encodeURIComponent(JSON.stringify({name:'w2w', id:SHA256( uuidv4())}))
-
-
-        // const uuidv4Str=uuidv4()
-        // const id=CryptoJS.SHA224(uuidv4Str).toString()
-        const id_a="123"
-        const id_b="456"
-        const id_c="789"
-        const id_d="101"
-
-        const wss_protocol_a=encodeURIComponent(JSON.stringify({name:'w2w', id:id_a}))
-        const wss_protocol_b=encodeURIComponent(JSON.stringify({name:'w2w', id:id_b}))
-        const wss_protocol_c=encodeURIComponent(JSON.stringify({name:'w2w', id:id_c}))
-        const wss_protocol_d=encodeURIComponent(JSON.stringify({name:'w2w', id:id_d}))
-
-        //let ws1=mkClient(URL, PORT, type1, msg1)
-        let ws_a=mkClient(URL, PORT, 'a2a', 'ca', wss_protocol_a)
-        let ws_b=mkClient(URL, PORT, 'a2b', 'cb', wss_protocol_b)
-        let ws_c=mkClient(URL, PORT, 'a2b', 'cb', wss_protocol_c)
-        let ws_d=mkClient(URL, PORT, 'a2b', 'cb', wss_protocol_d)
-
-        done()
-    });
-    */
+    
 
 // -----------------------------------------------------------------------------
 // mkClient

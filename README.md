@@ -272,11 +272,11 @@ flowchart LR
 
 
     %%mk_id_1
-        single_type2c(mk subprotocol=SHA or etc..) 
-        db1[(save to memory or storage)]
-        %%single_type2s(save to memory or storage):::class_server
+        single_type2c(mk subprotocol=<br/>Ed25519's Pubkey...) 
+        db1[(memory<br/> or storage)]
+        %%single_type2s(memory or storage):::class_server
             single_type2c --> db1:::class_server
-            db1 --> A{"send時に送信先を判定"}:::class_server
+            db1 --> A{"send時に<br/>送信先を判定"}:::class_server
 
 classDef class_server fill:#eee,color:#000,stroke:#333
 classDef class_text fill:#fff,color:#000,stroke:#fff
