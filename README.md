@@ -24,7 +24,7 @@ https://w2w.info/
 
 ### 想定している実装環境
 - OS
-    Ubuntu ( or Win/Mac)
+    Ubuntu ( or Win/Mac )
 - フレームワーク
     Node.js
 - データベース(現在は only on memory)
