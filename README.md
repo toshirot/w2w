@@ -265,6 +265,7 @@ sequenceDiagram
 <li>知ってるリストが無ければどうするのが良いか
 <li>接続している wss Server 同士は socket.w2w_client を時々同期する
 <li>全リストを持つのは無駄なのでアドレスを番地分けしておきたい。
+<li>※サーバーが接続してきたときに登録する仕組みを考える
 </ol>
 
 ```mermaid
