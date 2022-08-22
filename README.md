@@ -29,7 +29,7 @@ https://w2w.info/
     Node.js
 - データベース(現在は only on memory)
     MongoDB
-- Client は現状 command line (browserfyして将来はブラウザUIもある？)
+- Client は現状 command line (browserfyなどして将来はブラウザUIもある？)
 - wss Server はUbuntu/Node.js/ws
 
 ### 経路type
