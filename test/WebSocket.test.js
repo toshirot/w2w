@@ -178,7 +178,7 @@ describe.only('WebSocketサーバーとの送受信', function () {
 
         done()
     });
-    it('ca->sa->cb: ca から wss://reien.top:3333 へsendして cb が結果を受け取った。"a2b hello w2w"を受信できた', (done) => {
+    it('ca->sa->cb: wss://reien.top:3333 へsendして cb が結果を受け取った。"a2b hello w2w"を受信できた', (done) => {
 
         //接続先
         const PORT=3333
