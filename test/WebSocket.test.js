@@ -8,113 +8,177 @@ ca->sa->cb  クライアントaからサーバーaへ送信し、サーバーa�
 
 */
 const assert = require("assert");
-const WebSocket=require('../index.js').WebSocket
-const sendFromClient=require('../index.js').sendFromClient
-const receiveFromServer=require('../index.js').receiveFromServer
+const mkAccount=require('../index.js').mkAccount
+const WebSocket=require('../').WebSocket
+const sendFromClient=require('../').sendFromClient
+const receiveFromServer=require('../').receiveFromServer
+const getAccountId=require('../').getAccountId
 const CryptoJS =require('crypto-js')
 
+//console.log(getAccountId())
 
+// -----------------------------------------------------------------------------
+// make SubProtocol
+// @id {string} pubkey
+// @return SubProtocol {string} encoded SubProtocol
+function mkSubProtocol(id){
+    const ID=id?id:mkAccount(true)
+    return encodeURIComponent(
+        JSON.stringify({
+            name: 'w2w'
+            , id: ID
+        })
+    )
+}
 
 
 describe.only('WebSocketサーバーとの送受信', function () {
 
-    it('sa->ca: wss://reien.top:3333 から"Response from 3333"を受信できた', (done) => {
+    it('replyBack: "reply Back from wss://reien.top:3333"を受信できた', (done) => {
 
-        //接続先
+        // 接続先
         const PORT=3333
         const URL='wss://reien.top:'+PORT
-       // const id=CryptoJS.SHA224(uuidv4).toString()
-        const id="1111"
-        //console.log(id)
-      
-        const wss_protocol=encodeURIComponent(JSON.stringify({name:'w2w', id:id}))
-          
-        // 期待した値
-        expected='Response from ' + PORT;
+        // アカウントID
+        const id=getAccountId()
+        // 送信type 
+        const sendType='replyBack'
 
-        const ws = new WebSocket(URL, wss_protocol)
-         
+        // 期待したtype
+        expected_type=sendType
+        // 期待したid
+        expected_from=expected_to=id
+        // 期待したmsg
+        expected_msg='reply Back from '+URL
+        // WebSocket
+        const ws = new WebSocket(URL, mkSubProtocol())
+        //着信イベント
         ws.on('message', function message(data) {
-            // on connection で発信されたレスポンス
-            // receive from 3333
-            const actual=receiveFromServer(data)
 
-            assert.equal(actual, expected)
+            const acceptType=sendType
+
+            // on connection で発信された reply back レスポンス
+            let receive=receiveFromServer(acceptType, data)
+            if(!receive)return
+            // 着信結果
+            const actual_type=receive.type
+            const actual_from=receive.from
+            const actual_to=receive.to
+            const actual_msg=receive.msg
+
+            // 検証
+            assert.equal(actual_type, expected_type)
+            assert.equal(actual_from, expected_from)
+            assert.equal(actual_to, expected_to)
+            assert.equal(actual_msg, expected_msg)
+
             done();
             //ws.close()
         });
 
     });
 
-    it('sb->cb: wss://reien.top:3334 から"Response from 3334"を受信できた', (done) => {
+    it('replyBack: "reply Back from wss://reien.top:3334"を受信できた', (done) => {
 
-        //接続先
+        // 接続先
         const PORT=3334
         const URL='wss://reien.top:'+PORT
-       // const id=CryptoJS.SHA224(uuidv4).toString()
-        const id="2222"
-        //console.log(id)
-      
-        const wss_protocol=encodeURIComponent(JSON.stringify({name:'w2w', id:id}))
+        // アカウントID
+        const id=getAccountId()
+        // 送信type 
+        const sendType='replyBack'
 
-        // 期待した値
-        expected='Response from ' + PORT;
-
-        const ws = new WebSocket(URL, wss_protocol)
-         
+        // 期待したtype
+        expected_type=sendType
+        // 期待したid
+        expected_from=expected_to=id
+        // 期待したmsg
+        expected_msg='reply Back from '+URL
+        // WebSocket
+        const ws = new WebSocket(URL, mkSubProtocol())
+        //着信イベント
         ws.on('message', function message(data) {
-            // on connection で発信されたレスポンス
-            // receive from 3333
-            const actual=receiveFromServer(data)
 
-            assert.equal(actual, expected)
+            // 受け入れるtype
+            const acceptType=sendType
+
+            // on connection で発信された reply back レスポンス
+            let receive=receiveFromServer(acceptType, data)
+            if(!receive)return
+            // 着信結果
+            const actual_type=receive.type
+            const actual_from=receive.from
+            const actual_to=receive.to
+            const actual_msg=receive.msg
+
+            // 検証
+            assert.equal(actual_type, expected_type)
+            assert.equal(actual_from, expected_from)
+            assert.equal(actual_to, expected_to)
+            assert.equal(actual_msg, expected_msg)
+
             done();
-            //ws.close()
+            ws.close()
         });
 
     });
 
-    it('ca->sa->ca: wss://reien.top:3333 へsendして結果を受け取った。"ca to 3333 to ca"を受信できた', (done) => {
+    it('ca->sa->ca: wss://reien.top:3333 へsendして結果を受け取った。"a2a hello w2w"を受信できた', (done) => {
 
-        //接続先
+        // 接続先
         const PORT=3333
         const URL='wss://reien.top:'+PORT
-       // const id=CryptoJS.SHA224(uuidv4).toString()
-        const id="12345"
-
-        //console.log(id)
-      
-        const wss_protocol=encodeURIComponent(JSON.stringify({name:'w2w', id:id}))
+        // アカウントID
+        const id=getAccountId()
 
         // 送信するデータ
-        const type='msg_from_ALICE'
-        const msg='ca'
+        const  senddata={
+            type: 'a2a'
+            , from: id
+            , to: id
+            , msg: 'a2a hello w2w'
+        }
 
-        // 期待した値
-        expected=msg+' to '+ PORT+' to '+msg
+        // 期待したtype
+        const expected_type=senddata.type
+        // 期待したid
+        const expected_from=id
+        const expected_to=id
+        // 期待したmsg
+        const expected_msg=senddata.msg
 
-        const ws = new WebSocket(URL, wss_protocol)
+        const ws = new WebSocket(URL, mkSubProtocol())
         ws.on('message', function message(data) {
 
             // send to 3333
-            sendFromClient(ws, type, msg)
+            sendFromClient(ws, senddata)
+
+            // 受け入れるtype
+            const acceptType=senddata.type
 
             // receive from 3333
-            const receivedData=receiveFromServer(data)
-
-            // assert
-            if(receivedData.type==='msg_from_'+PORT){
-                const actual=receivedData.msg
-                console.log('data.msg', receivedData.msg)
-                assert.equal(actual, expected)
-            }
+            const receive=receiveFromServer(acceptType, data)
             
-            //ws.close()
+            if(!receive)return
+            //console.log(111, receive, expected_type, receive.type)
+            // 着信結果
+            const actual_type=receive.type
+            const actual_from=receive.from
+            const actual_to=receive.to
+            const actual_msg=receive.msg
+
+            // 検証
+            assert.equal(actual_type, expected_type)
+            assert.equal(actual_from, expected_from)
+            assert.equal(actual_to, expected_to)
+            assert.equal(actual_msg, expected_msg)
+            
+            ws.close()
         });
 
         done()
     });
-    it('ca->sa->cb: ca から wss://reien.top:3333 へsendして cb が結果を受け取った。"ca to 3333 to cb"を受信できた', (done) => {
+    it('ca->sa->cb: ca から wss://reien.top:3333 へsendして cb が結果を受け取った。"a2b hello w2w"を受信できた', (done) => {
 
         //接続先
         const PORT=3333
@@ -127,36 +191,56 @@ describe.only('WebSocketサーバーとの送受信', function () {
         const id_a="9d6a5de9e16c3999c714840f47771f36dcc297a7bdefaac36c9515ae"
         const id_b="47222ac208fc654817a9a9422d6e97a46753479f3c190211e68103d6"
 
-        const wss_protocol_a=encodeURIComponent(JSON.stringify({name:'w2w', id:id_a}))
-        const wss_protocol_b=encodeURIComponent(JSON.stringify({name:'w2w', id:id_b}))
-
         //let ws1=mkClient(URL, PORT, type1, msg1)
-        let ws_a=mkClient(URL, PORT, wss_protocol_a)
-        let ws_b=mkClient(URL, PORT, wss_protocol_b)
+        const ws_a=mkClient(URL, PORT, mkSubProtocol(id_a))
+        const ws_b=mkClient(URL, PORT, mkSubProtocol(id_b))
 
+        // 送信するデータ
+        const senddata={
+            type: 'a2b'
+            , from: id_a
+            , to: id_b
+            , msg: 'a2b hello w2w'
+        }
 
-        // 期待した値
-        expected='a2b'+' to '+ PORT+' to '+'cb'
+        // 期待したtype
+        const expected_type=senddata.type
+        // 期待したid
+        const expected_from=id_a
+        const expected_to=id_b
+        // 期待したmsg
+        const expected_msg=senddata.msg
 
+        // ws_a の open イベント
         ws_a.on('open', function open() {
             // send to 3333
-            sendFromClient(ws_a, 'a2b', 'cb', id_b)
+            sendFromClient(ws_a, senddata)
+            ws_a.close()
         })
 
+        // ws_bの受信イベント
         ws_b.on('message', function message(data) {
 
+            // 受け入れるtype
+            const acceptType=senddata.type
+
             // receive from 3333
-            const receivedData=receiveFromServer(data)
-            console.log('data.msg', receivedData)
-            // assert
-            if(receivedData.type==='msg_from_'+PORT){
-                if(receivedData.msg==='msg_from_'+PORT){
-                    const actual=receivedData.msg
-                    console.log('data.msg', receivedData.msg)
-                    assert.equal(actual, expected)
-                }
-            }
+            const receive=receiveFromServer(acceptType, data)
+            //console.log(222, receive)
+            if(!receive)return
+            // 着信結果
+            const actual_type=receive.type
+            const actual_from=receive.from
+            const actual_to=receive.to
+            const actual_msg=receive.msg
+
+            // 検証
+            assert.equal(actual_type, expected_type)
+            assert.equal(actual_from, expected_from)
+            assert.equal(actual_to, expected_to)
+            assert.equal(actual_msg, expected_msg)
             
+            ws_b.close()
         // ws.close()
         });
 

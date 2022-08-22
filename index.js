@@ -6,22 +6,23 @@ const sendFromClient = require('./lib/sendFromClient')
 const receiveFromServer = require('./lib/receiveFromServer')
 const { mkKeyPair, sign, verify } = require('./lib/mkKeyPairEd25519')
 const{
-    getKeyPair,
+    getAndSetKeyPair,
     mkAccount, //pubkey
     removeCnf,
-    getW2wCnf
+    getW2wCnf,
+    getAccountId
 }  = require('./lib/mkAccount')
-
 
 module.exports= new function() {
     this.sign=sign
     this.verify=verify
     this.mkKeyPair=mkKeyPair
 
-    this.getKeyPair=getKeyPair
+    this.getAndSetKeyPair=getAndSetKeyPair
     this.mkAccount=mkAccount
     this.removeCnf=removeCnf
     this.getW2wCnf=getW2wCnf
+    this.getAccountId=getAccountId
 
     this.receiveFromServer=receiveFromServer
     this.sendFromClient=sendFromClient

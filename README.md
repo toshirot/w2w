@@ -304,10 +304,13 @@ w2w.info\html>npm run test
     ✔ 新しいアカウントを作製した
 
   WebSocketサーバーとの送受信
-    ✔ sa->ca: wss://reien.top:3333 から"Response from 3333"を受信できた (397ms)
-    ✔ sb->cb: wss://reien.top:3334 から"Response from 3334"を受信できた (655ms)
-    ✔ ca->sa->ca: wss://reien.top:3333 へsendして結果を受け取った。"ca to 3333 to ca"を受信できた
-    ✔ ca->sa->cb: ca から wss://reien.top:3333 へsendして cb が結果を受け取った。"ca to 3333 to cb"を受信できた
+    ✔ replyBack: "reply Back from wss://reien.top:3333"を受信できた (381ms)
+    ✔ replyBack: "reply Back from wss://reien.top:3334"を受信できた (625ms)
+    ✔ ca->sa->ca: wss://reien.top:3333 へsendして結果を受け取った。"a2a hello w2w"を受信できた
+    ✔ ca->sa->cb: ca から wss://reien.top:3333 へsendして cb が結果を受け取った。"a2b hello w2w"を受信できた
+
+
+  6 passing (1s)
 
 
   3 passing (285ms)

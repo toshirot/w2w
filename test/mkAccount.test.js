@@ -3,7 +3,8 @@ const assert = require("assert");
 const mkAccount=require('../index.js').mkAccount
 const removeCnf=require('../index.js').removeCnf
 const getW2wCnf=require('../index.js').getW2wCnf
-const getKeyPair=require('../index.js').getKeyPair
+const getAccountId=require('../index.js').getAccountId
+const getAndSetKeyPair=require('../index.js').getAndSetKeyPair
 const WebSocket=require('../index.js').WebSocket
 
 // -----------------------------------------------------------------------------
