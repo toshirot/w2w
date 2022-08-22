@@ -13,6 +13,13 @@ https://w2w.info/
 勇気付けてくれる人がいるだけで、人は立ち上がれる。
 自分も人に力を渡せる人になりたい。
 
+### TODO
+<ol>
+<li>次はa2gのテストを作ってみる
+<li>その次はa2nのテストを作ってみる
+<li>サーバーが接続してきたときに自動登録する仕組みを考える
+</ol>
+
 ### 経路type
 <li>s2c (sent to client from server)
 <li>c2s (sent to server from client)
