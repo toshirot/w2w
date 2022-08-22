@@ -179,10 +179,10 @@ classDef class_text_min fill:#fff,color:#000,stroke:#fff,margin:0
 ```
 ### 用語の暫定定義
 
-<li>Client: wssネットワーク上のclient
-<li>wss Server: WebSocketネットワークServer。以下の Node Client を兼ねる。
-<li>Node Client: 参加しているNode List を持つClient。Clientに教える。
-<li>ID: Node Client の Node List で公開されている各ClientのアカウントIDで公開鍵。
+<li><strong>Client:</strong> wssネットワーク上のclient
+<li><strong>wss Server:</strong> WebSocketネットワークServer。以下の Node Client を兼ねる。
+<li><strong>Node Client:</strong> 参加しているNode List を持つClient。Clientに教える。
+<li><strong>ID:</strong> Node Client の Node List で公開されている各ClientのアカウントIDで公開鍵。
 
 
 ### 機能要件
