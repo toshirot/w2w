@@ -22,6 +22,16 @@ https://w2w.info/
 <li>複数ネットワーク時の効率の良いルーティング手順を決める
 </ol>
 
+### 想定している実装環境
+- OS
+    Ubuntu ( or Win/Mac)
+- フレームワーク
+    Node.js
+- データベース(現在は only on memory)
+    MongoDB
+- Client は現状 cmd line (browserfyして将来はブラウザUIもある？)
+- wss Server はUbuntu/Node.js/ws
+
 ### 経路type
 <li>s2c (sent to client from server)
 <li>c2s (sent to server from client)
