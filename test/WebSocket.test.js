@@ -23,6 +23,7 @@ const CryptoJS =require('crypto-js')
 // @return SubProtocol {string} encoded SubProtocol
 function mkSubProtocol(id){
     const ID=id?id:mkAccount(true)
+   // console.log( !!id, ID)
     return encodeURIComponent(
         JSON.stringify({
             name: 'w2w'
@@ -51,7 +52,7 @@ describe.only('WebSocketサーバーとの送受信', function () {
         // 期待したmsg
         expected_msg='reply Back from '+URL
         // WebSocket
-        const ws = new WebSocket(URL, mkSubProtocol())
+        const ws = new WebSocket(URL, mkSubProtocol(id))
         //着信イベント
         ws.on('message', function message(data) {
 
@@ -95,7 +96,7 @@ describe.only('WebSocketサーバーとの送受信', function () {
         // 期待したmsg
         expected_msg='reply Back from '+URL
         // WebSocket
-        const ws = new WebSocket(URL, mkSubProtocol())
+        const ws = new WebSocket(URL, mkSubProtocol(id))
         //着信イベント
         ws.on('message', function message(data) {
 
@@ -135,7 +136,7 @@ describe.only('WebSocketサーバーとの送受信', function () {
         const  senddata={
             type: 'a2a'
             , from: id
-            , to: id
+            , to: [id] //toは配列
             , msg: 'a2a hello w2w'
         }
 
@@ -147,20 +148,24 @@ describe.only('WebSocketサーバーとの送受信', function () {
         // 期待したmsg
         const expected_msg=senddata.msg
 
-        const ws = new WebSocket(URL, mkSubProtocol())
-        ws.on('message', function message(data) {
+        const ws = new WebSocket(URL, mkSubProtocol(id))
 
+        // ws の open イベントでメッセージを1回送る
+        ws.on('open', function open() {
             // send to 3333
             sendFromClient(ws, senddata)
+        })
+        ws.on('message', function message(data) {
 
             // 受け入れるtype
             const acceptType=senddata.type
 
             // receive from 3333
             const receive=receiveFromServer(acceptType, data)
-            
             if(!receive)return
-            //console.log(111, receive, expected_type, receive.type)
+
+           // console.log('a2a:', receive, expected_type, receive.type)
+
             // 着信結果
             const actual_type=receive.type
             const actual_from=receive.from
@@ -191,15 +196,20 @@ describe.only('WebSocketサーバーとの送受信', function () {
         const id_a="9d6a5de9e16c3999c714840f47771f36dcc297a7bdefaac36c9515ae"
         const id_b="47222ac208fc654817a9a9422d6e97a46753479f3c190211e68103d6"
 
+        let sb=mkSubProtocol(id_b)
         //let ws1=mkClient(URL, PORT, type1, msg1)
         const ws_a=mkClient(URL, PORT, mkSubProtocol(id_a))
-        const ws_b=mkClient(URL, PORT, mkSubProtocol(id_b))
+        const ws_b=mkClient(URL, PORT, sb)
+
+
+         console.log(decodeURIComponent(sb))
+
 
         // 送信するデータ
         const senddata={
             type: 'a2b'
             , from: id_a
-            , to: id_b
+            , to: [id_b] //toは配列
             , msg: 'a2b hello w2w'
         }
 
@@ -211,11 +221,10 @@ describe.only('WebSocketサーバーとの送受信', function () {
         // 期待したmsg
         const expected_msg=senddata.msg
 
-        // ws_a の open イベント
+        // ws_a の  open イベントでメッセージを1回送る
         ws_a.on('open', function open() {
             // send to 3333
             sendFromClient(ws_a, senddata)
-            ws_a.close()
         })
 
         // ws_bの受信イベント
@@ -226,8 +235,10 @@ describe.only('WebSocketサーバーとの送受信', function () {
 
             // receive from 3333
             const receive=receiveFromServer(acceptType, data)
-            //console.log(222, receive)
             if(!receive)return
+            console.log('a2b:', receive, expected_type, receive.type)
+
+
             // 着信結果
             const actual_type=receive.type
             const actual_from=receive.from
@@ -240,7 +251,7 @@ describe.only('WebSocketサーバーとの送受信', function () {
             assert.equal(actual_to, expected_to)
             assert.equal(actual_msg, expected_msg)
             
-            ws_b.close()
+           // ws_b.close()
         // ws.close()
         });
 

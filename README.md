@@ -26,6 +26,22 @@ p.s. 勇気付けてくれる人がいるだけで、人は立ち上がれる。
 <li>複数ネットワーク時の効率の良いルーティング手順を決める
 </ol>
 
+### 発生中の問題 
+issue を使ってないので暫定メモ
+```
+下記のケースでconnectedが遅れた 47222ac2.. にはdo sendA2B が行われない。遅れた理由を解析中
+
+
+connected: at 3333 from:MCowBQYDK2VwAyEA+KxMOeBUcZDCs5G6LtHfQLr79Bx1DxE8QYGIsYOIn80= 2022-08-23T04:21:25.791Z
+connected: at 3333 from:MCowBQYDK2VwAyEA+KxMOeBUcZDCs5G6LtHfQLr79Bx1DxE8QYGIsYOIn80= 2022-08-23T04:21:26.065Z
+connected: at 3333 from:9d6a5de9e16c3999c714840f47771f36dcc297a7bdefaac36c9515ae 2022-08-23T04:21:26.069Z
+do sendA2B on message a2b
+ws.clients:  1 MCowBQYDK2VwAyEA+KxMOeBUcZDCs5G6LtHfQLr79Bx1DxE8QYGIsYOIn80=
+ws.clients:  1 MCowBQYDK2VwAyEA+KxMOeBUcZDCs5G6LtHfQLr79Bx1DxE8QYGIsYOIn80=
+ws.clients:  1 9d6a5de9e16c3999c714840f47771f36dcc297a7bdefaac36c9515ae
+connected: at 3333 from:47222ac208fc654817a9a9422d6e97a46753479f3c190211e68103d6 2022-08-23T04:21:26.096Z
+```
+
 ### 想定している実装環境
 - OS
     Ubuntu ( or Win/Mac )
