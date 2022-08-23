@@ -124,7 +124,7 @@ describe.only('WebSocketサーバーとの送受信', function () {
 
     });
 
-    it('ca->sa->ca: wss://reien.top:3333 へsendして結果を受け取った。"a2a hello w2w"を受信できた', (done) => {
+    it('a2a: wss://reien.top:3333 へsendして結果を受け取った。"a2a hello w2w"を受信できた', (done) => {
 
         // 接続先
         const PORT=3333
@@ -183,7 +183,7 @@ describe.only('WebSocketサーバーとの送受信', function () {
 
         done()
     });
-    it('ca->sa->cb: wss://reien.top:3333 へsendして cb が結果を受け取った。"a2b hello w2w"を受信できた', (done) => {
+    it('a2b: wss://reien.top:3333 へsendして cb が結果を受け取った。"a2b hello w2w"を受信できた', (done) => {
 
         //接続先
         const PORT=3333
@@ -202,7 +202,7 @@ describe.only('WebSocketサーバーとの送受信', function () {
         const ws_b=mkClient(URL, PORT, sb)
 
 
-         console.log(decodeURIComponent(sb))
+        // console.log(decodeURIComponent(sb))
 
 
         // 送信するデータ
@@ -238,7 +238,7 @@ describe.only('WebSocketサーバーとの送受信', function () {
             // receive from 3333
             const receive=receiveFromServer(acceptType, data)
             if(!receive)return
-            console.log('a2b:', receive, expected_type, receive.type)
+            //console.log('a2b:', receive, expected_type, receive.type)
 
 
             // 着信結果

@@ -314,11 +314,12 @@ classDef class_text fill:#fff,color:#000,stroke:#fff
 
 凡例 通信方向
 ------------------------------------------------------------------------------
+replyBack: 自分自身へ返す at onconnected
 sa->ca サーバーaからクライアントaへ送信する
 sb->cb サーバーbからクライアントbへ送信する
 ca->sa  クライアントaからサーバーaへ送信する
-ca->sa->ca  クライアントaからサーバーaへ送信し、サーバーaからクライアントaへ返信する
-ca->sa->cb  クライアントaからサーバーaへ送信し、サーバーaからクライアントbへ送信する
+a2a: ca->sa->ca  クライアントaからサーバーaへ送信し、サーバーaからクライアントaへ返信する
+a2b: ca->sa->cb  クライアントaからサーバーaへ送信し、サーバーaからクライアントbへ送信する
 ------------------------------------------------------------------------------
 
 w2w.info\html>npm run test
@@ -332,10 +333,10 @@ w2w.info\html>npm run test
     ✔ 新しいアカウントを作製した
 
   WebSocketサーバーとの送受信
-    ✔ replyBack: "reply Back from wss://reien.top:3333"を受信できた (381ms)
-    ✔ replyBack: "reply Back from wss://reien.top:3334"を受信できた (625ms)
-    ✔ ca->sa->ca: wss://reien.top:3333 へsendして結果を受け取った。"a2a hello w2w"を受信できた
-    ✔ ca->sa->cb: ca から wss://reien.top:3333 へsendして cb が結果を受け取った。"a2b hello w2w"を受信できた
+    ✔ replyBack: "reply Back from wss://reien.top:3333"を受信できた (351ms)
+    ✔ replyBack: "reply Back from wss://reien.top:3334"を受信できた (320ms)
+    ✔ a2a: wss://reien.top:3333 へsendして結果を受け取った。"a2a hello w2w"を受信できた
+    ✔ a2b: wss://reien.top:3333 へsendして cb が結果を受け取った。"a2b hello w2w"を受信できた
 
 
   6 passing (1s)
