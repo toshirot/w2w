@@ -221,10 +221,12 @@ describe.only('WebSocketサーバーとの送受信', function () {
         // 期待したmsg
         const expected_msg=senddata.msg
 
-        // ws_a の  open イベントでメッセージを1回送る
+        // ws_a かつ ws_b の open イベントでメッセージを1回送る
         ws_a.on('open', function open() {
-            // send to 3333
-            sendFromClient(ws_a, senddata)
+            ws_b.on('open', function open() {
+                // send to 3333
+                sendFromClient(ws_a, senddata)
+            })
         })
 
         // ws_bの受信イベント
