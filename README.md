@@ -39,6 +39,10 @@ p.s. 勇気付けてくれる人がいるだけで、人は立ち上がれる。
 - wss Server はUbuntu/Node.js/ws
 
 ### 経路type
+<ul>1) at on connect:
+<li>replyBack (reply to myself)
+</ul>
+<ul>2) at on message: 
 <li>s2c (sent to client from server)
 <li>c2s (sent to server from client)
 <li>a2a (reply to myself)
@@ -46,6 +50,7 @@ p.s. 勇気付けてくれる人がいるだけで、人は立ち上がれる。
 <li>a2g (sent to gloup)
 <li>a2n (sent to all/broadcast)
 <li>s2s (server to server)
+</ul>
 
 ( x2s terminate on last server. )
 
@@ -54,18 +59,45 @@ p.s. 勇気付けてくれる人がいるだけで、人は立ち上がれる。
 ```mermaid
 flowchart LR
 
+test0("1) at on connect: 自動で返される reply back"):::class_text
+classDef class_text fill:#fff,color:#000,stroke:#fff
+```
+```mermaid
+flowchart LR
 
-text1(単一ネットワーク single network):::class_text
+%%test0("at on connect: 自動で返される reply back"):::class_text
+
+    %%single_type3
+        text_a2a(replyBack):::class_text_min
+        single_type3c(ws client ca) 
+        single_type3s(ws server sa):::class_server
+            text_a2a -.- single_type3c
+            single_type3c --> single_type3s --> single_type3c
+
+classDef class_server fill:#eee,color:#000,stroke:#333
+classDef class_text fill:#fff,color:#000,stroke:#fff
+classDef class_text_min fill:#fff,color:#000,stroke:#fff,margin:0
+```
+
+```mermaid
+flowchart LR
+
+text1("2-1) at on message: 単一ネットワーク single network"):::class_text
+classDef class_text fill:#fff,color:#000,stroke:#fff
+```
+
+```mermaid
+flowchart LR
 
     %%single_type1
-        text_s2c(s2c/sent to client from server):::class_text_min
+        text_s2c(s2c):::class_text_min
         single_type1c(ws client ca) 
         single_type1s(ws server sa):::class_server
             text_s2c -.- single_type1s
             single_type1s --> single_type1c 
 
     %%single_type2
-        text_c2s(c2s/sent to server from client):::class_text_min
+        text_c2s(c2s):::class_text_min
         single_type2c(ws client ca) 
         single_type2s(ws server sa):::class_server
             text_c2s -.- single_type2c
@@ -115,10 +147,17 @@ classDef class_server fill:#eee,color:#000,stroke:#333
 classDef class_text fill:#fff,color:#000,stroke:#fff,margin:0
 classDef class_text_min fill:#fff,color:#000,stroke:#fff,margin:0
 ```
+
+
 ```mermaid
 flowchart LR
 
-text2(複数ネットワーク multiple networks):::class_text
+text2("2-2) at on message: 複数ネットワーク multiple networks"):::class_text
+classDef class_text fill:#fff,color:#000,stroke:#fff
+```
+
+```mermaid
+flowchart LR
 
     %%multi_type1
         text_s2s(s2s):::class_text_min
