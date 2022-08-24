@@ -64,12 +64,7 @@ p.s. 勇気付けてくれる人がいるだけで、人は立ち上がれる。
 
 ### 構築後のフロー
 
-```mermaid
-flowchart LR
-
-test0("1) at on connect: 自動で返される reply back"):::class_text
-classDef class_text fill:#fff,color:#000,stroke:#fff,margin:0,font-size:18px;
-```
+#### at on connect: 自動で返される reply back
 ```mermaid
 flowchart LR
 
@@ -87,12 +82,7 @@ classDef class_text fill:#fff,color:#000,stroke:#fff
 classDef class_text_min fill:#fff,color:#000,stroke:#fff,margin:0
 ```
 
-```mermaid
-flowchart LR
-
-text1("2-1) at on message: 単一ネットワーク single network"):::class_text
-classDef class_text fill:#fff,color:#000,stroke:#fff,margin:0
-```
+#### at on message: 単一ネットワーク single network
 
 ```mermaid
 flowchart LR
@@ -156,13 +146,7 @@ classDef class_text fill:#fff,color:#000,stroke:#fff,margin:0
 classDef class_text_min fill:#fff,color:#000,stroke:#fff,margin:0
 ```
 
-
-```mermaid
-flowchart LR
-
-text2("2-2) at on message: 複数ネットワーク multiple networks"):::class_text
-classDef class_text fill:#fff,color:#000,stroke:#fff,margin:0
-```
+#### at on message: 複数ネットワーク multiple networks
 
 ```mermaid
 flowchart LR
