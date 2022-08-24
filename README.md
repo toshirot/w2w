@@ -342,19 +342,28 @@ sequenceDiagram
 </ul>
 <li>データのリモート削除機能 (Autonomous なら無しか代替機能)
 
-### 宛先IDアドレスの作り方(ブロードキャストでは使わない)
+### 宛先IDアドレスを作り登録するとか
 
 プランA アルゴリズム
 <ol>
 <li>IDはclientのWebSocket生成時にsubprotocol用にkeypairを作り
 <li>keypairはCONF_PATHへ保存する
-<li>公開鍵をwssサーバーへ送信する
-<li>サーバー側では onconnect時にsubprotocolの基礎要件を判定して
+<li>公開鍵とsigAをwssサーバーへ送信する
+<li>サーバー側では onconnect時に
+<li>subprotocolの基礎要件を判定(chkProtocol)して
 <li>falseなら接続終了
-<li>trueなら更にIDの存在を（とりまメモリかDBで）確認し
-<li>falseならメモリかDBへ登録する
+<li>trueなら更にIDの存在をメモリかDBで確認し(if(hasId(protocol.id))return)
+<li>falseならメモリかDBへ登録ネゴへ
 <li>trueなら何もしない
-<li>送信時に宛先を判定し
+<li>登録ネゴ:1 wssサーバーは、sigAとpriKeyでsigBを作る
+<li>登録ネゴ:2 wssサーバーは、sigBと自身のPubKeyをclientへreplyBackする
+<li>登録ネゴ:3 clientは受け取った sigBをVerify しNGなら終了
+<li>登録ネゴ:4 OKならsigBとpriKeyでsigCを作る
+<li>登録ネゴ:5 sigCをwssサーバーへ送る
+<li>登録ネゴ:6 wssサーバーは受け取った sigCをVerify しNGなら終了
+<li>登録ネゴ:7 OKなら登録する
+<li>clientはリストを受け取る(ただの宛先リストと知ってるよリストなどがありうる)
+<li>送信時にはリストから宛先を判定し
 <li>(要：知ってるリストの問い合わせ方法)
 <li>知ってるリストがあればそこへ送信する
 <li>知ってるリストが無ければどうするのが良いか
