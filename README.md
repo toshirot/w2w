@@ -27,6 +27,38 @@ p.s. 勇気付けてくれる人がいるだけで、人は立ち上がれる。
 <li>a2g (sent to gloup)で配列リストにグループ名をSlackチャンネルのように付けられると良いかもしれない
 </ol>
 
+### 最新のTEST状況
+
+```
+
+凡例 通信方向
+------------------------------------------------------------------------------
+replyBack: at onconnected 自分自身へ返す 
+a2a: at onmsg, client から server へ送信し、更に、同じ client へ返信する
+a2b: at onmsg, client から server へ送信し、更に、別の client へ送信する
+a2g: at onmsg, client から server へ送信し、更に、複数の指定した client へ送信する
+------------------------------------------------------------------------------
+
+w2w.info\html>npm run test
+
+> w2w@1.0.0 test
+> mocha
+
+
+  新しいAccountの作成
+    ✔ 一旦古いアカウントを削除した
+    ✔ 新しいアカウントを作製した
+
+  WebSocketサーバーとの送受信
+    ✔ replyBack: "reply Back from wss://reien.top:3333"を受信できた (207ms)
+    ✔ replyBack: "reply Back from wss://reien.top:3334"を受信できた (279ms)
+    ✔ a2a: wss://reien.top:3333 へsendして結果を受け取った。"a2a hello w2w"を受信できた
+    ✔ a2b: wss://reien.top:3333 へsendして cb が結果を受け取った。"a2b hello w2w"を受信できた
+    ✔ a2g: wss://reien.top:3333 へsendして to list の複数clientが各自結果を受け取った。
+
+
+  7 passing (514ms)
+```
 
 ### 想定している実装環境
 - OS
@@ -337,39 +369,6 @@ flowchart LR
 
 classDef class_server fill:#eee,color:#000,stroke:#333
 classDef class_text fill:#fff,color:#000,stroke:#fff
-```
-
-### test
-
-```
-
-凡例 通信方向
-------------------------------------------------------------------------------
-replyBack: at onconnected 自分自身へ返す 
-a2a: at onmsg, client から server へ送信し、更に、同じ client へ返信する
-a2b: at onmsg, client から server へ送信し、更に、別の client へ送信する
-a2g: at onmsg, client から server へ送信し、更に、複数の指定した client へ送信する
-------------------------------------------------------------------------------
-
-w2w.info\html>npm run test
-
-> w2w@1.0.0 test
-> mocha
-
-
-  新しいAccountの作成
-    ✔ 一旦古いアカウントを削除した
-    ✔ 新しいアカウントを作製した
-
-  WebSocketサーバーとの送受信
-    ✔ replyBack: "reply Back from wss://reien.top:3333"を受信できた (207ms)
-    ✔ replyBack: "reply Back from wss://reien.top:3334"を受信できた (279ms)
-    ✔ a2a: wss://reien.top:3333 へsendして結果を受け取った。"a2a hello w2w"を受信できた
-    ✔ a2b: wss://reien.top:3333 へsendして cb が結果を受け取った。"a2b hello w2w"を受信できた
-    ✔ a2g: wss://reien.top:3333 へsendして to list の複数clientが各自結果を受け取った。
-
-
-  7 passing (514ms)
 ```
 
 ### 例えば ca->sa->cb 違うクライアントへ送る場合
