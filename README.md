@@ -220,9 +220,9 @@ flowchart LR
         multi_type5c1(ws client ca) 
         multi_type5s1(ws server sa):::class_server
         multi_type5s2(ws server sa):::class_server 
-        multi_type5c3(ws client cc) 
+        multi_type5c3(ws client cb) 
             text_a2b -.- multi_type5c1
-            multi_type5c1 --> multi_type5s1
+            multi_type5c1 -->  |to b| multi_type5s1
                         multi_type5s1 -->  |..n server| multi_type5s2
                         multi_type5s2 --> multi_type5c3
 
@@ -234,12 +234,13 @@ flowchart LR
         multi_type6c2(ws client cb) 
         multi_type6c3(ws client cc) 
         multi_type6c4(ws client cd) 
-            text_a2g -.- multi_type6s1
+            text_a2g -.- multi_type6c1
+            multi_type6c1 -->  |to b,c,d| multi_type6s1
+           
+            multi_type6s1 --> multi_type6c2
             multi_type6s1 --> multi_type6s2
-                multi_type6s2 --> multi_type6c1
-            multi_type6s2 --> multi_type6c2
-                        multi_type6s1 --> multi_type6c3
-                        multi_type6s1 --> multi_type6c4
+                        multi_type6s2 --> multi_type6c3
+                        multi_type6s2 --> multi_type6c4
 
 
 classDef class_server fill:#eee,color:#000,stroke:#333
