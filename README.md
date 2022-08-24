@@ -84,14 +84,14 @@ flowchart LR
 
 classDef class_server fill:#eee,color:#000,stroke:#333
 classDef class_text fill:#fff,color:#000,stroke:#fff
-classDef class_text_min fill:#fff,color:#000,stroke:#fff,margin:0,font-size:18px,width:100%,float:left
+classDef class_text_min fill:#fff,color:#000,stroke:#fff,margin:0
 ```
 
 ```mermaid
 flowchart LR
 
 text1("2-1) at on message: 単一ネットワーク single network"):::class_text
-classDef class_text fill:#fff,color:#000,stroke:#fff,margin:0,font-size:18px,width:100%,float:left
+classDef class_text fill:#fff,color:#000,stroke:#fff,margin:0
 ```
 
 ```mermaid
@@ -161,7 +161,7 @@ classDef class_text_min fill:#fff,color:#000,stroke:#fff,margin:0
 flowchart LR
 
 text2("2-2) at on message: 複数ネットワーク multiple networks"):::class_text
-classDef class_text fill:#fff,color:#000,stroke:#fff,margin:0,font-size:18px,width:100%,float:left
+classDef class_text fill:#fff,color:#000,stroke:#fff,margin:0
 ```
 
 ```mermaid
