@@ -252,7 +252,7 @@ describe.only('WebSocketサーバーとの送受信', function () {
         done()
     });
 
-    it('a2g: wss://reien.top:3333 へsendして to list の複数clientが各自結果を受け取った。', (done) => {
+    it('a2g: client a,b,c があるときに to [b,c] へ送り b,c だけが受け取った。', (done) => {
 
         //接続先
         const PORT=3333
@@ -358,43 +358,7 @@ describe.only('WebSocketサーバーとの送受信', function () {
         done()
     });
 
-// -----------------------------------------------------------------------------
-// assert on message
-//
-function asserOnMessage(wss, id, expected){
-        // ws_bの受信イベント
-        wss.on('message', function message(data) {
 
-            expected=JSON.parse(JSON.stringify(expected))
-
-            // receive from 3333
-            const receive=receiveFromServer(id, expected.type,  data)
-            if(!receive)return
-
-            console.log(receive.to[0])
-            if(receive.to[0]!==expected.to[0])return
-            console.log('a2g: recived:', receive, expected.type, expected.to)
-
-           
-            // 着信結果
-            const actual_type=receive.type
-            const actual_from=receive.from
-            const actual_to=receive.to
-            const actual_msg=receive.msg
-
-            // 検証
-            assert.equal(actual_type, expected.type)
-            assert.equal(actual_from, expected.from)
-            assert.equal(actual_to[0], expected.to[0])
-            assert.equal(actual_msg, expected.msg)
-
-            console.log(555,actual_to[0])
-          
-           // ws_b.close()
-        // ws.close()
-        });
-        return wss
-}
 
 
 // -----------------------------------------------------------------------------
