@@ -82,7 +82,7 @@ classDef class_text fill:#fff,color:#000,stroke:#fff
 classDef class_text_min fill:#fff,color:#000,stroke:#fff,margin:0
 ```
 
-#### at on message: 単一ネットワーク single network
+#### at on message:1 単一ネットワーク single network
 
 ```mermaid
 flowchart LR
@@ -146,7 +146,7 @@ classDef class_text fill:#fff,color:#000,stroke:#fff,margin:0
 classDef class_text_min fill:#fff,color:#000,stroke:#fff,margin:0
 ```
 
-#### at on message: 複数ネットワーク multiple networks
+#### at on message:2 複数ネットワーク multiple networks
 
 ```mermaid
 flowchart LR
