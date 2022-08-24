@@ -256,11 +256,7 @@ describe.only('WebSocketサーバーとの送受信', function () {
         //接続先
         const PORT=3333
         const URL='wss://reien.top'
-        //const wss_protocol=encodeURIComponent(JSON.stringify({name:'w2w', id:SHA256( uuidv4())}))
 
-
-        // const uuidv4Str=uuidv4()
-        // const id=CryptoJS.SHA224(uuidv4Str).toString()
         const id_a="aCowBQYDK2VwAyEAbpLYChvmHPGObredyPNSDwrNFHFe/KBzEx8hgaiDYuU="
         const id_b="bCowBQYDK2VwAyEAxCb67kGCPrIzjyI/Y5hXnoag5xIlWgX5ADfrtthLDFU="
         const id_c="cC4CAQAwBQYDK2VwBCIEIPAAO8Vb7gwZwZ8vRTtfLHsnhRiUOym/DcuAoYA5NpbZ"
@@ -285,35 +281,79 @@ describe.only('WebSocketサーバーとの送受信', function () {
         }
 
         // 期待した値
-        const expected=JSON.parse(JSON.stringify(senddata))
+        let expected=JSON.parse(JSON.stringify(senddata))
+        //JSON.parse(JSON.stringify(senddata))
         
-
+        // 各clientのopenを確認後に  送信とassertを実行する
+        sendAndAssert()
         async function sendAndAssert(){
             await ws_a.on('open', function open() {
-                console.log('a2g=ws_a=======')
+                //console.log('a2g=ws_a=opend======')
             })
             await ws_b.on('open', function open() {
-                console.log('a2g=ws_b=======')
+                //console.log('a2g=ws_b=opend======')
             })
             await ws_c.on('open', function open() {
-                console.log('a2g=ws_c=======')
+                //console.log('a2g=ws_c=opend======')
                 // send to 3333
                 setTimeout(function(){
-                    //if(!ws_a)return
-                    //ws_a.close()
+                    //ws_a.close() <- open 失敗をテストする
                     sendFromClient(ws_a, senddata)
-                    //console.log('senddata',senddata)
                 },0)
                 
             })
+
             // asser用の受信イベント
-            expected.to=[id_b]
-            await  asserOnMessage(ws_b, id_b, expected)
-            expected.to=[id_c]
-            await  asserOnMessage(ws_c, id_c, expected)
-          
+
+            // ws_bの受信イベント
+            ws_b.on('message', function message(data) {
+                const myID=id_b
+                expected.to=[myID]
+
+                // receive from 3333
+                // actual received
+                const receive=receiveFromServer(myID, expected.type,  data)
+                if(!receive)return
+                if(receive.to[0]!==expected.to[0])return
+                // console.log('a2g: recived:', receive, expected.type, expected.to)
+
+                // 検証
+                assert.equal(receive.type, expected.type)
+                assert.equal(receive.from, expected.from)
+                assert.equal(receive.to[0], expected.to[0])
+                assert.equal(receive.msg, expected.msg)
+
+                // console.log('received myID:',receive.to[0])
+            
+            // ws_b.close()
+ 
+            });
+
+            // ws_bの受信イベント
+            ws_c.on('message', function message(data) {
+                const myID=id_c
+                expected.to=[myID]
+
+                // receive from 3333
+                // actual received
+                const receive=receiveFromServer(myID, expected.type,  data)
+                if(!receive)return
+                if(receive.to[0]!==expected.to[0])return
+                // console.log('a2g: recived:', receive, expected.type, expected.to)
+
+                // 検証
+                assert.equal(receive.type, expected.type)
+                assert.equal(receive.from, expected.from)
+                assert.equal(receive.to[0], expected.to[0])
+                assert.equal(receive.msg, expected.msg)
+
+                // console.log('received myID:',receive.to[0])
+            
+            // ws_c.close()
+ 
+            });
         }
-        sendAndAssert()
+        
         done()
     });
 
@@ -352,6 +392,7 @@ function asserOnMessage(wss, id, expected){
            // ws_b.close()
         // ws.close()
         });
+        return wss
 }
 
 

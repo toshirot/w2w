@@ -19,8 +19,7 @@ p.s. 勇気付けてくれる人がいるだけで、人は立ち上がれる。
 
 ### TODO
 <ol>
-<li>次はa2gのテストを作ってみる
-<li>その次はa2nのテストを作ってみる
+<li>次はa2nのテストを作ってみる
 <li>サーバーが接続してきたときに自動登録する仕組みを考える
 <li>「参加処理 ID登録」をsigCまでの手順でやってみる
 <li>複数ネットワーク時の効率の良いルーティング手順を決める
@@ -331,16 +330,14 @@ w2w.info\html>npm run test
     ✔ 新しいアカウントを作製した
 
   WebSocketサーバーとの送受信
-    ✔ replyBack: "reply Back from wss://reien.top:3333"を受信できた (351ms)
-    ✔ replyBack: "reply Back from wss://reien.top:3334"を受信できた (320ms)
+    ✔ replyBack: "reply Back from wss://reien.top:3333"を受信できた (624ms)
+    ✔ replyBack: "reply Back from wss://reien.top:3334"を受信できた (303ms)
     ✔ a2a: wss://reien.top:3333 へsendして結果を受け取った。"a2a hello w2w"を受信できた
     ✔ a2b: wss://reien.top:3333 へsendして cb が結果を受け取った。"a2b hello w2w"を受信できた
+    ✔ a2g: wss://reien.top:3333 へsendして to list の複数clientが結果を受け取った。
 
 
-  6 passing (1s)
-
-
-  3 passing (285ms)
+  7 passing (955ms)
 ```
 
 ### 例えば ca->sa->cb 違うクライアントへ送る場合
