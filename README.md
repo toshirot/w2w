@@ -95,7 +95,7 @@ w2w.info\html>npm run test
 ( x2s terminate on last server. )
 
 ### 構築後のフロー
-
+<p>※✓はテスト済み</p>
 #### at on connect: 自動で返される reply back
 ```mermaid
 flowchart LR
