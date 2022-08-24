@@ -13,6 +13,7 @@ const WebSocket=require('../').WebSocket
 const sendFromClient=require('../').sendFromClient
 const receiveFromServer=require('../').receiveFromServer
 const getAccountId=require('../').getAccountId
+const mkClient=require('../').mkClient
 const CryptoJS =require('crypto-js')
 
 //console.log(getAccountId())
@@ -396,22 +397,6 @@ function asserOnMessage(wss, id, expected){
 }
 
 
-// -----------------------------------------------------------------------------
-// mkClient
-//
-function mkClient(URL, PORT, protocol){
-    //接続情報
-    const url=URL+':'+PORT
-    let ws = new WebSocket(url, protocol)
-    ws.w2w={
-        url:url
-        ,URL: URL
-        ,PORT: PORT
-        ,protocol:protocol
-    }
-
-    return ws
-}
 // -----------------------------------------------------------------------------
 // uuidv4
 //

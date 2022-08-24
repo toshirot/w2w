@@ -12,6 +12,7 @@ const{
     getW2wCnf,
     getAccountId
 }  = require('./lib/mkAccount')
+const mkClient = require('./lib/mkClient')
 
 module.exports= new function() {
     this.sign=sign
@@ -23,6 +24,8 @@ module.exports= new function() {
     this.removeCnf=removeCnf
     this.getW2wCnf=getW2wCnf
     this.getAccountId=getAccountId
+
+    this.mkClient=mkClient
 
     this.receiveFromServer=receiveFromServer
     this.sendFromClient=sendFromClient
