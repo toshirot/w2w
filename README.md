@@ -362,14 +362,14 @@ w2w.info\html>npm run test
     ✔ 新しいアカウントを作製した
 
   WebSocketサーバーとの送受信
-    ✔ replyBack: "reply Back from wss://reien.top:3333"を受信できた (624ms)
-    ✔ replyBack: "reply Back from wss://reien.top:3334"を受信できた (303ms)
+    ✔ replyBack: "reply Back from wss://reien.top:3333"を受信できた (207ms)
+    ✔ replyBack: "reply Back from wss://reien.top:3334"を受信できた (279ms)
     ✔ a2a: wss://reien.top:3333 へsendして結果を受け取った。"a2a hello w2w"を受信できた
     ✔ a2b: wss://reien.top:3333 へsendして cb が結果を受け取った。"a2b hello w2w"を受信できた
-    ✔ a2g: wss://reien.top:3333 へsendして to list の複数clientが結果を受け取った。
+    ✔ a2g: wss://reien.top:3333 へsendして to list の複数clientが各自結果を受け取った。
 
 
-  7 passing (955ms)
+  7 passing (514ms)
 ```
 
 ### 例えば ca->sa->cb 違うクライアントへ送る場合

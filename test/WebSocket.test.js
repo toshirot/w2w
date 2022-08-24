@@ -251,7 +251,7 @@ describe.only('WebSocketサーバーとの送受信', function () {
         done()
     });
 
-    it('a2g: wss://reien.top:3333 へsendして to list の複数clientが結果を受け取った。', (done) => {
+    it('a2g: wss://reien.top:3333 へsendして to list の複数clientが各自結果を受け取った。', (done) => {
 
         //接続先
         const PORT=3333
