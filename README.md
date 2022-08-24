@@ -213,7 +213,7 @@ flowchart LR
         multi_type4s1(ws server sa):::class_server 
         multi_type4s2(ws server sb):::class_server
             text_a2a -.- multi_type4c1
-            multi_type4c1 --> multi_type4s1 --> |..n server| multi_type4s2 -->  |..n server| multi_type4s1--> multi_type4c1
+            multi_type4c1 -->  |to a| multi_type4s1 --> |..n server| multi_type4s2 -->  |..n server| multi_type4s1--> multi_type4c1
  
      %%multi_type5
         text_a2b(a2b):::class_text_min
