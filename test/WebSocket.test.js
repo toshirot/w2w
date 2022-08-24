@@ -358,6 +358,112 @@ describe.only('WebSocketサーバーとの送受信', function () {
         done()
     });
 
+    
+    it('a2n: client a,b,c があるときに to n(all) へ送り 全員が受け取った。', (done) => {
+
+        //接続先
+        const PORT=3333
+        const URL='wss://reien.top'
+
+        // id
+        const id_a="aCowBQYDK2VwAyEAbpLYChvmHPGObredyPNSDwrNFHFe/KBzEx8hgaiDYuU="
+        const id_b="bCowBQYDK2VwAyEAxCb67kGCPrIzjyI/Y5hXnoag5xIlWgX5ADfrtthLDFU="
+        const id_c="cC4CAQAwBQYDK2VwBCIEIPAAO8Vb7gwZwZ8vRTtfLHsnhRiUOym/DcuAoYA5NpbZ"
+
+        // make subprotocol
+        let sub_a=mkSubProtocol(id_a)
+        let sub_b=mkSubProtocol(id_b)
+        let sub_c=mkSubProtocol(id_c)
+
+        // make wss client
+        let ws_a=mkClient(URL, PORT, sub_a)
+        let ws_b=mkClient(URL, PORT, sub_b)
+        let ws_c=mkClient(URL, PORT, sub_c)
+
+        // 送信するデータ
+        const senddata={
+            type: 'a2n'
+            , from: id_a
+            , to: [] //toは配列 a2nでは省略 to自体を省略でも良いかな？？
+            , msg: 'a2n hello w2w'
+        }
+
+        // 期待した値
+        let expected=JSON.parse(JSON.stringify(senddata))
+        //JSON.parse(JSON.stringify(senddata))
+        
+        // 各clientのopenを確認後に  送信とassertを実行する
+        sendAndAssert()
+        async function sendAndAssert(){
+            await ws_a.on('open', function open() {
+                //console.log('a2g=ws_a=opend======')
+            })
+            await ws_b.on('open', function open() {
+                //console.log('a2g=ws_b=opend======')
+            })
+            await ws_c.on('open', function open() {
+                //console.log('a2g=ws_c=opend======')
+                // send to 3333
+                setTimeout(function(){
+                    //ws_a.close() <- open 失敗をテストする
+                    sendFromClient(ws_a, senddata)
+                },0)
+                
+            })
+
+            // asser用の受信イベント
+
+            // ws_bの受信イベント
+            ws_b.on('message', function message(data) {
+                const myID=id_b
+                expected.to=[myID]
+
+                // receive from 3333
+                // actual received
+                const receive=receiveFromServer(myID, expected.type,  data)
+                if(!receive)return
+                if(receive.to[0]!==expected.to[0])return
+                // console.log('a2g: recived:', receive, expected.type, expected.to)
+
+                // 検証
+                assert.equal(receive.type, expected.type)
+                assert.equal(receive.from, expected.from)
+                assert.equal(receive.to[0], expected.to[0])
+                assert.equal(receive.msg, expected.msg)
+
+                // console.log('received myID:',receive.to[0])
+            
+            // ws_b.close()
+ 
+            });
+
+            // ws_bの受信イベント
+            ws_c.on('message', function message(data) {
+                const myID=id_c
+                expected.to=[myID]
+
+                // receive from 3333
+                // actual received
+                const receive=receiveFromServer(myID, expected.type,  data)
+                if(!receive)return
+                if(receive.to[0]!==expected.to[0])return
+                // console.log('a2g: recived:', receive, expected.type, expected.to)
+
+                // 検証
+                assert.equal(receive.type, expected.type)
+                assert.equal(receive.from, expected.from)
+                assert.equal(receive.to[0], expected.to[0])
+                assert.equal(receive.msg, expected.msg)
+
+                // console.log('received myID:',receive.to[0])
+            
+            // ws_c.close()
+ 
+            });
+        }
+        
+        done()
+    });
 
 
 
