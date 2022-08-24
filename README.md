@@ -95,6 +95,7 @@ w2w.info\html>npm run test
 ( x2s terminate on last server. )
 
 ### 構築後のフロー
+<p>※●はテスト済み</p>
 
 #### at on connect: 自動で返される reply back
 
@@ -104,7 +105,7 @@ flowchart LR
 %%test0("at on connect: 自動で返される reply back"):::class_text
 
     %%single_type3
-        text_a2a("replyBack"):::class_text_min
+        text_a2a("●replyBack"):::class_text_min
         single_type3c(ws client ca) 
         single_type3s(ws server sa):::class_server
             text_a2a -.- single_type3c
