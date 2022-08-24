@@ -107,7 +107,7 @@ flowchart LR
         single_type3c(ws client ca) 
         single_type3s(ws server sa):::class_server
             text_a2a -.- single_type3c
-            single_type3c --> single_type3s --> single_type3c
+            single_type3c --> |to rb| single_type3s --> single_type3c
 
 classDef class_server fill:#eee,color:#000,stroke:#333
 classDef class_text fill:#fff,color:#000,stroke:#fff
@@ -138,7 +138,7 @@ flowchart LR
         single_type3c(ws client ca) 
         single_type3s(ws server sa):::class_server
             text_a2a -.- single_type3c
-            single_type3c --> single_type3s --> single_type3c
+            single_type3c --> |to a| single_type3s --> single_type3c
 
     %%single_type4
         text_a2b(a2b):::class_text_min
@@ -146,32 +146,33 @@ flowchart LR
         single_type4s1(ws server sa):::class_server 
         single_type4c2(ws client cb)
             text_a2b -.- single_type4c1
-            single_type4c1 --> single_type4s1 --> single_type4c2
-
-    %%single_type5
-        text_a2n(a2n):::class_text_min
-        single_type5c1(ws client ca) 
-        single_type5s1(ws server sa):::class_server 
-        single_type5c2(ws client cb) 
-        single_type5c3(ws client cc) 
-        single_type5c4(ws client ..n) 
-            text_a2n -.- single_type5c1
-            single_type5c1 --> single_type5s1 --> single_type5c2
-                        single_type5s1 --> single_type5c3
-                        single_type5s1 --> single_type5c4
-
+            single_type4c1 -->  |to b| single_type4s1 --> single_type4c2
 
     %%single_type6
         text_a2g(a2g):::class_text_min
         single_type6c1(ws client ca) 
         single_type6s1(ws server sa):::class_server 
-        single_type6c2(ws client cb) 
-        single_type6c3(ws client cc) 
-        single_type6c4(ws client cd) 
+        single_type6c3(ws client cb) 
+        single_type6c4(ws client cc) 
             text_a2g -.- single_type6c1
-            single_type6c1 --> single_type6s1 --> single_type6c2
+            single_type6c1 --> |to b,c| single_type6s1 
                         single_type6s1 --> single_type6c3
                         single_type6s1 --> single_type6c4
+                        
+    %%single_type5
+        text_a2n(a2n):::class_text_min
+        single_type5c1(ws client ca) 
+        single_type5s1(ws server sa):::class_server 
+        single_type5c2(ws client ca) 
+        single_type5c3(ws client cb) 
+        single_type5c4(ws client ..n) 
+            text_a2n -.- single_type5c1
+            single_type5c1 --> |to all| single_type5s1 -->single_type5c2
+                        single_type5s1 --> single_type5c3
+                        single_type5s1 --> single_type5c4
+
+
+
 
 classDef class_server fill:#eee,color:#000,stroke:#333
 classDef class_text fill:#fff,color:#000,stroke:#fff,margin:0
