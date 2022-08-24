@@ -40,7 +40,7 @@ describe.only('WebSocketサーバーとの送受信', function () {
         // 接続先
         const PORT=3333
         const URL='wss://reien.top:'+PORT
-        // アカウントID
+        // アカウントID by Ed25519's PubKey
         const id=getAccountId()
         // 送信type 
         const sendType='replyBack'
@@ -82,7 +82,7 @@ describe.only('WebSocketサーバーとの送受信', function () {
         // 接続先
         const PORT=3334
         const URL='wss://reien.top:'+PORT
-        // アカウントID
+        // アカウントID by Ed25519's PubKey
         const id=getAccountId()
         // 送信type 
         const sendType='replyBack'
@@ -124,7 +124,7 @@ describe.only('WebSocketサーバーとの送受信', function () {
         // 接続先
         const PORT=3333
         const URL='wss://reien.top:'+PORT
-        // アカウントID
+        // アカウントID by Ed25519's PubKey
         const id=getAccountId()
 
         // 送信するデータ
@@ -181,16 +181,16 @@ describe.only('WebSocketサーバーとの送受信', function () {
         const PORT=3333
         const URL='wss://reien.top'
         //const wss_protocol=encodeURIComponent(JSON.stringify({name:'w2w', id:SHA256( uuidv4())}))
-
-
         // const uuidv4Str=uuidv4()
         // const id=CryptoJS.SHA224(uuidv4Str).toString()
+
+        // id
         const id_a="MCowBQYDK2VwAyEAVYnlTCRQhV0rOg1hOCPQCB3S60i0yGcwkS6MdtKkJ1E="
         const id_b="MCowBQYDK2VwAyEAh8VkWJFCm0T9sX6OXT3x/UXxewb/2GkdfAe8B6w9z1w="
-
+        // make subprotocol
         let sub_a=mkSubProtocol(id_a)
         let sub_b=mkSubProtocol(id_b)
-        //let ws1=mkClient(URL, PORT, type1, msg1)
+        // make wss client
         const ws_a=mkClient(URL, PORT, sub_a)
         const ws_b=mkClient(URL, PORT, sub_b)
 
@@ -257,20 +257,20 @@ describe.only('WebSocketサーバーとの送受信', function () {
         const PORT=3333
         const URL='wss://reien.top'
 
+        // id
         const id_a="aCowBQYDK2VwAyEAbpLYChvmHPGObredyPNSDwrNFHFe/KBzEx8hgaiDYuU="
         const id_b="bCowBQYDK2VwAyEAxCb67kGCPrIzjyI/Y5hXnoag5xIlWgX5ADfrtthLDFU="
         const id_c="cC4CAQAwBQYDK2VwBCIEIPAAO8Vb7gwZwZ8vRTtfLHsnhRiUOym/DcuAoYA5NpbZ"
 
+        // make subprotocol
         let sub_a=mkSubProtocol(id_a)
         let sub_b=mkSubProtocol(id_b)
         let sub_c=mkSubProtocol(id_c)
-        //let ws1=mkClient(URL, PORT, type1, msg1)
+
+        // make wss client
         let ws_a=mkClient(URL, PORT, sub_a)
         let ws_b=mkClient(URL, PORT, sub_b)
         let ws_c=mkClient(URL, PORT, sub_c)
-
-        // console.log(decodeURIComponent(sb))
-
 
         // 送信するデータ
         const senddata={
