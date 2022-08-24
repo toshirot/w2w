@@ -413,6 +413,29 @@ describe.only('WebSocketサーバーとの送受信', function () {
 
             // asser用の受信イベント
 
+            // ws_aの受信イベント
+            ws_a.on('message', function message(data) {
+                const myID=id_a
+                expected.to=[myID]
+
+                // receive from 3333
+                // actual received
+                const receive=receiveFromServer(myID, expected.type,  data)
+                if(!receive)return
+                if(receive.to[0]!==expected.to[0])return
+                //console.log('a2g: recived: ws_a', receive, expected.type, expected.to)
+
+                // 検証
+                assert.equal(receive.type, expected.type)
+                assert.equal(receive.from, expected.from)
+                assert.equal(receive.to[0], expected.to[0])
+                assert.equal(receive.msg, expected.msg)
+
+                // console.log('received myID:',receive.to[0])
+            
+            // ws_a.close()
+ 
+            });
             // ws_bの受信イベント
             ws_b.on('message', function message(data) {
                 const myID=id_b
@@ -423,7 +446,7 @@ describe.only('WebSocketサーバーとの送受信', function () {
                 const receive=receiveFromServer(myID, expected.type,  data)
                 if(!receive)return
                 if(receive.to[0]!==expected.to[0])return
-                // console.log('a2g: recived:', receive, expected.type, expected.to)
+                //console.log('a2g: recived: ws_b', receive, expected.type, expected.to)
 
                 // 検証
                 assert.equal(receive.type, expected.type)
@@ -447,7 +470,7 @@ describe.only('WebSocketサーバーとの送受信', function () {
                 const receive=receiveFromServer(myID, expected.type,  data)
                 if(!receive)return
                 if(receive.to[0]!==expected.to[0])return
-                // console.log('a2g: recived:', receive, expected.type, expected.to)
+                //console.log('a2g: recived: ws_c', receive, expected.type, expected.to)
 
                 // 検証
                 assert.equal(receive.type, expected.type)
