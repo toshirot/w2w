@@ -39,17 +39,25 @@ p.s. 勇気付けてくれる人がいるだけで、人は立ち上がれる。
 - wss Server はUbuntu/Node.js/ws
 
 ### 経路type
-<ul>1) at on connect:
-<li>replyBack (reply to myself)
+<ul>
+    <li>1) at on connect:
+        <ul>
+        <li>replyBack (reply to myself)
+        </ul>
+    </li>
 </ul>
-<ul>2) at on message: 
-<li>s2c (sent to client from server)
-<li>c2s (sent to server from client)
-<li>a2a (reply to myself)
-<li>a2b (sent to an other)
-<li>a2g (sent to gloup)
-<li>a2n (sent to all/broadcast)
-<li>s2s (server to server)
+<ul>
+    <li>2) at on message: 
+        <ul>
+            <li>s2c (sent to client from server)
+            <li>c2s (sent to server from client)
+            <li>a2a (reply to myself)
+            <li>a2b (sent to an other)
+            <li>a2g (sent to gloup)
+            <li>a2n (sent to all/broadcast)
+            <li>s2s (server to server)
+        </ul>
+    </li>
 </ul>
 
 ( x2s terminate on last server. )
