@@ -272,7 +272,9 @@ classDef class_text_min fill:#fff,color:#000,stroke:#fff,margin:0
 <br/>
 
 <li>参加処理 ID登録
-<p><small>Clientは自分の所属しているネットワークの wss Serverと相互のPubkey/署名を交換し、OKなら wss Server はDBへ登録・公開する。公開されるアカウントIDは各Clientの公開鍵です。</small></p>
+<p><small>Clientは自分の所属しているネットワークの wss Serverと相互のPubkey/署名を交換し、OKなら wss Server はDBへ登録・公開する。公開されるアカウントIDは各Clientの公開鍵です。
+この手順を踏むことでなりすましは、できなくなる。
+</small></p>
 
 ```mermaid
 sequenceDiagram
