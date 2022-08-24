@@ -512,41 +512,6 @@ function uuidv4() {
     }, 1000);
     return uuid;
 }
-/*
-    it('ca->sa->cb: wss://reien.top:3333 へsendしてcbが結果を受け取った。"A to 3333 to B" を受信できた', (done) => {
 
-        //接続先
-        const PORT=3333
-        const URL='wss://reien.top:'+PORT
-
-        // 送信するデータ
-        const type='msg_from_ALICE'
-        const msg='to B'
-
-        // 期待した値
-        expected='A to '+ PORT+' to B'
-
-        const ws = new WebSocket(URL)
-        ws.on('message', function message(data) {
-
-            // send to 3333
-            sendFromClient(ws, type, msg)
-
-            // receive from 3333
-            const receivedData=receiveFromServer(data)
-
-            // assert
-            if(receivedData.type==='msg_from_3333'){
-                const actual=receivedData.msg
-                //console.log('data.msg', receivedData.msg)
-                assert.equal(actual, expected)
-            }
-            
-            ws.close()
-        });
-
-        done()
-    });
-    */
 });
 
