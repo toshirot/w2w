@@ -95,7 +95,7 @@ w2w.info\html>npm run test
 ( x2s terminate on last server. )
 
 ### 構築後のフロー
-<p>※●はテスト済み</p>
+<p>※◎はテスト済み</p>
 
 #### at on connect: 自動で返される reply back
 
@@ -105,7 +105,7 @@ flowchart LR
 %%test0("at on connect: 自動で返される reply back"):::class_text
 
     %%single_type3
-        text_a2a("●replyBack"):::class_text_min
+        text_a2a("◎replyBack"):::class_text_min
         single_type3c(ws client ca) 
         single_type3s(ws server sa):::class_server
             text_a2a -.- single_type3c
@@ -136,14 +136,14 @@ flowchart LR
             single_type2c --> single_type2s
 
     %%single_type3
-        text_a2a("a2a"):::class_text_min
+        text_a2a("◎a2a"):::class_text_min
         single_type3c(ws client ca) 
         single_type3s(ws server sa):::class_server
             text_a2a -.- single_type3c
             single_type3c --> |to a| single_type3s --> single_type3c
 
     %%single_type4
-        text_a2b("a2b"):::class_text_min
+        text_a2b("◎a2b"):::class_text_min
         single_type4c1(ws client ca) 
         single_type4s1(ws server sa):::class_server 
         single_type4c2(ws client cb)
@@ -151,7 +151,7 @@ flowchart LR
             single_type4c1 -->  |to b| single_type4s1 --> single_type4c2
 
     %%single_type6
-        text_a2g("a2g"):::class_text_min
+        text_a2g("◎a2g"):::class_text_min
         single_type6c1(ws client ca) 
         single_type6s1(ws server sa):::class_server 
         single_type6c3(ws client cb) 
