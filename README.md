@@ -258,7 +258,7 @@ classDef class_text_min fill:#fff,color:#000,stroke:#fff,margin:0
 <li><strong>Client:</strong> wssネットワーク上のclient
 <li><strong>wss Server:</strong> WebSocketネットワークServer。以下の Node Client を兼ねる。
 <li><strong>Node Client:</strong> 参加しているNode List を持つClient。Clientに教える。
-<li><strong>Node List:</strong> Node Clientで公開されているclientリスト
+<li><strong>Node List:</strong> Node Clientで公開されているClientリスト
 <li><strong>ID:</strong> Node List で公開されている各ClientのアカウントIDで公開鍵。
 
 
