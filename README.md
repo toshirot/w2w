@@ -19,8 +19,6 @@ p.s. 勇気付けてくれる人がいるだけで、人は立ち上がれる。
 
 ### TODO
 <ol>
-<li>これを変更する https://github.com/toshirot/w2w/issues/3
-<li>次はa2nのテストを作ってみる
 <li>「参加処理 ID登録」をsigCまでの手順でやってみる
 <li>サーバーが接続してきたときに自動登録する仕組みを考える
 <li>複数ネットワーク時の効率の良いルーティング手順を決める
@@ -41,6 +39,7 @@ replyBack: at onconnected 自分自身へ返す
 a2a: at onmsg, client から server へ送信し、更に、同じ client へ返信する
 a2b: at onmsg, client から server へ送信し、更に、別の client へ送信する
 a2g: at onmsg, client から server へ送信し、更に、複数の指定した client へ送信する
+a2n: at onmsg, client から server へ送信し、更に、接続してる全 client へ送信する
 ------------------------------------------------------------------------------
 
 w2w.info\html>npm run test
@@ -48,20 +47,20 @@ w2w.info\html>npm run test
 > w2w@1.0.0 test
 > mocha
 
-
   新しいAccountの作成
     ✔ 一旦古いアカウントを削除した
     ✔ 新しいアカウントを作製した
 
   WebSocketサーバーとの送受信
-    ✔ replyBack: "reply Back from wss://reien.top:3333"を受信できた (223ms)
-    ✔ replyBack: "reply Back from wss://reien.top:3334"を受信できた (213ms)
+    ✔ replyBack: "reply Back from wss://reien.top:3333"を受信できた (145ms)
+    ✔ replyBack: "reply Back from wss://reien.top:3334"を受信できた (84ms)
     ✔ a2a: wss://reien.top:3333 へsendして結果を受け取った。"a2a hello w2w"を受信できた
     ✔ a2b: wss://reien.top:3333 へsendして cb が結果を受け取った。"a2b hello w2w"を受信できた
     ✔ a2g: client a,b,c があるときに to [b,c] へ送り b,c だけが受け取った。
+    ✔ a2n: client a,b,c があるときに to n(all) へ送り 全員が受け取った。
 
 
-  7 passing (464ms)
+  8 passing (275ms)
 ```
 
 ### 想定している実装環境
@@ -166,7 +165,7 @@ flowchart LR
                         single_type6s1 --> single_type6c4
                         
     %%single_type5
-        text_a2n(a2n):::class_text_min
+        text_a2n("◎a2n"):::class_text_min
         single_type5c1(ws client ca) 
         single_type5s1(ws server sa):::class_server 
         single_type5c2(ws client ca) 
