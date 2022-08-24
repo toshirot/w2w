@@ -315,8 +315,9 @@ classDef class_text fill:#fff,color:#000,stroke:#fff
 凡例 通信方向
 ------------------------------------------------------------------------------
 replyBack: at onconnected 自分自身へ返す 
-a2a: at onmsg クライアントからサーバーへ送信し、サーバーから同じクライアントへ返信する
-a2b: at onmsg クライアントからサーバーへ送信し、サーバーから別のクライアントへ送信する
+a2a: at onmsg, client から server へ送信し、更に、同じ client へ返信する
+a2b: at onmsg, client から server へ送信し、更に、別の client へ送信する
+a2g: at onmsg, client から server へ送信し、更に、複数の指定した client へ送信する
 ------------------------------------------------------------------------------
 
 w2w.info\html>npm run test
