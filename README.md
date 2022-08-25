@@ -374,7 +374,7 @@ Operation Helheim: sigA2sigB2sigC アルゴリズム
 <li>ALICE: wssサーバーに接続し、公開鍵(BOB's Address)を取得する
 <li>ALICE: 秘密鍵とmsgでsigAを作る
 
-`e.g sigA =AlicePriKey.sign(msg).toHex();`
+`e.g sigA =sign(msg, AlicePriKey)`
 
 <li>ALICE: 公開鍵(Alice's Address)とsigAをwssサーバーBOBへ送信する
 
@@ -411,7 +411,7 @@ upsert {
 
 `e.g. let recived=recivedMsg() //from BOB get sigB`
 
-<li>ALICE: verify sigB and Bobの公開鍵(BOB's Address)
+<li>ALICE: verify sigA and sigB by Bobの公開鍵(BOB's Address)
 
 `let res:{bool} = verify(sigA, BobPubKey, sigB)`
 
@@ -430,7 +430,7 @@ if(res){
 
 `e.g. let recived=recivedMsg() //from ALICE get sigC`
 
-<li>BOB: find sigB from DB by Alice's addr, and verify
+<li>BOB: find sigB from DB by Alice's addr, and Verify  sigB and sigC by Alice's Public Key.
 
 `let res:{bool} = verify(sigB, AlicePubKey, sigC)`
 
