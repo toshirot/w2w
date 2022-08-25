@@ -413,7 +413,7 @@ upsert {
 
 <li>ALICE: verify sigA and sigB by Bobの公開鍵(BOB's Address)
 
-`let res:{bool} = verify(sigA, BobPubKey, sigB)`
+`let res:{bool} = verify(sigA, sigB, BobPubKey)`
 
 <li>ALICE: res is true then  Make the "sigC" by the Alice's Private Key and the "sigB".
 and send to Bob
@@ -432,7 +432,7 @@ if(res){
 
 <li>BOB: find sigB from DB by Alice's addr, and Verify  sigB and sigC by Alice's Public Key.
 
-`let res:{bool} = verify(sigB, AlicePubKey, sigC)`
+`let res:{bool} = verify(sigB, sigC, AlicePubKey)`
 
 <li>BOB: if res is then Alice's SignIn is OK, and send msg(status OK) to ALICE
 
