@@ -446,6 +446,7 @@ if(res){
 ```
 <li>honor to okarin
 </ol>
+
 ```mermaid
 flowchart LR
 
@@ -549,6 +550,7 @@ https://www.npmjs.com/
 <li>暗号スイートの暗号強度と、公開鍵のビット数の設定 https://http2.try-and-test.net/ecdhe.html
 <li>サーバ負荷をRSAとECDSAで比較 https://http2.try-and-test.net/ecdsa.html
 <li>Node Doc https://nodejs.org/dist/latest-v16.x/docs/api/
+<li>http://masterwiki.net/steinsgate/index.php?%C7%AF%C9%BD
 
 ```
 2022-08-21
