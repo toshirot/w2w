@@ -470,7 +470,7 @@ describe.only('WebSocketサーバーとの送受信', function () {
                 const receive=receiveFromServer(myID, expected.type,  data)
                 if(!receive)return
                 if(receive.to[0]!==expected.to[0])return
-                //console.log('a2g: recived: ws_c', receive, expected.type, expected.to)
+                //console.log('a2g: recived: ws_c', receive, expected.type,  expected.to)
 
                 // 検証
                 assert.equal(receive.type, expected.type)

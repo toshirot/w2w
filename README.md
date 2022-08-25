@@ -352,20 +352,13 @@ sequenceDiagram
 <ol>
 <li>IDはclientのWebSocket生成時にsubprotocol用にkeypairを作り
 <li>keypairはCONF_PATHへ保存する
-<li>公開鍵とsigAをwssサーバーへ送信する
+<li>公開鍵とsigAをwssサーバーへ送信する(send Pub,sigA)
 <li>サーバー側では onconnect時に
 <li>subprotocolの基礎要件を判定(chkProtocol)して
 <li>falseなら接続終了
 <li>trueなら更にIDの存在をメモリかDBで確認し(if(hasId(protocol.id))return)
-<li>falseならメモリかDBへ登録ネゴへ
+<li>falseならメモリかDBへ登録し、ネゴ　Operation Helheimへ
 <li>trueなら何もしない
-<li>登録ネゴ:1 wssサーバーは、sigAとpriKeyでsigBを作る
-<li>登録ネゴ:2 wssサーバーは、sigBと自身のPubKeyをclientへreplyBackする
-<li>登録ネゴ:3 clientは受け取った sigBをVerify しNGなら終了
-<li>登録ネゴ:4 OKならsigBとpriKeyでsigCを作る
-<li>登録ネゴ:5 sigCをwssサーバーへ送る
-<li>登録ネゴ:6 wssサーバーは受け取った sigCをVerify しNGなら終了
-<li>登録ネゴ:7 OKなら登録する
 <li>clientはリストを受け取る(ただの宛先リストと知ってるよリストなどがありうる)
 <li>送信時にはリストから宛先を判定し
 <li>(要：知ってるリストの問い合わせ方法)
@@ -375,7 +368,84 @@ sequenceDiagram
 <li>全リストを持つのは無駄なのでアドレスを番地分けしておきたい。
 <li>※サーバーが接続してきたときに登録する仕組みを考える
 </ol>
+Operation Helheim: sigA2sigB2sigC アルゴリズム
+<p><small>Client is ALICE, wss Server is BOB.</small></p>
+<ol>
+<li>ALICE: wssサーバーに接続し、公開鍵(BOB's Address)を取得する
+<li>ALICE: 秘密鍵とmsgでsigAを作る
 
+`e.g sigA =AlicePriKey.sign(msg).toHex();`
+
+<li>ALICE: 公開鍵(Alice's Address)とsigAをwssサーバーBOBへ送信する
+
+`e.g. wss.send(Alice's Address, sigA) //to BOB `
+
+<li>BOB: get 公開鍵(Alice's Address) and sigA
+
+`e.g. let recived=recivedMsg() //from ALICE and get Alice's Address, sigA`
+
+<li>BOB: save 公開鍵(Alice's Address) and sigA to memoly or DB
+
+```
+upsert {    
+    utime: {type: Number, require:true}
+    , addr: {type: String, require:true}
+    , sigA: {type: String, require:true}
+    , sigB: {type: String, require:true}
+    , sigC: {type: String, require:true}    }
+```
+
+<li>BOB: "sigB" を "sigA" と BOB's Private Keyで作る
+
+`e.g sigB = sign(sigA, BobPriKey)`
+
+<li>BOB:  upsert to DB, sigB where Alice's Address
+
+`e.g upsert sigB where Alice's addr`
+
+<li>BOB: sigBをAliceへ送信する
+
+`e.g. wss.send(sigB) //to ALICE  `
+
+<li>ALICE: get sigB
+
+`e.g. let recived=recivedMsg() //from BOB get sigB`
+
+<li>ALICE: verify sigB and Bobの公開鍵(BOB's Address)
+
+`let res:{bool} = verify(sigA, BobPubKey, sigB)`
+
+<li>ALICE: res is true then  Make the "sigC" by the Alice's Private Key and the "sigB".
+and send to Bob
+
+```
+if(res){
+        sigC = sign(sigB, AlicePriKey)
+        wss.send(sigC) //to BOB 
+} else {
+        //goto 1
+} 
+```
+<li>BOB: get sigC
+
+`e.g. let recived=recivedMsg() //from ALICE get sigC`
+
+<li>BOB: find sigB from DB by Alice's addr, and verify
+
+`let res:{bool} = verify(sigB, AlicePubKey, sigC)`
+
+<li>BOB: if res is then Alice's SignIn is OK, and send msg(status OK) to ALICE
+
+```
+if(res){
+        upsert to DB, sigC where Alice's Address
+        ss.send(status OK) //to ALICE 
+} else {
+        //goto 1
+} 
+```
+<li>honor to okarin
+</ol>
 ```mermaid
 flowchart LR
 
