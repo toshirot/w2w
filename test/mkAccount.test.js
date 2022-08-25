@@ -18,7 +18,7 @@ function mkClient(URL, PORT, protocol){
     return ws
 }
 
-describe.only('新しいAccountの作成', function () {
+describe('新しいAccountの作成', function () {
 
     it('一旦古いアカウントを削除した', (done) => {
         // 期待した値

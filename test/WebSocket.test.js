@@ -13,6 +13,8 @@ const WebSocket=require('../').WebSocket
 const sendFromClient=require('../').sendFromClient
 const receiveFromServer=require('../').receiveFromServer
 const getAccountId=require('../').getAccountId
+const sign=require('../').sign
+const verify=require('../').verify
 const mkClient=require('../').mkClient
 const CryptoJS =require('crypto-js')
 
@@ -24,6 +26,7 @@ const CryptoJS =require('crypto-js')
 // @return SubProtocol {string} encoded SubProtocol
 function mkSubProtocol(id){
     const ID=id?id:mkAccount(true)
+    //const sigA=sign('20100728')
    // console.log( !!id, ID)
     return encodeURIComponent(
         JSON.stringify({
@@ -34,7 +37,7 @@ function mkSubProtocol(id){
 }
 
 
-describe.only('WebSocketサーバーとの送受信', function () {
+describe('WebSocketサーバーとの送受信', function () {
 
     it('replyBack: "reply Back from wss://reien.top:3333"を受信できた', (done) => {
 

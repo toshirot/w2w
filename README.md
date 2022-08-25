@@ -51,16 +51,19 @@ w2w.info\html>npm run test
     ✔ 一旦古いアカウントを削除した
     ✔ 新しいアカウントを作製した
 
+  signの作成とveryfy
+    ✔ sign した signature は期待通りの値で、verify は true だった
+
   WebSocketサーバーとの送受信
-    ✔ replyBack: "reply Back from wss://reien.top:3333"を受信できた (145ms)
-    ✔ replyBack: "reply Back from wss://reien.top:3334"を受信できた (84ms)
+    ✔ replyBack: "reply Back from wss://reien.top:3333"を受信できた (420ms)
+    ✔ replyBack: "reply Back from wss://reien.top:3334"を受信できた (586ms)
     ✔ a2a: wss://reien.top:3333 へsendして結果を受け取った。"a2a hello w2w"を受信できた
     ✔ a2b: wss://reien.top:3333 へsendして cb が結果を受け取った。"a2b hello w2w"を受信できた
     ✔ a2g: client a,b,c があるときに to [b,c] へ送り b,c だけが受け取った。
     ✔ a2n: client a,b,c があるときに to n(all) へ送り 全員が受け取った。
 
 
-  8 passing (275ms)
+  9 passing (1s)
 ```
 
 ### 想定している実装環境

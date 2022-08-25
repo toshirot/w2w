@@ -10,7 +10,9 @@ const{
     mkAccount, //pubkey
     removeCnf,
     getW2wCnf,
-    getAccountId
+    getAccountId,
+    setBeginEndStr,
+    removeBeginEndStr
 }  = require('./lib/mkAccount')
 const mkClient = require('./lib/mkClient')
 
@@ -24,6 +26,8 @@ module.exports= new function() {
     this.removeCnf=removeCnf
     this.getW2wCnf=getW2wCnf
     this.getAccountId=getAccountId
+    this.setBeginEndStr=setBeginEndStr
+    this.removeBeginEndStr=removeBeginEndStr
 
     this.mkClient=mkClient
 
