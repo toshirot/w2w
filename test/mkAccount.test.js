@@ -4,29 +4,21 @@ const mkAccount=require('../index.js').mkAccount
 const removeCnf=require('../index.js').removeCnf
 const getW2wCnf=require('../index.js').getW2wCnf
 const getAccountId=require('../index.js').getAccountId
-const getAndSetKeyPair=require('../index.js').getAndSetKeyPair
+const getOrSetKeyPair=require('../index.js').getOrSetKeyPair
 const WebSocket=require('../index.js').WebSocket
+const W2wSocket=require('../').W2wSocket
 
-// -----------------------------------------------------------------------------
-// mkClient
-//
-function mkClient(URL, PORT, protocol){
-    //接続情報
-    const url=URL+':'+PORT
-    const ws = new WebSocket(url, protocol)
-
-    return ws
-}
 
 describe('新しいAccountの作成', function () {
 
     it('一旦古いアカウントを削除した', (done) => {
         // 期待した値
         const expected=null
-        //一旦古いアカウントがあれば削除する
+        // 一旦古いアカウントがあれば削除する
         removeCnf()
-        //cnf fileの存在を調べる。無ければnull
+        // cnf fileの存在を調べる。無ければnull
         const actual=getW2wCnf()
+        // nullだった
         assert.equal(expected, actual)
         done();
     })
@@ -34,11 +26,12 @@ describe('新しいAccountの作成', function () {
         
         //一旦アカウントを作製する
         // 期待した値
-        const expected=mkAccount()
-        //アカウントを削除する
+        const expected=getAccountId()
+        // アカウントを削除する
         removeCnf()
-        //アカウントを作製する
-        const actual=mkAccount()
+        // アカウントを作製する
+        const actual=getAccountId()
+        // 異なるアカウントIDが生成された
         assert.notEqual(expected, actual)
         done();
     })
@@ -48,7 +41,7 @@ describe('新しいAccountの作成', function () {
         
         //アカウントのを作製する
         // 期待した値
-        const expected=mkAccount()
+        const expected=getAccountId()
  
 
         //接続先
@@ -58,8 +51,9 @@ describe('新しいAccountの作成', function () {
         const id_a=expected
         const wss_protocol_a=encodeURIComponent(JSON.stringify({name:'w2w', id:id_a}))
 
-        //let ws1=mkClient(URL, PORT, type1, msg1)
-        let ws_a=mkClient(URL, PORT, wss_protocol_a)
+        const url=URL+':'+PORT
+        //let ws1=new W2wSocket(url, type1, msg1)
+        let ws_a=new W2wSocket(url, wss_protocol_a)
 
         ws_a.on('open', function open() {
             // send to 3333
