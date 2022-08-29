@@ -2,10 +2,10 @@
 
 const websocket = require('ws')
 const w2w = require('./lib/w2w')
-const sendFromClient = require('./lib/sendFromClient')
-const receiveFromServer = require('./lib/receiveFromServer')
-const { mkKeyPair, sign, verify } = require('./lib/mkKeyPairEd25519')
-const{
+const send = require('./lib/send')
+const received = require('./lib/received')
+const { mkKeyPair, sign, verify } = require('./lib/mkKeyPair')
+const {
     getOrSetKeyPair,
     mkAccount, // key pair
     removeCnf,
@@ -14,7 +14,10 @@ const{
     setBeginEndStr,
     removeBeginEndStr
 }  = require('./lib/mkAccount')
-const W2wSocket = require('./lib/W2wSocket')
+const { 
+    W2wSocket,
+    mkSubProtocol
+}= require('./lib/W2wSocket')
 
 module.exports= new function() {
     this.sign=sign
@@ -30,9 +33,10 @@ module.exports= new function() {
     this.removeBeginEndStr=removeBeginEndStr
 
     this.W2wSocket=W2wSocket
+    this.mkSubProtocol=mkSubProtocol
 
-    this.receiveFromServer=receiveFromServer
-    this.sendFromClient=sendFromClient
+    this.received=received
+    this.send=send
     this.w2w=w2w
 
     this.createWebSocketStream=websocket.createWebSocketStream;
