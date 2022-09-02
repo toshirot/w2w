@@ -6,22 +6,22 @@ const sendFromClient = require('./lib/sendFromClient')
 const receiveFromServer = require('./lib/receiveFromServer')
 const { mkKeyPair, sign, verify } = require('./lib/mkKeyPairEd25519')
 const{
-    getOrSetKeyPair,
-    mkAccount, // key pair
+    getAndSetKeyPair,
+    mkAccount, //pubkey
     removeCnf,
     getW2wCnf,
-    getAccountId, // public key
+    getAccountId,
     setBeginEndStr,
     removeBeginEndStr
 }  = require('./lib/mkAccount')
-const W2wSocket = require('./lib/W2wSocket')
+const mkClient = require('./lib/mkClient')
 
 module.exports= new function() {
     this.sign=sign
     this.verify=verify
     this.mkKeyPair=mkKeyPair
 
-    this.getOrSetKeyPair=getOrSetKeyPair
+    this.getAndSetKeyPair=getAndSetKeyPair
     this.mkAccount=mkAccount
     this.removeCnf=removeCnf
     this.getW2wCnf=getW2wCnf
@@ -29,7 +29,7 @@ module.exports= new function() {
     this.setBeginEndStr=setBeginEndStr
     this.removeBeginEndStr=removeBeginEndStr
 
-    this.W2wSocket=W2wSocket
+    this.mkClient=mkClient
 
     this.receiveFromServer=receiveFromServer
     this.sendFromClient=sendFromClient

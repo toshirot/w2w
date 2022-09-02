@@ -8,13 +8,14 @@ ca->sa->cb  クライアントaからサーバーaへ送信し、サーバーa�
 
 */
 const assert = require("assert");
+const mkAccount=require('../index.js').mkAccount
 const WebSocket=require('../').WebSocket
 const sendFromClient=require('../').sendFromClient
 const receiveFromServer=require('../').receiveFromServer
 const getAccountId=require('../').getAccountId
 const sign=require('../').sign
 const verify=require('../').verify
-const W2wSocket=require('../').W2wSocket
+const mkClient=require('../').mkClient
 const CryptoJS =require('crypto-js')
 
 //console.log(getAccountId())
@@ -24,7 +25,7 @@ const CryptoJS =require('crypto-js')
 // @id {string} pubkey
 // @return SubProtocol {string} encoded SubProtocol
 function mkSubProtocol(id){
-    const ID=id?id:getAccountId()
+    const ID=id?id:mkAccount(true)
     //const sigA=sign('20100728')
    // console.log( !!id, ID)
     return encodeURIComponent(
@@ -55,7 +56,7 @@ describe('WebSocketサーバーとの送受信', function () {
         // 期待したmsg
         expected_msg='reply Back from '+URL
         // WebSocket
-        const ws = new W2wSocket(URL, mkSubProtocol(id))
+        const ws = new WebSocket(URL, mkSubProtocol(id))
         //着信イベント
         ws.on('message', function message(data) {
 
@@ -97,7 +98,7 @@ describe('WebSocketサーバーとの送受信', function () {
         // 期待したmsg
         expected_msg='reply Back from '+URL
         // WebSocket
-        const ws = new W2wSocket(URL, mkSubProtocol(id))
+        const ws = new WebSocket(URL, mkSubProtocol(id))
         //着信イベント
         ws.on('message', function message(data) {
 
@@ -146,8 +147,7 @@ describe('WebSocketサーバーとの送受信', function () {
         // 期待したmsg
         const expected_msg=senddata.msg
 
-        const ws = new W2wSocket(URL, mkSubProtocol(id))
-
+        const ws = new WebSocket(URL, mkSubProtocol(id))
 
         // ws の open イベントでメッセージを1回送る
         ws.on('open', function () {
@@ -184,7 +184,6 @@ describe('WebSocketサーバーとの送受信', function () {
         //接続先
         const PORT=3333
         const URL='wss://reien.top'
-        const url=URL+':'+PORT
         //const wss_protocol=encodeURIComponent(JSON.stringify({name:'w2w', id:SHA256( uuidv4())}))
         // const uuidv4Str=uuidv4()
         // const id=CryptoJS.SHA224(uuidv4Str).toString()
@@ -196,8 +195,8 @@ describe('WebSocketサーバーとの送受信', function () {
         let sub_a=mkSubProtocol(id_a)
         let sub_b=mkSubProtocol(id_b)
         // make wss client
-        const ws_a= new W2wSocket(url, sub_a)
-        const ws_b= new W2wSocket(url, sub_b)
+        const ws_a=mkClient(URL, PORT, sub_a)
+        const ws_b=mkClient(URL, PORT, sub_b)
 
 
         // console.log(decodeURIComponent(sb))
@@ -261,7 +260,6 @@ describe('WebSocketサーバーとの送受信', function () {
         //接続先
         const PORT=3333
         const URL='wss://reien.top'
-        const url=URL+':'+PORT
 
         // id
         const id_a="aCowBQYDK2VwAyEAbpLYChvmHPGObredyPNSDwrNFHFe/KBzEx8hgaiDYuU="
@@ -274,9 +272,9 @@ describe('WebSocketサーバーとの送受信', function () {
         let sub_c=mkSubProtocol(id_c)
 
         // make wss client
-        let ws_a= new W2wSocket(url, sub_a)
-        let ws_b= new W2wSocket(url, sub_b)
-        let ws_c= new W2wSocket(url, sub_c)
+        let ws_a=mkClient(URL, PORT, sub_a)
+        let ws_b=mkClient(URL, PORT, sub_b)
+        let ws_c=mkClient(URL, PORT, sub_c)
 
         // 送信するデータ
         const senddata={
@@ -369,7 +367,6 @@ describe('WebSocketサーバーとの送受信', function () {
         //接続先
         const PORT=3333
         const URL='wss://reien.top'
-        const url=URL+':'+PORT
 
         // id
         const id_a="aCowBQYDK2VwAyEAbpLYChvmHPGObredyPNSDwrNFHFe/KBzEx8hgaiDYuU="
@@ -382,9 +379,9 @@ describe('WebSocketサーバーとの送受信', function () {
         let sub_c=mkSubProtocol(id_c)
 
         // make wss client
-        let ws_a= new W2wSocket(url, sub_a)
-        let ws_b= new W2wSocket(url, sub_b)
-        let ws_c= new W2wSocket(url, sub_c)
+        let ws_a=mkClient(URL, PORT, sub_a)
+        let ws_b=mkClient(URL, PORT, sub_b)
+        let ws_c=mkClient(URL, PORT, sub_c)
 
         // 送信するデータ
         const senddata={

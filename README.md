@@ -555,11 +555,6 @@ https://www.npmjs.com/
 <li>Node Doc https://nodejs.org/dist/latest-v16.x/docs/api/
 <li>http://masterwiki.net/steinsgate/index.php?%C7%AF%C9%BD
 
-<hr>
-<li>npm ws 
-<li>npm validator (予定) https://github.com/validatorjs/validator.js
-<li>npm crypto-js (未使用 cryptoを使ってる)
-
 ```
 2022-08-21
 
