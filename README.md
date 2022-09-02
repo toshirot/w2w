@@ -6,6 +6,13 @@ https://w2w.info/
 
 ### 動機
 
+WebSocketも [rfc6455](https://datatracker.ietf.org/doc/rfc6455/) が2011年12月に公開されてから2022年でほぼ10年が経過し、Webでは日常的に使われる技術となってきています。
+
+一般的な使われ方は、常時接続のリアルタイム送受信をClient/Server型の単一ネットワーク内で行うものが多いのですが、もし、複数のWebSocketネットワークを超えて送信先を指定したりブロードキャストで放送したりするとしたら少し手間がかかります。
+
+ここで行おうとしているのは、それらをなるべく簡単で安全に統一的な方法で提供する方法を考えてみたいということです。
+
+いろいろテストしながら、楽しみつつ作業をしていきたいなと思っています。
 
 Almost ten years have passed 2022 since rfc6455 was published in December 2011, and WebSocket has become a technology that is used daily on the Web.
 
@@ -15,15 +22,6 @@ Still, if a transmission destination is specified beyond multiple WebSocket netw
 What I'm trying to do here is try to think of a way to provide them in the most straightforward, safest, and most uniform way possible.
 
 I want to enjoy working while testing various things.
-
-WebSocketも [rfc6455](https://datatracker.ietf.org/doc/rfc6455/) が2011年12月に公開されてから2022年でほぼ10年が経過し、Webでは日常的に使われる技術となってきています。
-
-一般的な使われ方は、常時接続のリアルタイム送受信をClient/Server型の単一ネットワーク内で行うものが多いのですが、もし、複数のWebSocketネットワークを超えて送信先を指定したりブロードキャストで放送したりするとしたら少し手間がかかります。
-
-ここで行おうとしているのは、それらをなるべく簡単で安全に統一的な方法で提供する方法を考えてみたいということです。
-
-いろいろテストしながら、楽しみつつ作業をしていきたいなと思っています。
-
 
 ### TODO
 <ol>
