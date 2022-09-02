@@ -14,14 +14,6 @@ WebSocketも [rfc6455](https://datatracker.ietf.org/doc/rfc6455/) が2011年12�
 
 いろいろテストしながら、楽しみつつ作業をしていきたいなと思っています。
 
-Almost ten years have passed 2022 since rfc6455 was published in December 2011, and WebSocket has become a technology that is used daily on the Web.
-
-Still, specifying destinations across multiple WebSocket networks and broadcasts can be cumbersome.
-
-Still, if a transmission destination is specified beyond multiple WebSocket networks or broadcasts, If you do, it will take some time.
-What I'm trying to do here is try to think of a way to provide them in the most straightforward, safest, and most uniform way possible.
-
-I want to enjoy working while testing various things.
 
 ### TODO
 <ol>
