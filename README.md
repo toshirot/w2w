@@ -1,7 +1,7 @@
 # w2w
 Tool for WebSocket to WebSocket. Realizing W2W (WebSocket-to-WebSocket) like P2P. But is not P2P.
 
-<<<<<<< HEAD
+
 ### サイト準備
 https://w2w.info/
 
@@ -619,6 +619,4 @@ https://www.npmjs.com/
 }
 
 ```
-=======
-一旦クリア
->>>>>>> a59cb48eefe94e6fdb8754e49ef69c146682b83b
+
