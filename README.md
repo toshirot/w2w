@@ -572,7 +572,7 @@ https://www.npmjs.com/
 <li>http://masterwiki.net/steinsgate/index.php?%C7%AF%C9%BD
 
 <hr>
-<li>npm ws 
+<li>npm ws https://www.npmjs.com/package/ws#websocket-compression　https://github.com/websockets/ws/blob/HEAD/doc/ws.md#new-websocketserveroptions-callback
 <li>npm validator (予定) https://github.com/validatorjs/validator.js
 <li>npm crypto-js (未使用 cryptoを使ってる)
 
