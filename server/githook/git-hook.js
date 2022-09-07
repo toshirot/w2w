@@ -118,7 +118,9 @@ function chkSECRET(req, data){
          
             console.log('x-hub-signature !== sig '
                 , (req.headers['x-hub-signature'] !== sig)
+                , 'hub:'
                 , req.headers['x-hub-signature']
+                , 'local:'
                 , sig
                 )
          
