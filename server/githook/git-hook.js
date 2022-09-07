@@ -107,7 +107,8 @@ const server = new https.createServer(option, function (req, res){
 // @return true|false
 // 
 function chkSECRET(req, data){
-    console.log(201,'chkSECRET', SECRET)
+    //console.log(201,'chkSECRET', SECRET)
+    console.log(201,'chkSECRET')
     // chk SECRET 
     let sig = ''
         + 'sha1='
