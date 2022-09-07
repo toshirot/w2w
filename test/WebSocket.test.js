@@ -25,19 +25,21 @@ describe('WebSocketサーバーとの各種送受信', function () {
         const URL='wss://reien.top'
         const PORT=3333
         const url=URL+':'+PORT
+
         // アカウントID by Ed25519's PubKey
-        //const id=getAccountId()
+        const id=getAccountId()
+
+        // WebSocket
+        //const ws = new W2wSocket(url, mkSubProtocol(id))
+        const ws = new W2wSocket(url)
 
         // 送受信type 
         // mkSubProtocolの第2引数でtypeを指定しなければ 送信typeはreplyになり
         // 着信typeもreplyになる
         const reciveType='reply'
 
-        // WebSocket
-        //const ws = new W2wSocket(url, mkSubProtocol(id))
-        const ws = new W2wSocket(url)
         // 期待したid
-        const id=expected_from=expected_to=getAccountId()
+        expected_from=expected_to=id
         // 期待したtype
         expected_type=reciveType
         // 期待したmsg
