@@ -1,54 +1,6 @@
 module.exports={
     "w2w": {
         about: "github webhook for w2w.info",
-        secret: `-----BEGIN OPENSSH PRIVATE KEY-----
-        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
-        -----END OPENSSH PRIVATE KEY-----`
+        secret: `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`
     }
 }
