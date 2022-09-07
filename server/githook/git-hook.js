@@ -71,7 +71,9 @@ const server = new https.createServer(option, function (req, res){
         
         payload+=chunk.toString();
         // chk SECRET
-        if(!chkSECRET(req, payload))return;
+        let flg_chkSECRET=chkSECRET(req, payload)
+        console.log(flg_chkSECRET)
+        if(!flg_chkSECRET)return;
         // parse payload
         try{
             payload=JSON.parse(payload);
