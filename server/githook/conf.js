@@ -1,5 +1,5 @@
 module.exports={
-    "w2w.info": {
+    "w2w": {
         about: "github webhook for w2w.info",
         secret: `-----BEGIN OPENSSH PRIVATE KEY-----
         b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAACFwAAAAdzc2gtcn

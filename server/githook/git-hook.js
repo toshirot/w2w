@@ -45,14 +45,13 @@ const KEY = fs.readFileSync(pemPath+'/privkey.pem');
 
 // config のSECRETは git webhookへもセットする
 const conf=require(__dirname+'/conf'); // conf 読込み
-const SECRET = conf[HOST].secret; // シークレット
+const SECRET = conf[REPO_NAME].secret; // シークレット
 
 // git settings
 const BRANCHName='main';// 'master'|'dev-2f' Branch Name
 const targetBRANCH = 'refs/heads/'+BRANCHName;//'refs/heads/master'|'refs/heads/dev-2f'
 const targetRepositoryDir='/home/tato/'+REPO_NAME;
 const pullStr='sudo git pull origin '+BRANCHName;
-const REPOSITORY_NAME = REPO_NAME;
 
 // log file
 const logFilePath = '/home/tato/w2w/webhook/log/'+HOST+'.log';
@@ -136,9 +135,9 @@ function chkSECRET(req, data){
 // 
 function chkRepositoryName(payload){
     let repositoryName = payload.repository.name;
-    console.log(555,'chkRepositoryName', REPOSITORY_NAME===repositoryName, REPOSITORY_NAME, repositoryName)
+    console.log(555,'chkRepositoryName', REPO_NAME===repositoryName, REPO_NAME, repositoryName)
 
-    if(REPOSITORY_NAME!==repositoryName){
+    if(REPO_NAME!==repositoryName){
         return false;//リポジトリ名が違えばパス
     } else {
         return true;
