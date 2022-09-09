@@ -28,6 +28,7 @@ WebSocketも [rfc6455](https://datatracker.ietf.org/doc/rfc6455/) が2011年12�
 
 ### TODO
 <ol>
+<li>ed25519 バグの修正 https://github.com/toshirot/w2w/issues/4
 <li>github web hook for w2w.info
 <li>「参加処理 ID登録」をsigCまでの手順でやってみる
 <li>サーバーが接続してきたときに自動登録する仕組みを考える
