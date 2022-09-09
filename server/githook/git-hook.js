@@ -51,7 +51,7 @@ const SECRET = conf[REPO_NAME].secret; // シークレット
 const BRANCHName='main';// 'master'|'dev-2f' Branch Name
 const targetBRANCH = 'refs/heads/'+BRANCHName;//'refs/heads/master'|'refs/heads/dev-2f'
 const targetRepositoryDir='/home/tato/'+REPO_NAME;
-const pullStr='sudo git pull origin '+BRANCHName;
+const pullStr='git pull origin '+BRANCHName;
 
 // log file
 const logFilePath = '/home/tato/w2w/webhook/log/'+HOST+'.log';
@@ -64,16 +64,24 @@ const option={
     key: KEY,
 };
 const server = new https.createServer(option, function (req, res){
-
+    console.log('statusCode:', res.statusCode);
+ 
     let payload='';
     req.on('data', function(chunk) {
         
         payload+=chunk.toString();
+
+    });
+
+    req.on('end', function() {
+
         // chk SECRET
         let flg_chkSECRET=chkSECRET(req, payload)
         console.log(flg_chkSECRET)
         if(!flg_chkSECRET)return;
         // parse payload
+
+        console.log('payload:', typeof payload,  payload)
         try{
             payload=JSON.parse(payload);
         } catch(e){
@@ -95,8 +103,7 @@ const server = new https.createServer(option, function (req, res){
             writeLog(`3 stdout: ${stdout}`);
             writeLog(`3 stderr: ${stderr}`);
         });
-
-    });
+    })
     res.end();
 
 }).listen(PORT);
@@ -106,8 +113,8 @@ const server = new https.createServer(option, function (req, res){
 // @return true|false
 // 
 function chkSECRET(req, data){
-    //console.log(201,'chkSECRET', SECRET)
-    console.log(201,'chkSECRET')
+    console.log(201,'chkSECRET', SECRET)
+    //console.log(201,'chkSECRET')
     // chk SECRET 
     let sig = ''
         + 'sha1='
