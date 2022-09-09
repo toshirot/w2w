@@ -2,17 +2,45 @@ const assert = require("assert");
 const WebSocket=require('../').WebSocket
 const w2w_send=require('../').w2w_send
 const received=require('../').received
-const getAccountId=require('../').getAccountId
-const sign=require('../').sign
-const verify=require('../').verify
-const W2wSocket=require('../').W2wSocket
-const mkSubProtocol=require('../').mkSubProtocol
+const getAccountId=require('../lib/mkAccount').getAccountId
+
 const CryptoJS =require('crypto-js')
+const { mkKeyPair, sign, verify } = require('../lib/mkKeyPair')
+const { 
+    W2wSocket,
+    mkSubProtocol
+}= require('../lib/W2wSocket')
+
+const EdDSA = require('elliptic').eddsa;
+const ec = new EdDSA('ed25519');
+
+//----------------------------------------------
+// ALICE
+
+// Alice's Private Key
+const AlicePriKeyHex='fa127e73935678a647daf3d3af2a934dc0e9c9c39dc4ac2e69c9c3648447ff53';
+// Create key pair from secret
+const keyPairAlice = ec.keyFromSecret(AlicePriKeyHex, 'hex');// hex string, array or Buffer
+
+// Import public key
+const AlicePubKeyHex = '78cd96278f49a78664faf50e9b238f3f5642360d80b3b0ce82782a4a8af3a8e9';
+const AlicePubKey = ec.keyFromPublic(AlicePubKeyHex, 'hex');
+
+//----------------------------------------------
+// BOB
+
+const BobPriKeyHex='16253458330e54b08e3d492d200776d8af2d0367bbca4ca59df88985175a6069';
+// Create key pair from secret
+const keyPairBob = ec.keyFromSecret(BobPriKeyHex, 'hex');// hex string, array or Buffer
+
+// Import public key
+const BobPubKeyHex = '6e6579f1f368f9a4ac6d20a11a7741ed44d1409a923fa9b213e0160d90aa0ecc';
+const BobPubKey = ec.keyFromPublic(BobPubKeyHex, 'hex');
 
 
-describe('参加処理 ID登録 sigA から sigC を交換し verifyする', function () {
+describe.only('参加処理 ID登録 sigA から sigC を交換し verifyする', function () {
 
-    it('sigAをサーバーへ送りsigBを受け取った', (done) => {
+    it('sigAをサーバーへ送り sigB を受け取り、 verify したら true だった', (done) => {
 
         // 接続先
         const URL='wss://reien.top'
@@ -29,9 +57,11 @@ describe('参加処理 ID登録 sigA から sigC を交換し verifyする', fun
 
         // 期待したid
         const id=expected_from=expected_to=getAccountId()
+ 
+        const subprotocol=mkSubProtocol(id, sentType)
 
         // WebSocket sigAを送る
-        const ws = new W2wSocket(url, mkSubProtocol(id, sentType))
+        const ws = new W2wSocket(url, subprotocol)
      
 
         // 期待したtype
@@ -45,17 +75,25 @@ describe('参加処理 ID登録 sigA から sigC を交換し verifyする', fun
             // on connection で発信された reply back レスポンス
             let receive=received(id, expected_type,  data)
             if(!receive)return
+
+            const msg ='test'
+            let signA_= keyPairAlice.sign(msg).toHex()
+    
+
             // 着信結果
             const actual_type=receive.type
             const actual_from=receive.from
             const actual_to=receive.to
             const actual_msg=receive.msg
-
+            const actual_verify=BobPubKey.verify(signA_, receive.sigB)
+            
             // 検証
             assert.equal(actual_type, expected_type)
             assert.equal(actual_from, expected_from)
             assert.equal(actual_to, expected_to)
             assert.equal(actual_msg, expected_msg)
+            assert.equal(actual_verify, true)
+            
 
             done();
             //ws.close()
