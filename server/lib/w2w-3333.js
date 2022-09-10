@@ -9,6 +9,33 @@ const { mkKeyPair, sign, verify } = require(__dirname+'/mkKeyPair')
 const getOrSetKeyPair= require(__dirname+'/mkAccount').getOrSetKeyPair
 const removeBeginEndStr= require(__dirname+'/mkAccount').removeBeginEndStr
 
+const EdDSA = require('elliptic').eddsa;
+const ec = new EdDSA('ed25519');
+const { SHA3 } = require('sha3');
+
+//----------------------------------------------
+// ALICE
+
+// Alice's Private Key
+const AlicePriKeyHex='fa127e73935678a647daf3d3af2a934dc0e9c9c39dc4ac2e69c9c3648447ff53';
+// Create key pair from secret
+const keyPairAlice = ec.keyFromSecret(AlicePriKeyHex, 'hex');// hex string, array or Buffer
+
+// Import public key
+const AlicePubKeyHex = '78cd96278f49a78664faf50e9b238f3f5642360d80b3b0ce82782a4a8af3a8e9';
+const AlicePubKey = ec.keyFromPublic(AlicePubKeyHex, 'hex');
+
+//----------------------------------------------
+// BOB
+
+const BobPriKeyHex='16253458330e54b08e3d492d200776d8af2d0367bbca4ca59df88985175a6069';
+// Create key pair from secret
+const keyPairBob = ec.keyFromSecret(BobPriKeyHex, 'hex');// hex string, array or Buffer
+
+// Import public key
+const BobPubKeyHex = '6e6579f1f368f9a4ac6d20a11a7741ed44d1409a923fa9b213e0160d90aa0ecc';
+const BobPubKey = ec.keyFromPublic(BobPubKeyHex, 'hex');
+
 //----------------------------------------------------------------------60-------
 // wss関連定数
 //
@@ -20,7 +47,7 @@ const url=URL+':'+PORT
 //-----------------------------------------------------------------------------
 // key pair oj, set or get KeyPair to conf  by Ed25519
 const keys={}//getOrSetKeyPair()
-console.log('my------',1)
+
 //-----------------------------------------------------------------------------
 // アカウントID PubKey widthout BeginEndStr
 const accountId=123456//removeBeginEndStr(keys).publicKey
@@ -40,7 +67,7 @@ function mkSigB(sigA, keys){
   //console.log(signA , sigB)
   return sigB
 }
-console.log('my------',2)
+
 //-----------------------------------------------------------------------------
 // HTTPSサーバーを起動する
 //
@@ -58,7 +85,6 @@ ws.w2w={
   url: url
   , id: accountId // pubkey widthout BeginEndStr
 }
-console.log('my------', 3, ws._events)
 let wsIdList=[]
 //broadCast();//データ配信開始する場合に使う
 
@@ -66,6 +92,7 @@ let wsIdList=[]
 // on connection
 //
 ws.on('connection', function(socket, req) {
+  console.log('on connected: at ' + PORT, new Date());
   //-----------------------------------------------------------------------------
   // protocolを取得する
   const protocol = getSubProtocol(socket, req)
@@ -81,16 +108,14 @@ ws.on('connection', function(socket, req) {
   // Respose of reply back at on connection
   // 
   sendToReplay(socket, req, protocol)
-
-
-  console.log('on connected: at ' + PORT, socket.w2w_client.type, 'from:'+ socket.w2w_client.id, new Date());
-  console.log('my------', 4, socket._events)
+  console.log('after sendToReplay: ' , socket.w2w_client.type, 'from:'+ socket.w2w_client.id, new Date());
+  //console.log('my------', 4, socket._events)
   //-----------------------------------------------------------------------------
   // Respose of onmessage recieved
   //
   socket.on('message', function message(msg) {
     console.log('on message: at ' + PORT, msg, new Date());
-    console.log('my------', 6)
+    // console.log('my------', 6)
   
     try {
       
@@ -111,17 +136,26 @@ ws.on('connection', function(socket, req) {
     //-----------------------------------------------------------------------------
     // recieved and send msg
 
+    // send to sigC
+    if(data.type==='sigC'){
+      console.log('sendSigC',data.type)
+      ws.sendSigC(socket,  data)
+      return
+    } else 
+
     // reply back e.g. ca->sa->ca
     if(data.type==='a2a'){
       console.log('sendA2A',data.type)
       ws.sendA2A(socket,  data)
+      return
     } else 
 
-    // send to other
+    // send to other client
     if(data.type==='a2b'){
       if(!data.to)return
       console.log('do sendA2B on message',data.type)
-      ws.sendA2B(data) 
+      ws.sendA2B(data)
+      return
     } else 
 
     // sent to gloup
@@ -131,15 +165,18 @@ ws.on('connection', function(socket, req) {
       if(typeof data.to!=='object')return
       if(data.to.length<1)return
      
-      ws.sendA2G(socket, data) 
+      ws.sendA2G(socket, data)
+      return
     } else 
 
     // send to all, limit hop とかは必要だろうか
     if(data.type==='a2n'){
       console.log('do sendA2N on message',data.type)
-      ws.sendA2N(socket, data) 
+      ws.sendA2N(socket, data)
+      return
     }
     console.log('my------', 7)
+    return
   });
  
 });
@@ -207,15 +244,19 @@ function setW2wClient(socket, req, protocol){
   //if(!socket.w2w_client){delete socket; return} //重複する accounrの socketは削除してしまう
   //console.log('save', protocol.id)
   let replyType=protocol.type
- 
-  //default
-  let sigA = ''
+  let sigA = '' //3項演算子でconstにできないかな
   let sigB = ''
+
   if(protocol.type==='sigA'){
     replyType='sigB'
     sigA = protocol.sigA
-    sigB = '123'//mkSigB(sigA, keys)
-  } else if(protocol.type==='reply'){
+    //----------------------------------------------
+    // Sign
+    sigB = keyPairBob.sign(sigA).toHex();
+
+  //} else if(protocol.type==='reply'){
+ 
+  } else {
     replyType='reply'
     sigA = ''
     sigB = ''
@@ -242,6 +283,8 @@ function setW2wClient(socket, req, protocol){
 //----------------------------------------------------------------------60-------
 // reply Back To Client Self at on connection
 //
+
+// sendToReplay と sendToSigAは分ける？
 function sendToReplay(socket, req, protocol){
   //console.log('protocol2:' + JSON.stringify(protocol));
 
@@ -264,8 +307,15 @@ function sendToReplay(socket, req, protocol){
     , msg: replyType+' from wss://'+HOST+':'+PORT
     , date: new Date()
   }
-  console.log('sendToReplay:', replyType, socket.w2w_client.id)
-
+  /*
+  console.log(
+    'sendToReplay:', 
+    protocol.type, '->' ,replyType,
+   '\n sigA is ',socket.w2w_client.sigA,
+   '\n sigB is ',socket.w2w_client.sigB,
+   '\n to', socket.w2w_client.id
+   )
+*/
   //----------------------------------------------------------------------60-------
   // send to client
   socket.send(JSON.stringify(replydata));
@@ -313,6 +363,27 @@ function mkSendOj(data){
   }
 }
 
+ws.sendSigC=function(socket, data){
+  let sigC = data.msg
+  let sigC_verify=false
+  let replyType='sigOK'
+  // console.log('ssigB:--1-------', socket.w2w_client.sigB)
+  // cconsole.log('ssigc:--1-------', sigC)
+  //----------------------------------------------
+  // verify
+  sigC_verify=AlicePubKey.verify(socket.w2w_client.sigB, sigC)
+  // cconsole.log('sendSigC:--2-------', sigC_verify, new Date())
+  if(sigC_verify){
+    data.type=replyType
+    console.log('sendSigC:--3-------', sigC_verify, new Date())
+    socket.send(
+      JSON.stringify(mkSendOj(data))
+    )
+    console.log('sended! sendSigC:---------', data, new Date())
+  }
+}
+
+
 //-----------------------------------------------------------------------------
 // a2a返信
 //
@@ -321,7 +392,7 @@ ws.sendA2A=function sendA2A(socket, data) {
   socket.send(
     JSON.stringify(mkSendOj(data))
   )
-  console.log('sended! sendA2A:---------', new Date())
+  //console.log('sended! sendA2A:---------', new Date())
 }
 //-----------------------------------------------------------------------------
 // a2b送信 to を指定して送信する
@@ -394,7 +465,7 @@ ws.broadcast = function broadcast(socket, data) {
       if (client.readyState === WebSocket.OPEN) {
         data.to= [client.w2w_client.id]
         let res=JSON.stringify(mkSendOj(data));
-        console.log('sended! send'+type+':--------- to:',  client.w2w_client.id, new Date())
+        //console.log('sended! send'+type+':--------- to:',  client.w2w_client.id, new Date())
         client.send(res);
       }
   });
