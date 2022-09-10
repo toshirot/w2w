@@ -3,7 +3,11 @@
 @see for sign,verify https://stackoverflow.com/questions/70408080/crypto-generatekeypairsynced25519-does-not-verify-simple-test-which-an-ec
 */
 // Including generateKeyPairSync from crypto module
- 
+module.exports = {
+    mkKeyPair: mkKeyPair,
+    sign: sign, 
+    verify: verify
+}
 const crypto = require('crypto')
 
 
@@ -66,11 +70,7 @@ function verify(msg, signature, publicKey){
    // console.log('publicKey is: ', publicKey)
     return crypto.verify(null, Buffer.from(msg), publicKey, signature)
 }
-module.exports = {
-    mkKeyPair: mkKeyPair,
-    sign: sign, 
-    verify: verify
-}
+
  
 
  

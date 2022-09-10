@@ -1,8 +1,9 @@
-const assert = require("assert");
-const sign=require('../').sign
-const verify=require('../').verify
-const mkKeyPair=require('../').mkKeyPair
-const removeBeginEndStr=require('../').removeBeginEndStr
+const assert=require("assert")
+const {
+  mkKeyPair: mkKeyPair,
+  sign: sign, 
+  verify: verify
+}=require('../lib/mkKeyPair')
 
 
 describe('signの作成とveryfy', function () {

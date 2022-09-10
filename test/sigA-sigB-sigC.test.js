@@ -1,16 +1,12 @@
-const assert = require("assert");
-const WebSocket=require('../').WebSocket
-const w2w_send=require('../').w2w_send
-const received=require('../').received
+const assert=require("assert")
+const received=require('../lib/received').received
 const getAccountId=require('../lib/mkAccount').getAccountId
-
-const CryptoJS =require('crypto-js')
 const { mkKeyPair, sign, verify } = require('../lib/mkKeyPair')
 const { 
     W2wSocket,
     mkSubProtocol
-}= require('../lib/W2wSocket')
-
+}=require('../lib/W2wSocket')
+const CryptoJS =require('crypto-js')
 const EdDSA = require('elliptic').eddsa;
 const ec = new EdDSA('ed25519');
 
@@ -38,7 +34,7 @@ const BobPubKeyHex = '6e6579f1f368f9a4ac6d20a11a7741ed44d1409a923fa9b213e0160d90
 const BobPubKey = ec.keyFromPublic(BobPubKeyHex, 'hex');
 
 
-describe.only('参加処理 ID登録 sigA から sigC を交換し verifyする', function () {
+describe('参加処理 ID登録 sigA から sigC を交換し verifyする', function () {
 
     it('sigAをサーバーへ送り sigB を受け取り、 verify したら true だった', (done) => {
 
@@ -86,7 +82,7 @@ describe.only('参加処理 ID登録 sigA から sigC を交換し verifyする'
             const actual_to=receive.to
             const actual_msg=receive.msg
             const actual_verify=BobPubKey.verify(signA_, receive.sigB)
-            
+
             // 検証
             assert.equal(actual_type, expected_type)
             assert.equal(actual_from, expected_from)

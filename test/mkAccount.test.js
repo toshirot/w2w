@@ -1,11 +1,15 @@
 
 const assert = require("assert");
-const mkAccount=require('../index.js').mkAccount
-const removeCnf=require('../index.js').removeCnf
-const getW2wCnf=require('../index.js').getW2wCnf
-const getAccountId=require('../index.js').getAccountId
-const getAndSetKeyPair=require('../index.js').getAndSetKeyPair
-const WebSocket=require('../index.js').WebSocket
+const {
+     getOrSetKeyPair: getOrSetKeyPair,
+     mkAccount: mkAccount, //key pair
+     removeCnf: removeCnf,
+     getW2wCnf: getW2wCnf,
+     getAccountId: getAccountId, //pubkey
+     setBeginEndStr: setBeginEndStr,
+     removeBeginEndStr: removeBeginEndStr
+}=require('../lib/mkAccount')
+const WebSocket=require('ws').WebSocket
 
 // -----------------------------------------------------------------------------
 // mkClient

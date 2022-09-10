@@ -7,12 +7,14 @@ ca->sa->ca  クライアントaからサーバーaへ送信し、サーバーa�
 ca->sa->cb  クライアントaからサーバーaへ送信し、サーバーaからクライアントbへ送信する
 
 */
-const assert = require("assert");
-const getAccountId=require('../').getAccountId
-const mkSubProtocol=require('../').mkSubProtocol
-const W2wSocket=require('../').W2wSocket
-const send=require('../').send
-const received=require('../').received
+const assert=require("assert")
+const getAccountId=require('../lib/mkAccount').getAccountId
+const { 
+    W2wSocket,
+    mkSubProtocol
+}=require('../lib/W2wSocket')
+const send=require('../lib/send').send
+const received=require('../lib/received').received
 
 //console.log(getAccountId())
 
