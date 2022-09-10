@@ -63,24 +63,24 @@ w2w.info\html>npm run test
     ✔ 新しいアカウントを作製した
 
   WebSocketサーバーへsendし返信を受け取る
-    ✔ a2a: wss://reien.top:3333 へsendし返信を受け取った (57ms)
+    ✔ a2a: wss://reien.top:3333 へsendし返信を受け取った
 
   参加処理 ID登録 sigA から sigC を交換し verifyする
-    ✔ sigAをサーバーへ送り sigB を受け取り、 verify したら true だった (162ms)
+    ✔ sigA、sigB、sigCをサーバーと交換しお互いに verify して true だった (166ms)
 
   signの作成とveryfy
     ✔ sign した signature は期待通りの値で、verify は true だった
 
   WebSocketサーバーとの各種送受信
-    ✔ replyBack: "reply from wss://reien.top:3333"を受信できた (75ms)
-    ✔ replyBack: "reply from wss://reien.top:3334"を受信できた (97ms)
+    ✔ replyBack: "reply from wss://reien.top:3333"を受信できた (92ms)
+    ✔ replyBack: "reply from wss://reien.top:3334"を受信できた (140ms)
     ✔ a2a: wss://reien.top:3333 へsendして結果を受け取った。"a2a hello w2w"を受信できた
     ✔ a2b: wss://reien.top:3333 へsendして cb が結果を受け取った。"a2b hello w2w"を受信できた
     ✔ a2g: client a,b,c があるときに to [b,c] へ送り b,c だけが受け取った。
     ✔ a2n: client a,b,c があるときに to n(all) へ送り 全員が受け取った。
 
 
-  11 passing (449ms)
+  11 passing (503ms)
 ```
 
 ### 想定している実装環境

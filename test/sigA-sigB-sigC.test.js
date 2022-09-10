@@ -36,7 +36,7 @@ const BobPubKey = ec.keyFromPublic(BobPubKeyHex, 'hex');
 
 describe('参加処理 ID登録 sigA から sigC を交換し verifyする', function () {
 
-    it('sigAをサーバーへ送り sigB を受け取り、 verify したら true だった', (done) => {
+    it('sigA、sigB、sigCをサーバーと交換しお互いに verify して true だった', (done) => {
 
         // 接続先
         const URL='wss://reien.top'
@@ -59,29 +59,28 @@ describe('参加処理 ID登録 sigA から sigC を交換し verifyする', fun
         // WebSocket sigAを送る
         const ws = new W2wSocket(url, subprotocol)
      
-
+        // console.log(' ws.w2w:', ws.w2w)
         // 期待したtype
         expected_type=reciveType
-        // 期待したmsg
+        //----------------------------------------------
+        //  chatch sigB received
         expected_msg=reciveType+' from '+url
 
-        //着信イベント
+        // sigB 着信イベント
         ws.on('message', function message(data) {
 
-            // on connection で発信された reply back レスポンス
+            // on connection で発信された sendToReplay レスポンス
             let receive=received(id, expected_type,  data)
             if(!receive)return
 
-            const msg ='test'
-            let signA_= keyPairAlice.sign(msg).toHex()
-    
+            // send(ws, sendsigC)はW2wSocket内で行われる
 
             // 着信結果
             const actual_type=receive.type
             const actual_from=receive.from
             const actual_to=receive.to
             const actual_msg=receive.msg
-            const actual_verify=BobPubKey.verify(signA_, receive.sigB)
+            const actual_verify=BobPubKey.verify(ws.w2w.sigA, receive.sigB)
 
             // 検証
             assert.equal(actual_type, expected_type)
@@ -89,15 +88,27 @@ describe('参加処理 ID登録 sigA から sigC を交換し verifyする', fun
             assert.equal(actual_to, expected_to)
             assert.equal(actual_msg, expected_msg)
             assert.equal(actual_verify, true)
-            
-
+             
+            console.log(actual_msg, expected_msg)
             done();
             //ws.close()
         });
-        
 
+
+        //----------------------------------------------
+        // chatch sigOK received
+        ws.on('message', function message(data) {
+            let expected_type='sigOK'
+            // on massage で発信された sigOK レスポンス
+            let receive=received(id, 'sigOK',  data)
+            if(!receive)return
+
+            // 着信結果
+            const actual_type=receive.type
+            // 検証
+            assert.equal(actual_type, expected_type)
+        });
     });
-
 });
 
 /* 参加処理 ID登録
