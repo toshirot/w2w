@@ -37,7 +37,6 @@ WebSocketも [rfc6455](https://datatracker.ietf.org/doc/rfc6455/) が2011年12�
 <li>ディレクトリにサーバー側も入れて書き直す
 <li>a2g (sent to gloup)で配列リストにグループ名をSlackチャンネルのように付けられると良いかもしれない
 <li>a2g (sent to gloup)でグループメンバーの検証をするケースと単に宛先を複数指定するケースは別かもしれない。今は後者でテストしてる。
-<li>できればこのTODOをClickUpに連動したい
 <li>そろそろ dev_branchを作って作業したほうが良いかな
 </ol>
 
