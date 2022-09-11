@@ -5,12 +5,15 @@
 const WebSocket=require('ws')
 const fs = require('fs')
 const https = require('https')
+// w2w
 const { mkKeyPair, sign, verify } = require(__dirname+'/mkKeyPair')
 const getOrSetKeyPair= require(__dirname+'/mkAccount').getOrSetKeyPair
 const removeBeginEndStr= require(__dirname+'/mkAccount').removeBeginEndStr
-
+// crypt
 const EdDSA = require('elliptic').eddsa;
 const ec = new EdDSA('ed25519');
+// DB
+const sqlite3 = require('sqlite3').verbose()
 
 //----------------------------------------------
 // ALICE

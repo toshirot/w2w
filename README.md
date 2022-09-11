@@ -28,9 +28,10 @@ WebSocketも [rfc6455](https://datatracker.ietf.org/doc/rfc6455/) が2011年12�
 
 ### TODO
 <ol>
-<li>ed25519 バグの修正 https://github.com/toshirot/w2w/issues/4
-<li>github web hook for w2w.info
+<li><s>ed25519 バグの修正 https://github.com/toshirot/w2w/issues/4</s>
+<li><s>github web hook for w2w.info</s>
 <li>「参加処理 ID登録」をsigCまでの手順でやってみる
+<li>DBとしてSQLite3を試す(高速、シンプル、ロックしても繋ぎなおせば良い)
 <li>サーバーが接続してきたときに自動登録する仕組みを考える
 <li>複数ネットワーク時の効率の良いルーティング手順を決める
 <li>ディレクトリにサーバー側も入れて書き直す
@@ -66,21 +67,24 @@ w2w.info\html>npm run test
     ✔ a2a: wss://w2w.info:3333 へsendし返信を受け取った
 
   参加処理 ID登録 sigA から sigC を交換し verifyする
-    ✔ sigA、sigB、sigCをサーバーと交換しお互いに verify して true だった (166ms)
+    ✔ sigA、sigB、sigCをサーバーと交換しお互いに verify して true だった (142ms)
 
   signの作成とveryfy
     ✔ sign した signature は期待通りの値で、verify は true だった
 
+  sqlite3の動作確認
+    ✔ CREATE TABLE、INSERTし、SELECTした
+
   WebSocketサーバーとの各種送受信
-    ✔ replyBack: "reply from wss://w2w.info:3333"を受信できた (92ms)
-    ✔ replyBack: "reply from wss://w2w.info:3334"を受信できた (140ms)
+    ✔ replyBack: "reply from wss://w2w.info:3333"を受信できた (78ms)
+    ✔ replyBack: "reply from wss://w2w.info:3334"を受信できた (77ms)
     ✔ a2a: wss://w2w.info:3333 へsendして結果を受け取った。"a2a hello w2w"を受信できた
     ✔ a2b: wss://w2w.info:3333 へsendして cb が結果を受け取った。"a2b hello w2w"を受信できた
     ✔ a2g: client a,b,c があるときに to [b,c] へ送り b,c だけが受け取った。
     ✔ a2n: client a,b,c があるときに to n(all) へ送り 全員が受け取った。
 
 
-  11 passing (503ms)
+  12 passing (410ms)
 ```
 
 ### 想定している実装環境

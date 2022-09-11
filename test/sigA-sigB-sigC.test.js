@@ -89,7 +89,7 @@ describe('参加処理 ID登録 sigA から sigC を交換し verifyする', fun
             assert.equal(actual_msg, expected_msg)
             assert.equal(actual_verify, true)
              
-            console.log(actual_msg, expected_msg)
+            //console.log(actual_msg, expected_msg)
             done();
             //ws.close()
         });
