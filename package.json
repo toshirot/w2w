@@ -9,7 +9,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha \"html/test\"",
+    "test": "mocha",
     "dev": "npm run test"
   },
   "repository": {
