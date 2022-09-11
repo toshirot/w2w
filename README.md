@@ -41,6 +41,22 @@ WebSocketも [rfc6455](https://datatracker.ietf.org/doc/rfc6455/) が2011年12�
 <li>そろそろ dev_branchを作って作業したほうが良いかな
 </ol>
 
+```mermaid
+  gantt
+    title TODO
+    dateFormat  YYYY-MM-DD
+    axisFormat  %m-%d
+    excludes    weekends
+    section 作業順
+    ed25519 バグの修正       :done a, 2022-09-01, 5d
+    Github WebHook          :done b, 2022-09-05, 2022-09-10
+    ID登録                   :active, 2022-09-09,5d
+    ディレクトリ            :active, 2022-09-10, 2022-09-25 
+    DB                      :active, after b, 10d
+    自動登録                 :active, 2022-09-15, 12d
+    ルーティング           :active, 2022-09-25, 2022-10-05
+```
+
 ### 最新のTEST状況
 
 ```
