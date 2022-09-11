@@ -39,7 +39,7 @@ const BobPubKey = ec.keyFromPublic(BobPubKeyHex, 'hex');
 // wss関連定数
 //
 const PORT=3333;
-const HOST='reien.top'
+const HOST='w2w.info'
 const PEM_PATH='/etc/letsencrypt/live/'+HOST
 const url=URL+':'+PORT
 

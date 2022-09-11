@@ -13,7 +13,7 @@ const removeBeginEndStr= require(__dirname+'/mkAccount').removeBeginEndStr
 // wss関連定数
 //
 const PORT=3334;
-const HOST='reien.top'
+const HOST='w2w.info'
 const PEM_PATH='/etc/letsencrypt/live/'+HOST
 const url=URL+':'+PORT
 
