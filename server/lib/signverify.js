@@ -5,7 +5,7 @@ var EdDSA = require('elliptic').eddsa;
 var ec = new EdDSA('ed25519');
 
 //----------------------------------------------
-// ALICE
+// ALICE  this is for stub
 
 // Alice's Private Key
 const AlicePriKeyHex='fa127e73935678a647daf3d3af2a934dc0e9c9c39dc4ac2e69c9c3648447ff53';
@@ -17,7 +17,7 @@ const AlicePubKeyHex = '78cd96278f49a78664faf50e9b238f3f5642360d80b3b0ce82782a4a
 const AlicePubKey = ec.keyFromPublic(AlicePubKeyHex, 'hex');
 
 //----------------------------------------------
-// BOB
+// BOB  this is for stub
 
 const BobPriKeyHex='16253458330e54b08e3d492d200776d8af2d0367bbca4ca59df88985175a6069';
 // Create key pair from secret
