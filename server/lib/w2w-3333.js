@@ -11,7 +11,6 @@ const removeBeginEndStr= require(__dirname+'/mkAccount').removeBeginEndStr
 
 const EdDSA = require('elliptic').eddsa;
 const ec = new EdDSA('ed25519');
-const { SHA3 } = require('sha3');
 
 //----------------------------------------------
 // ALICE
