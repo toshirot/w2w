@@ -15,7 +15,7 @@ function k(){
 
 
 const PORT=3335;
-const HOST='reien.top'
+const HOST='w2w.info'
 const PEM_PATH='/etc/letsencrypt/live/'+HOST
 const url=URL+':'+PORT
 // server
