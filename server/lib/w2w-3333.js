@@ -16,9 +16,11 @@ const ec = new EdDSA('ed25519');
 const sqlite = require('sqlite3').verbose()
 const dbPath='../../db/w2w'
 if (!fs.existsSync(dbPath)) {
+  console.log('dbPath:', dbPath)
   fs.mkdirSync(dbPath);
 }
 const db = new sqlite.Database(dbPath+'/lists.sqlite');
+console.log('dbPath2:', dbPath+'/lists.sqlite')
 
 //----------------------------------------------
 // ALICE  this is for stub
