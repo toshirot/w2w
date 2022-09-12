@@ -390,7 +390,7 @@ ws.sendSigC=function(socket, data){
 
     //----------------------------------------------
     // save to client list db
-    saveToClientListDB(socket.w2w_client.id)
+    saveToClientListDB(socket.w2w_client.id, socket.w2w_client.url)
     
     //----------------------------------------------
     // send to client OK
@@ -492,15 +492,15 @@ ws.broadcast = function broadcast(socket, data) {
 //----------------------------------------------
 // save to client list db
 //
-function saveToClientListDB(id){
+function saveToClientListDB(id, url){
   if(!id)return
   const utime=new Date().getTime()
   db.serialize(function() {
     // テーブルがなければ作成する
-    db.run('CREATE TABLE IF NOT EXISTS students(id STRING, utime INTEGER)');
+    db.run('CREATE TABLE IF NOT EXISTS id-url(id STRING, url STRING, utime INTEGER)');
     // プリペアードステートメントでデータを挿入する
-    const stmt = db.prepare('INSERT INTO students VALUES(?,?)');
-    stmt.run([id, utime]);
+    const stmt = db.prepare('INSERT INTO id-url VALUES(?,?,?)');
+    stmt.run([id, url, utime]);
     //stmt.run(["def", 3]);
     stmt.finalize();
   });

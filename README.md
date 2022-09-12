@@ -506,8 +506,32 @@ flowchart LR
 classDef class_server fill:#eee,color:#000,stroke:#333
 classDef class_text fill:#fff,color:#000,stroke:#fff
 ```
+### id検索する手順案のメモ1
+<ol>
+<li>client が server へ接続すると server は client id を id-url なリストへ登録する
 
-### 例えば ca->sa->cb 違うクライアントへ送る場合
+```
+CREATE TABLE IF NOT EXISTS id-url(id STRING, url STRING, utime INTEGER)'
+```
+<li>server は client へ  id-url なリストを返す
+<li>検索時： client は 自分の id-url なリストに idがあれば、そのurl へ接続し a2b などを送る
+<li>無ければ、client は  server へ a2bやa2nなどで id を to としてリクエストする
+<li>server は持っている  id-url リストに  id があればその id へ msg を送る
+<li>無ければ、まず、自分のネットワーク内の全 client に broadcast で問い合わせる
+<li>各クライアントは、持っている  id-url リストに  id があればその id へ msg を送る/ serverへ送るべき？
+この件は、msgが大きい場合もあるのでとりま id-url を serverへ送るべきな気がする
+<li>各クライアントは、無ければ has not の返事をする？
+<li>server は 各clientに無ければ、自分の持っている url リストへ問い合わせる
+
+```
+CREATE TABLE IF NOT EXISTS url(url STRING, utime INTEGER) //server 接続時に追記する
+```
+<li>問い合わせを受けた各 url は 持っている  id-url リストに id があれば has レスポンスを返す
+<li>各 url は 無ければ無視
+<li>
+</ol>
+
+### 例えば ca->sa->cb 違うクライアントへ送る場合の選択肢メモ
 実現するいくつかの方法がある。
 オプションで選択で聞くようにするか？どういうオプションが使いやすいか？
 
