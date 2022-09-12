@@ -14,13 +14,14 @@ const EdDSA = require('elliptic').eddsa;
 const ec = new EdDSA('ed25519');
 // DB
 const sqlite = require('sqlite3').verbose()
-const dbPath=__dirname+'/../../db/w2w' //path
+const dbPath=__dirname+'/../../db/w2w'
+const dnName='/lists.sqlite'
 if (!fs.existsSync(dbPath)) {
-  console.log('dbPath:', dbPath)
+  // dbPathが無ければ作る
   fs.mkdirSync(dbPath);
 }
-const db = new sqlite.Database(dbPath+'/lists.sqlite');
-console.log('dbPath2:', dbPath+'/lists.sqlite')
+const db = new sqlite.Database(dbPath+dnName);
+// console.log('dbPath2:', dbPath+'/lists.sqlite')
 
 //----------------------------------------------
 // ALICE  this is for stub

@@ -46,4 +46,31 @@ describe('sqlite3の動作確認', function () {
         done()
     });
 
+    /*
+    it('test2 SELECTした', (done) => {
+        const db = new sqlite.Database('db/w2w/lists.sqlite');
+        
+        // 期待したtype
+        const expected_name="Takahashi"
+        const expected_age=66
+
+        db.serialize(function() {
+            db.each("SELECT * FROM students", function(err, line) {
+                //console.log( line.name  + ":" + line.age);
+                const actual_id=line.id 
+                const actual_utime=line.utime
+
+                console.log(actual_id, new Date(actual_utime) )
+                // 検証
+                //assert.equal(actual_name, expected_name)
+               // assert.equal(actual_age, expected_age)
+            });
+
+ 
+        });
+
+        db.close();
+        done()
+    });
+    */
 });
