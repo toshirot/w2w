@@ -14,7 +14,7 @@ const EdDSA = require('elliptic').eddsa;
 const ec = new EdDSA('ed25519');
 // DB
 const sqlite = require('sqlite3').verbose()
-const db = new sqlite.Database('db/test/test.sqlite');
+const db = new sqlite.Database('db/w2w/lists.sqlite');
 
 //----------------------------------------------
 // ALICE  this is for stub
