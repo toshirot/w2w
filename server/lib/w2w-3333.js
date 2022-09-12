@@ -13,8 +13,8 @@ const removeBeginEndStr= require(__dirname+'/mkAccount').removeBeginEndStr
 const EdDSA = require('elliptic').eddsa;
 const ec = new EdDSA('ed25519');
 // DB
-const sqlite3 = require('sqlite3').verbose()
-const db = new sqlite3.Database('db/test/test.sqlite');
+const sqlite = require('sqlite3').verbose()
+const db = new sqlite.Database('db/test/test.sqlite');
 
 //----------------------------------------------
 // ALICE  this is for stub
