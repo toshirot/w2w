@@ -14,7 +14,7 @@ const EdDSA = require('elliptic').eddsa;
 const ec = new EdDSA('ed25519');
 // DB
 const sqlite = require('sqlite3').verbose()
-const dbPath='db/w2w'
+const dbPath='../../db/w2w'
 if (!fs.existsSync(dbPath)) {
   fs.mkdirSync(dbPath);
 }
