@@ -30,8 +30,9 @@ WebSocketも [rfc6455](https://datatracker.ietf.org/doc/rfc6455/) が2011年12�
 <ol>
 <li><s>ed25519 バグの修正 https://github.com/toshirot/w2w/issues/4</s>
 <li><s>github web hook for w2w.info</s>
-<li>「参加処理 ID登録」をsigCまでの手順でやってみる
-<li>DBとしてSQLite3を試す(高速、シンプル、ロックしても繋ぎなおせば良い)
+<li><s>「参加処理 ID登録」をsigCまでの手順でやってみる</s>
+<li><s>DBとしてSQLite3を試す(高速、シンプル、ロックしても繋ぎなおせば良い)</s>
+<li>サーバーを複数立てて転送を試す
 <li>サーバーが接続してきたときに自動登録する仕組みを考える
 <li>複数ネットワーク時の効率の良いルーティング手順を決める
 <li>ディレクトリにサーバー側も入れて書き直す
@@ -51,7 +52,9 @@ WebSocketも [rfc6455](https://datatracker.ietf.org/doc/rfc6455/) が2011年12�
     section 作業順
     ed25519 バグの修正       :done a, 2022-09-01, 5d
     Github WebHook          :done b, 2022-09-05, 2022-09-10
-    ID登録                   :active, 2022-09-09,5d
+    ID登録                   :done c, 2022-09-09,  2022-09-12
+    sqlite3                  :done d, 2022-09-11, 2022-09-13
+    サーバーを複数立てる      :active, 2022-09-11, 2022-09-20
     ディレクトリ            :active, 2022-09-10, 2022-09-25 
     DB                      :active, after b, 10d
     自動登録                 :active, 2022-09-15, 12d
