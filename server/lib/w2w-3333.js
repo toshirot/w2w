@@ -14,6 +14,7 @@ const EdDSA = require('elliptic').eddsa;
 const ec = new EdDSA('ed25519');
 // DB
 const sqlite3 = require('sqlite3').verbose()
+const db = new sqlite.Database('db/test/test.sqlite');
 
 //----------------------------------------------
 // ALICE  this is for stub
@@ -371,20 +372,27 @@ ws.sendSigC=function(socket, data){
   let replyType='sigOK'
   // console.log('ssigB:--1-------', socket.w2w_client.sigB)
   // cconsole.log('ssigc:--1-------', sigC)
+
   //----------------------------------------------
-  // verify
+  // verify for sigB, sigC
   sigC_verify=AlicePubKey.verify(socket.w2w_client.sigB, sigC)
   // cconsole.log('sendSigC:--2-------', sigC_verify, new Date())
   if(sigC_verify){
     data.type=replyType
     console.log('sendSigC:--3-------', sigC_verify, new Date())
+
+    //----------------------------------------------
+    // save to client list db
+    saveToClientListDB(socket.w2w_client.id)
+    
+    //----------------------------------------------
+    // send to client OK
     socket.send(
       JSON.stringify(mkSendOj(data))
     )
     console.log('sended! sendSigC:---------', data, new Date())
   }
 }
-
 
 //-----------------------------------------------------------------------------
 // a2a返信
@@ -472,6 +480,25 @@ ws.broadcast = function broadcast(socket, data) {
       }
   });
 };
+
+
+//----------------------------------------------
+// save to client list db
+//
+function saveToClientListDB(id){
+  if(!id)return
+  const utime=new Date().getTime()
+  db.serialize(function() {
+    // テーブルがなければ作成する
+    db.run('CREATE TABLE IF NOT EXISTS students(id STRING, utime INTEGER)');
+    // プリペアードステートメントでデータを挿入する
+    const stmt = db.prepare('INSERT INTO students VALUES(?,?)');
+    stmt.run([id, utime]);
+    //stmt.run(["def", 3]);
+    stmt.finalize();
+  });
+}
+
 
 //-----------------------------------------------------------------------------
 // ws.clients内の重複IDを削除する
