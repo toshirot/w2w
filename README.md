@@ -599,19 +599,12 @@ https://www.npmjs.com/
 <li>RFC6455 The WebSocket Protocol 日本語訳 https://triple-underscore.github.io/RFC6455-ja.html
 <li>RFC6455 The WebSocket Protocol https://www.rfc-editor.org/rfc/rfc6455
 <li>WebSocket のセキュリティ 日本語 — Switch to English https://devcenter.heroku.com/ja/articles/websocket-security
-<li>Hybrid P2P型とPure P2P型 https://internet.watch.impress.co.jp/www/column/wp2p/wp2p01.htm
-    
-```
-    >Hybrid P2P型:誰がどんな情報を持っているかを把握したサーバーがあり、最初はそこに接続しに行って、Peerを発見する
-    >Pure P2P型: 言ゲームの要領で、ネットワーク中のPeerを芋づる式に検索する
-```
-<li>wiki P2P https://ja.wikipedia.org/wiki/Peer_to_Peer
 
 <li>先人達 2011.11.20 [P2P]Websocketでブラウザ間P2P通信は実現できるか？(その2) http://toremoro.tea-nifty.com/tomos_hotline/2011/11/p2pwebsocketp2p.html
 <li>先人達 2011-11-05 WebSocketを使ってWebブラウザ間P2P通信をしてみた https://yogit.hatenadiary.org/entry/20111105/1320492134
 <li>SSDP (Simple Service Discovery Protocol) https://datatracker.ietf.org/doc/html/draft-cai-ssdp-v1-03
 
-<li> node-ssdp https://www.npmjs.com/package/node-ssdp
+<li>node-ssdp https://www.npmjs.com/package/node-ssdp
 <li>memo Set Phasers to STUN/TURN: Getting Started with WebRTC using Node.js, Socket.io and Twilio’s NAT Traversal Service https://www.twilio.com/blog/2014/12/set-phasers-to-stunturn-getting-started-with-webrtc-using-node-js-socket-io-and-twilios-nat-traversal-service.html @twilioより 
 
 <li>mermaid https://mermaid-js.github.io/mermaid/#/
@@ -628,7 +621,16 @@ https://www.npmjs.com/
 <li>DHT(分散ハッシュテーブル)https://ja.wikipedia.org/wiki/%E5%88%86%E6%95%A3%E3%83%8F%E3%83%83%E3%82%B7%E3%83%A5%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB
 <li>Pastry (DHT) https://en.wikipedia.org/wiki/Pastry_(DHT)
 <li>Chord (peer-to-peer) https://en.wikipedia.org/wiki/Chord_(peer-to-peer)
+<li>Hybrid P2P型とPure P2P型 https://internet.watch.impress.co.jp/www/column/wp2p/wp2p01.htm
+    
+```
+    >Hybrid P2P型:誰がどんな情報を持っているかを把握したサーバーがあり、最初はそこに接続しに行って、Peerを発見する
+    >Pure P2P型: 言ゲームの要領で、ネットワーク中のPeerを芋づる式に検索する
+```
+<li>wiki P2P https://ja.wikipedia.org/wiki/Peer_to_Peer
+
 <li> P2P通信でNatを越える https://qiita.com/nekobato/items/86e83d40b9d1a4d9b446 #Qiita 
+
 <hr>
 <li>npm ws https://www.npmjs.com/package/ws#websocket-compression　https://github.com/websockets/ws/blob/HEAD/doc/ws.md#new-websocketserveroptions-callback
 <li>npm validator (予定) https://github.com/validatorjs/validator.js
