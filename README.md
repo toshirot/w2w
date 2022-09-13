@@ -622,12 +622,15 @@ https://www.npmjs.com/
 <li>Pastry (DHT) https://en.wikipedia.org/wiki/Pastry_(DHT)
 <li>Chord (peer-to-peer) https://en.wikipedia.org/wiki/Chord_(peer-to-peer)
 <li>Hybrid P2P型とPure P2P型 https://internet.watch.impress.co.jp/www/column/wp2p/wp2p01.htm
-    
+<li>npm p2p https://github.com/thenativeweb/p2p
+<li>npm WebRTC socket.io-p2p https://github.com/socketio/socket.io-p2p
+<li>npm WebRTC simple-peer https://github.com/feross/simple-peer
 ```
     >Hybrid P2P型:誰がどんな情報を持っているかを把握したサーバーがあり、最初はそこに接続しに行って、Peerを発見する
     >Pure P2P型: 言ゲームの要領で、ネットワーク中のPeerを芋づる式に検索する
 ```
 <li>wiki P2P https://ja.wikipedia.org/wiki/Peer_to_Peer
+<li>2017 WebRTCを用いた耐故障性の高い ウェブブラウザ間構造化P2Pネットワークの実現 https://ipsj.ixsq.nii.ac.jp/ej/?action=pages_view_main&active_action=repository_view_main_item_detail&item_id=183653&item_no=1&page_id=13&block_id=8
 
 <li> P2P通信でNatを越える https://qiita.com/nekobato/items/86e83d40b9d1a4d9b446 #Qiita 
 
