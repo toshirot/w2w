@@ -610,7 +610,7 @@ https://www.npmjs.com/
 <li>先人達 2011.11.20 [P2P]Websocketでブラウザ間P2P通信は実現できるか？(その2) http://toremoro.tea-nifty.com/tomos_hotline/2011/11/p2pwebsocketp2p.html
 <li>先人達 2011-11-05 WebSocketを使ってWebブラウザ間P2P通信をしてみた https://yogit.hatenadiary.org/entry/20111105/1320492134
 <li>SSDP (Simple Service Discovery Protocol) https://datatracker.ietf.org/doc/html/draft-cai-ssdp-v1-03
-<li> P2P通信でNatを越える https://qiita.com/nekobato/items/86e83d40b9d1a4d9b446 #Qiita 
+
 <li> node-ssdp https://www.npmjs.com/package/node-ssdp
 <li>memo Set Phasers to STUN/TURN: Getting Started with WebRTC using Node.js, Socket.io and Twilio’s NAT Traversal Service https://www.twilio.com/blog/2014/12/set-phasers-to-stunturn-getting-started-with-webrtc-using-node-js-socket-io-and-twilios-nat-traversal-service.html @twilioより 
 
@@ -620,7 +620,15 @@ https://www.npmjs.com/
 <li>サーバ負荷をRSAとECDSAで比較 https://http2.try-and-test.net/ecdsa.html
 <li>Node Doc https://nodejs.org/dist/latest-v16.x/docs/api/
 <li>http://masterwiki.net/steinsgate/index.php?%C7%AF%C9%BD
-
+<hr>
+<li>P2P概論 http://dev.ariel-networks.com/articles/unixmagazine/abstract/
+<li>2P基本提言 平成 20 年 http://www.npo-ba.org/public/20080918p.pdf
+<li>Gnutella https://ja.wikipedia.org/wiki/Gnutella
+<li>Freenet https://ja.wikibooks.org/wiki/Freenet
+<li>DHT(分散ハッシュテーブル)https://ja.wikipedia.org/wiki/%E5%88%86%E6%95%A3%E3%83%8F%E3%83%83%E3%82%B7%E3%83%A5%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB
+<li>Pastry (DHT) https://en.wikipedia.org/wiki/Pastry_(DHT)
+<li>Chord (peer-to-peer) https://en.wikipedia.org/wiki/Chord_(peer-to-peer)
+<li> P2P通信でNatを越える https://qiita.com/nekobato/items/86e83d40b9d1a4d9b446 #Qiita 
 <hr>
 <li>npm ws https://www.npmjs.com/package/ws#websocket-compression　https://github.com/websockets/ws/blob/HEAD/doc/ws.md#new-websocketserveroptions-callback
 <li>npm validator (予定) https://github.com/validatorjs/validator.js
