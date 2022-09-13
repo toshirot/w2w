@@ -631,6 +631,7 @@ https://www.npmjs.com/
 ```
 <li>wiki P2P https://ja.wikipedia.org/wiki/Peer_to_Peer
 <li>2017 WebRTCを用いた耐故障性の高い ウェブブラウザ間構造化P2Pネットワークの実現 https://ipsj.ixsq.nii.ac.jp/ej/?action=pages_view_main&active_action=repository_view_main_item_detail&item_id=183653&item_no=1&page_id=13&block_id=8
+<li>2015 WebRTCのICEについて知る https://www.slideshare.net/iwashi86/webrtcice
 
 <li> P2P通信でNatを越える https://qiita.com/nekobato/items/86e83d40b9d1a4d9b446 #Qiita 
 
