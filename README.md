@@ -636,6 +636,7 @@ https://www.npmjs.com/
 <li>2020 WebRTC P2P 向けシグナリングサーバを OSS で公開してわかったこと、今後やっていくこと https://voluntas.medium.com/webrtc-p2p-%E5%90%91%E3%81%91%E3%82%B7%E3%82%B0%E3%83%8A%E3%83%AA%E3%83%B3%E3%82%B0%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92-oss-%E3%81%A7%E5%85%AC%E9%96%8B%E3%81%97%E3%81%A6%E3%82%8F%E3%81%8B%E3%81%A3%E3%81%9F%E3%81%93%E3%81%A8-%E4%BB%8A%E5%BE%8C%E3%82%84%E3%81%A3%E3%81%A6%E3%81%84%E3%81%8F%E3%81%93%E3%81%A8-dc31416a0e84
 
 <li> P2P通信でNatを越える https://qiita.com/nekobato/items/86e83d40b9d1a4d9b446 #Qiita 
+<li>2011 [P2P]Websocketでブラウザ間P2P通信は実現できるか？(その2) http://toremoro.tea-nifty.com/tomos_hotline/2011/11/p2pwebsocketp2p.html
 
 <hr>
 <li>npm ws https://www.npmjs.com/package/ws#websocket-compression　https://github.com/websockets/ws/blob/HEAD/doc/ws.md#new-websocketserveroptions-callback
