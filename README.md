@@ -632,6 +632,8 @@ https://www.npmjs.com/
 <li>wiki P2P https://ja.wikipedia.org/wiki/Peer_to_Peer
 <li>2017 WebRTCを用いた耐故障性の高い ウェブブラウザ間構造化P2Pネットワークの実現 https://ipsj.ixsq.nii.ac.jp/ej/?action=pages_view_main&active_action=repository_view_main_item_detail&item_id=183653&item_no=1&page_id=13&block_id=8
 <li>2015 WebRTCのICEについて知る https://www.slideshare.net/iwashi86/webrtcice
+<li>2020 ビデオチャットアプリを作る ( WebRTC + Node.js + Socket.IO ) https://www.hiramine.com/programming/videochat_webrtc/index.html
+<li>2020 WebRTC P2P 向けシグナリングサーバを OSS で公開してわかったこと、今後やっていくこと https://voluntas.medium.com/webrtc-p2p-%E5%90%91%E3%81%91%E3%82%B7%E3%82%B0%E3%83%8A%E3%83%AA%E3%83%B3%E3%82%B0%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92-oss-%E3%81%A7%E5%85%AC%E9%96%8B%E3%81%97%E3%81%A6%E3%82%8F%E3%81%8B%E3%81%A3%E3%81%9F%E3%81%93%E3%81%A8-%E4%BB%8A%E5%BE%8C%E3%82%84%E3%81%A3%E3%81%A6%E3%81%84%E3%81%8F%E3%81%93%E3%81%A8-dc31416a0e84
 
 <li> P2P通信でNatを越える https://qiita.com/nekobato/items/86e83d40b9d1a4d9b446 #Qiita 
 
