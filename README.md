@@ -522,7 +522,7 @@ CREATE TABLE IF NOT EXISTS id-url(type STRING, id STRING, url STRING, utime INTE
 <li>server-1は自分のid-urlリストとのid重複(の古いutime)を消してDBをupsertする
 <li><s>前項で id-urlリストが変われば、server-1 は client-1 へ  id-url なリストを返す</s>
 <li><s>client-1のネットワーク接続が増えるとやがて、全員がほぼ同じ id-url なリストを持つ</s>
-<li>clientは必ずserverに接続しているので、 id-url なリストを個々の client が持つより serverへ問い合わせる方が速く負荷も小さい。一般には単一障害点と呼ぶほど大きなネットワークではない。(ある閾値を超えて大きくなる時は別途 専用nodeを立てるかな)
+<li>clientは必ずserverに接続しているので、 id-url なリストを個々の client が持つより serverへ問い合わせるのは充分速く速く負荷も小さい。一般には単一障害点と呼ぶほど大きなネットワークではない。(ある閾値を超えて大きくなる時は別途 専用nodeを立てるかな。それとも、clientをリスト無しとリスト有りの2タイプにする？有りのメリットは探索が少し速いかもてとこ。)
 <li>server間接続で探索を行い、各server配下のネットワークはserverをindex(id-url情報)配信nodeとするサブネットワークとなる
 <li>検索時： 
 <li>(1) client-1 は 宛先 to のidをserver-1に問合せる
