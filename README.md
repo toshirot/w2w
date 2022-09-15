@@ -506,22 +506,44 @@ flowchart LR
 classDef class_server fill:#eee,color:#000,stroke:#333
 classDef class_text fill:#fff,color:#000,stroke:#fff
 ```
-### id検索する手順案のメモ1
+### id検索する手順案1のメモ 2022-09-15
 <ol>
-<li>client が server へ接続すると server は client id を id-url なリストへ登録する
+<li>serverとclientは起動時に id-url 配列をDBに確認し存在しなければ自身のidとurlを をDBへ登録する
 
 ```
-CREATE TABLE IF NOT EXISTS id-url(id STRING, url STRING, utime INTEGER)'
+CREATE TABLE IF NOT EXISTS id-url(type STRING, id STRING, url STRING, utime INTEGER)
+
+@type {string} server|client
+@id {string} peer's id
+@url {string} wss url e.g. wss://hoge.com:1234
+@utime {number} update time (unix time)
 ```
-<li>server は client へ  id-url なリストを返す
-<li>検索時： client は 自分の id-url なリストに idがあれば、そのurl へ接続し a2b などを送る
-<li>無ければ、client は  server へ a2bやa2nなどで id を to としてリクエストする
-<li>server は持っている  id-url リストに  id があればその id へ msg を送る
-<li>無ければ、まず、自分のネットワーク内の全 client に broadcast で問い合わせる
-<li>各クライアントは、持っている  id-url リストに  id があればその id へ msg を送る/ serverへ送るべき？
-この件は、msgが大きい場合もあるのでとりま id-url を serverへ送るべきな気がする
-<li>各クライアントは、無ければ has not の返事をする？
-<li>server は 各clientに無ければ、自分の持っている url リストへ問い合わせる
+<li>client-1 は server-1 へ接続する時に自分のid-urlリストを server-1 へ渡し
+<li>server-1は自分のid-urlリストとのid重複(の古いutime)を消してDBをupsertする
+<li><s>前項で id-urlリストが変われば、server-1 は client-1 へ  id-url なリストを返す</s>
+<li><s>client-1のネットワーク接続が増えるとやがて、全員がほぼ同じ id-url なリストを持つ</s>
+<li>clientは必ずserverに接続しているので、 id-url なリストを持つより serverへ問い合わせる方が速く負荷も小さい。
+<li>server間接続で探索を行い、各server配下のネットワークはserverをindex(id-url情報)配信nodeとするサブネットワークとなる
+<li>検索時： 
+<li>(1) client-1 は 宛先 to のidをserver-1に問合せる
+<ul>
+<li>server-1 は持っている  id-url リストに id(to) があればその urlへ接続し id の status を確認する
+<li>その宛先から status===1 な返事が来たら
+<li>server-1 はclient-1へid-urlを client-1 へ返す
+<li>client-1 はその urlへ接続し a2b をそのid(to)へ送る
+<li>connct 出来なければ終了？ 
+</ul>
+<li>(2) server-1 は id(to) が持っている  id-url リストに 無ければ、 宛先 id(to) を自分以外の url リストの server-n へ問い合わせる
+<ul>
+<li>server-n は持っている  id-url リストに id(to) があればその urlへ接続し id の status を確認する
+<li>その宛先 server-x から status===1 な返事が来たら
+<li>server-n は server-1 へその id-url を返す
+<li>server-1 はclient-1へid-urlを client-1 へ返す
+<li>client-1 はその　server-x の urlへ接続し a2b をそのid(to)へ送る
+<li>connct 出来なければ終了？ 
+
+</ul>
+<li>client-1 と to は、server-x を介して通信する
 
 ```
 CREATE TABLE IF NOT EXISTS url(url STRING, utime INTEGER) //server 接続時に追記する
@@ -638,6 +660,8 @@ https://www.npmjs.com/
 <li> P2P通信でNatを越える https://qiita.com/nekobato/items/86e83d40b9d1a4d9b446 #Qiita 
 <li>2011 [P2P]Websocketでブラウザ間P2P通信は実現できるか？(その2) http://toremoro.tea-nifty.com/tomos_hotline/2011/11/p2pwebsocketp2p.html
 
+<hr>
+<li>[ipv6]2019 IPv6ならネットから直接アクセスできる？　試して確かめようhttps://internet.watch.impress.co.jp/docs/column/shimizu/1163817.html
 <hr>
 <li>npm ws https://www.npmjs.com/package/ws#websocket-compression　https://github.com/websockets/ws/blob/HEAD/doc/ws.md#new-websocketserveroptions-callback
 <li>npm validator (予定) https://github.com/validatorjs/validator.js
