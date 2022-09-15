@@ -545,12 +545,6 @@ CREATE TABLE IF NOT EXISTS id-url(type STRING, id STRING, url STRING, utime INTE
 </ul>
 <li>client-1 と to は、server-x を介して通信する
 
-```
-CREATE TABLE IF NOT EXISTS url(url STRING, utime INTEGER) //server 接続時に追記する
-```
-<li>問い合わせを受けた各 url は 持っている  id-url リストに id があれば has レスポンスを返す
-<li>各 url は 無ければ無視
-<li>
 </ol>
 
 ### 例えば ca->sa->cb 違うクライアントへ送る場合の選択肢メモ
