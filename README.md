@@ -654,6 +654,13 @@ https://www.npmjs.com/
 <li> P2P通信でNatを越える https://qiita.com/nekobato/items/86e83d40b9d1a4d9b446 #Qiita 
 <li>2011 [P2P]Websocketでブラウザ間P2P通信は実現できるか？(その2) http://toremoro.tea-nifty.com/tomos_hotline/2011/11/p2pwebsocketp2p.html
 <li>2017年~2018年 Kademliaの解説と実装 1～3 https://block-chain.jp/kademlia/implementation-1/
+<li>9 years ago npm kademlia-dht https://github.com/jeanlauliac/kademlia-dht
+<li>7 years ago npm kad Node.js およびブラウザー用のKademlia分散ハッシュ テーブルの拡張可能な実装 。https://github.com/gwicke/kad
+<hr>
+
+<li>IPFSとは何か？ https://ipfs-book.decentralized-web.jp/what_is_ipfs/
+<li>2021年のIPFS https://blog.ipfs.tech/2022-01-11-IPFS-in-2021/
+<li>Welcome to the IPFS docs https://docs.ipfs.tech/
 
 <hr>
 <li>[ipv6]2019 IPv6ならネットから直接アクセスできる？　試して確かめようhttps://internet.watch.impress.co.jp/docs/column/shimizu/1163817.html
