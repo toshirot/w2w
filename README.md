@@ -586,7 +586,10 @@ CREATE TABLE IF NOT EXISTS id-url(type STRING, id STRING, url STRING, utime INTE
 
 ### memo:
 
+#### IPv6関連
+[How to Setup IPv6 for Azure VM]{https://github.com/toshirot/w2w/wiki/How-to-Setup-IPv6-for-Azure-VM}
 
+#### その他
 ```
 2022-08-21
 暫定send フォーマット {to,from,type,msg}
