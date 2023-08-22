@@ -43,6 +43,46 @@ WebSocketも [rfc6455](https://datatracker.ietf.org/doc/rfc6455/) が2011年12�
 <li>そろそろ dev_branchを作って作業したほうが良いかな
 </ol>
 
+```mermaid
+graph TD
+  subgraph "支払金額精査マクロの実行"
+    a.RunMacro1Button_Click --> b.targetWorkbook
+    b.targetWorkbook --> c.sheet_keiyaku
+    b.targetWorkbook --> d.sheet_siharai
+    b.targetWorkbook --> e.sheet_sql
+    b.targetWorkbook --> f.seisaArray
+    f.seisaArray --> g.seisaArray
+    c.sheet_keiyaku --> h.seisaArray
+    d.sheet_siharai --> i.seisaArray
+    e.sheet_sql --> j.seisaArray
+    g.seisaArray --> k.seisaArray
+    g.seisaArray --> l.seisaArray
+    g.seisaArray --> m.seisaArray
+    g.seisaArray --> n.seisaArray
+    g.seisaArray --> o.seisaArray
+    g.seisaArray --> p.seisaArray
+    g.seisaArray --> q.seisaArray
+    g.seisaArray --> r.seisaArray
+    g.seisaArray --> s.seisaArray
+    g.seisaArray --> t.seisaArray
+    g.seisaArray --> u.seisaArray
+    g.seisaArray --> v.seisaArray
+    k.seisaArray --> w.targetWorksheet
+    b.RunMacro1Button_Click --> x.ErrorHandling
+  end
+
+  subgraph "支払金額精査判定"
+    g.seisaArray --> y.seisaArray
+    g.seisaArray --> z.seisaArray
+    g.seisaArray --> aa.seisaArray
+  end
+
+  subgraph "2次元配列から精査シートを出力"
+    w.targetWorksheet --> bb.End
+  end
+
+```
+
 <a name=gantt></a>
 
 ```mermaid
